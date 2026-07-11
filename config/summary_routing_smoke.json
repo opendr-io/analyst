@@ -1,0 +1,2102 @@
+[
+  {
+    "question": "unpacking a suspicious executable?",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on recovering behavior from firmware.",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about extracting indicators from a binary?",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with dynamic analysis in a sandbox?",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is understanding an obfuscated payload. What research would help?",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on unpacking a suspicious executable without starting from scratch.",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover recovering behavior from firmware and dynamic analysis in a sandbox?",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving extracting indicators from a binary; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about understanding an obfuscated payload, not patch prioritization. What should I read?",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions endpoint alert tuning, but the real issue is unpacking a suspicious executable.",
+    "group": "topic",
+    "slug": "malware-analysis-and-reverse-engineering",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "turning a memory corruption bug into code execution?",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on building a proof of concept for a privilege boundary bypass.",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about finding a new attack surface?",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with validating whether a crash is exploitable?",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is chaining weaknesses into remote compromise. What research would help?",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on turning a memory corruption bug into code execution without starting from scratch.",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover building a proof of concept for a privilege boundary bypass and validating whether a crash is exploitable?",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving finding a new attack surface; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about chaining weaknesses into remote compromise, not routine patch operations. What should I read?",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions secure coding guidance, but the real issue is turning a memory corruption bug into code execution.",
+    "group": "topic",
+    "slug": "exploit-development-and-vulnerability-discovery",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "deciding which exposed CVEs to fix first?",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on combining KEV and EPSS with asset context.",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about moving findings through remediation?",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with measuring exploitability instead of severity alone?",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is reducing a scanner backlog. What research would help?",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on deciding which exposed CVEs to fix first without starting from scratch.",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover combining KEV and EPSS with asset context and measuring exploitability instead of severity alone?",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving moving findings through remediation; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about reducing a scanner backlog, not writing a new exploit. What should I read?",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions reverse engineering malware, but the real issue is deciding which exposed CVEs to fix first.",
+    "group": "topic",
+    "slug": "vulnerability-management-and-intelligence",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "abusing a delegated token?",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on designing passkey and MFA flows.",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about service-to-service authorization?",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with confused-deputy failures in OAuth?",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is controlling who can act on whose behalf. What research would help?",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on abusing a delegated token without starting from scratch.",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover designing passkey and MFA flows and confused-deputy failures in OAuth?",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving service-to-service authorization; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about controlling who can act on whose behalf, not network packet inspection. What should I read?",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions source code generation, but the real issue is abusing a delegated token.",
+    "group": "topic",
+    "slug": "identity-oauth-and-access-delegation",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "testing an API for broken access control?",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on finding flaws in a web application.",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about reviewing code for injection paths?",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with hardening an authentication flow?",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is preventing app-layer authorization mistakes. What research would help?",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on testing an API for broken access control without starting from scratch.",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover finding flaws in a web application and hardening an authentication flow?",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving reviewing code for injection paths; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about preventing app-layer authorization mistakes, not cloud posture management. What should I read?",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions malware sandboxing, but the real issue is testing an API for broken access control.",
+    "group": "topic",
+    "slug": "application-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "finding abuse paths before code is written?",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on using attack trees during architecture review.",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about mapping trust boundaries and misuse cases?",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with applying STRIDE to a proposed design?",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is challenging security assumptions before implementation. What research would help?",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on finding abuse paths before code is written without starting from scratch.",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover using attack trees during architecture review and applying STRIDE to a proposed design?",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving mapping trust boundaries and misuse cases; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about challenging security assumptions before implementation, not production alert triage. What should I read?",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions post-incident forensics, but the real issue is finding abuse paths before code is written.",
+    "group": "topic",
+    "slug": "threat-modeling",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "investigating suspicious Kubernetes activity?",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on securing infrastructure as code.",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about using cloud telemetry for response?",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with finding risky container configuration?",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is operating detection across cloud control planes. What research would help?",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on investigating suspicious Kubernetes activity without starting from scratch.",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover securing infrastructure as code and finding risky container configuration?",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving using cloud telemetry for response; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about operating detection across cloud control planes, not desktop endpoint telemetry. What should I read?",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions application source review, but the real issue is investigating suspicious Kubernetes activity.",
+    "group": "topic",
+    "slug": "cloud-infrastructure-and-cdr",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "testing an industrial protocol?",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on analyzing firmware from a connected appliance.",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about protecting a SCADA environment?",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with finding weaknesses in an embedded controller?",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is defending cyber-physical operations. What research would help?",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on testing an industrial protocol without starting from scratch.",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover analyzing firmware from a connected appliance and finding weaknesses in an embedded controller?",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving protecting a SCADA environment; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about defending cyber-physical operations, not enterprise OAuth. What should I read?",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions software package signing, but the real issue is testing an industrial protocol.",
+    "group": "topic",
+    "slug": "ot-and-iot-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "turning telemetry into reliable alerts?",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on reducing noisy SIEM detections.",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about hunting across event data?",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with validating whether a detection catches an attack?",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is improving analyst triage in the SOC. What research would help?",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on turning telemetry into reliable alerts without starting from scratch.",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover reducing noisy SIEM detections and validating whether a detection catches an attack?",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving hunting across event data; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about improving analyst triage in the SOC, not writing exploit code. What should I read?",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions governance audits, but the real issue is turning telemetry into reliable alerts.",
+    "group": "topic",
+    "slug": "detection-engineering-soc-siem-and-threat-hunting",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "stopping untrusted instructions from taking over an agent?",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on testing jailbreak resistance.",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about red teaming an LLM application?",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with preventing malicious tool use by an assistant?",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is defending against indirect prompt injection. What research would help?",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on stopping untrusted instructions from taking over an agent without starting from scratch.",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover testing jailbreak resistance and preventing malicious tool use by an assistant?",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving red teaming an LLM application; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about defending against indirect prompt injection, not general prompt-writing lessons. What should I read?",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions model serving performance, but the real issue is stopping untrusted instructions from taking over an agent.",
+    "group": "topic",
+    "slug": "ai-security-prompt-injection-and-jailbreaking",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "poisoning documents retrieved by an assistant?",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on enforcing permissions during vector search.",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about preventing knowledge-graph leakage?",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with securing a retrieval pipeline?",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is isolating tenants in a grounded chatbot. What research would help?",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on poisoning documents retrieved by an assistant without starting from scratch.",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover enforcing permissions during vector search and securing a retrieval pipeline?",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving preventing knowledge-graph leakage; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about isolating tenants in a grounded chatbot, not training-time model robustness. What should I read?",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions ordinary database tuning, but the real issue is poisoning documents retrieved by an assistant.",
+    "group": "topic",
+    "slug": "rag-and-graphrag-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "detecting a malicious dependency?",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on protecting a CI build from tampering.",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about using an SBOM during incident response?",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with securing package publication?",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is verifying provenance and signatures. What research would help?",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on detecting a malicious dependency without starting from scratch.",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover protecting a CI build from tampering and securing package publication?",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving using an SBOM during incident response; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about verifying provenance and signatures, not network intrusion detection. What should I read?",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions employee phishing awareness, but the real issue is detecting a malicious dependency.",
+    "group": "topic",
+    "slug": "software-supply-chain-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "testing whether a model memorized private records?",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on preventing unintended disclosure.",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about measuring deanonymization risk?",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with designing privacy-preserving data use?",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is finding sensitive information leakage. What research would help?",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on testing whether a model memorized private records without starting from scratch.",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover preventing unintended disclosure and designing privacy-preserving data use?",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving measuring deanonymization risk; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about finding sensitive information leakage, not egress policy enforcement. What should I read?",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions vulnerability patching, but the real issue is testing whether a model memorized private records.",
+    "group": "topic",
+    "slug": "privacy-and-data-leakage",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "extracting a model through repeated queries?",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on testing adversarial examples.",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about finding a backdoor in training data?",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with hardening model deserialization?",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is evaluating robustness against model inversion. What research would help?",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on extracting a model through repeated queries without starting from scratch.",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover testing adversarial examples and hardening model deserialization?",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving finding a backdoor in training data; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about evaluating robustness against model inversion, not prompt injection in an agent. What should I read?",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions GPU capacity planning, but the real issue is extracting a model through repeated queries.",
+    "group": "topic",
+    "slug": "machine-learning-model-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "detecting secrets leaving the company?",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on classifying sensitive files before egress.",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about investigating insider data movement?",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with blocking uploads of regulated data?",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is tuning controls for exfiltration. What research would help?",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on detecting secrets leaving the company without starting from scratch.",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover classifying sensitive files before egress and blocking uploads of regulated data?",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving investigating insider data movement; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about tuning controls for exfiltration, not privacy-preserving analytics. What should I read?",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions malware reverse engineering, but the real issue is detecting secrets leaving the company.",
+    "group": "topic",
+    "slug": "data-loss-detection-and-prevention",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "mapping controls to a regulatory obligation?",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on assessing third-party security risk.",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about preparing evidence for an audit?",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with setting responsible AI policy?",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is measuring enterprise risk against a framework. What research would help?",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on mapping controls to a regulatory obligation without starting from scratch.",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover assessing third-party security risk and setting responsible AI policy?",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving preparing evidence for an audit; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about measuring enterprise risk against a framework, not writing detection rules. What should I read?",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions exploit validation, but the real issue is mapping controls to a regulatory obligation.",
+    "group": "topic",
+    "slug": "governance-risk-and-compliance",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "finding attacks in DNS traffic?",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on analyzing packets for tunneling.",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about using Zeek or Suricata telemetry?",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with detecting suspicious BGP behavior?",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is investigating lateral movement on the wire. What research would help?",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on finding attacks in DNS traffic without starting from scratch.",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover analyzing packets for tunneling and detecting suspicious BGP behavior?",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving using Zeek or Suricata telemetry; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about investigating lateral movement on the wire, not host process injection. What should I read?",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions application code review, but the real issue is finding attacks in DNS traffic.",
+    "group": "topic",
+    "slug": "network-security-and-ndr",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "detecting process injection on Windows?",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on using Sysmon and ETW for investigation.",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about analyzing a suspicious kernel driver?",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with hunting with host telemetry?",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is improving EDR coverage across desktops. What research would help?",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on detecting process injection on Windows without starting from scratch.",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover using Sysmon and ETW for investigation and hunting with host telemetry?",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving analyzing a suspicious kernel driver; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about improving EDR coverage across desktops, not packet-level monitoring. What should I read?",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions cloud control-plane posture, but the real issue is detecting process injection on Windows.",
+    "group": "topic",
+    "slug": "endpoint-security-and-edr",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "building an assistant that completes business tasks?",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on orchestrating tools with an LLM.",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about automating document summarization?",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with using agents for domain workflows?",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is designing practical non-security AI automation. What research would help?",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on building an assistant that completes business tasks without starting from scratch.",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover orchestrating tools with an LLM and using agents for domain workflows?",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving automating document summarization; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about designing practical non-security AI automation, not jailbreak testing. What should I read?",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions model training infrastructure, but the real issue is building an assistant that completes business tasks.",
+    "group": "topic",
+    "slug": "ai-applications-agents-and-workflow-automation",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "routing requests across model servers?",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on building data pipelines for AI applications.",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about managing long-term context and memory?",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with engineering GPU-backed inference systems?",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is designing retrieval and knowledge-graph infrastructure. What research would help?",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on routing requests across model servers without starting from scratch.",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover building data pipelines for AI applications and engineering GPU-backed inference systems?",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving managing long-term context and memory; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about designing retrieval and knowledge-graph infrastructure, not prompt-writing education. What should I read?",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions AI coding assistants, but the real issue is routing requests across model servers.",
+    "group": "topic",
+    "slug": "ai-infrastructure-data-engineering-and-model-systems",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "using a coding agent to change a repository?",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on generating tests from requirements.",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about reviewing code with an LLM?",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with improving developer workflows with AI?",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is automating software maintenance. What research would help?",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on using a coding agent to change a repository without starting from scratch.",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover generating tests from requirements and improving developer workflows with AI?",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving reviewing code with an LLM; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about automating software maintenance, not general business automation. What should I read?",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions model serving infrastructure, but the real issue is using a coding agent to change a repository.",
+    "group": "topic",
+    "slug": "ai-assisted-software-development-and-developer-tooling",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "auditing a smart contract?",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on tracing stolen cryptocurrency.",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about protecting wallet keys?",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with finding protocol flaws in decentralized finance?",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is investigating exchange fraud. What research would help?",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on auditing a smart contract without starting from scratch.",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover tracing stolen cryptocurrency and finding protocol flaws in decentralized finance?",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving protecting wallet keys; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about investigating exchange fraud, not traditional payment-card fraud. What should I read?",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions post-quantum migration, but the real issue is auditing a smart contract.",
+    "group": "topic",
+    "slug": "blockchain-and-cryptocurrency-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "keeping communications available during an internet shutdown?",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on evading state network blocking.",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about building surveillance-resistant coordination tools?",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with preserving access to information under censorship?",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is making messaging resilient on hostile networks. What research would help?",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on keeping communications available during an internet shutdown without starting from scratch.",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover evading state network blocking and preserving access to information under censorship?",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving building surveillance-resistant coordination tools; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about making messaging resilient on hostile networks, not enterprise firewall tuning. What should I read?",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions ordinary disaster recovery, but the real issue is keeping communications available during an internet shutdown.",
+    "group": "topic",
+    "slug": "censorship-circumvention-and-resilient-communications",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "planning migration away from vulnerable public-key algorithms?",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on operating keys inside an HSM.",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about designing cryptographic agility?",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with managing the lifecycle of signing keys?",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is deploying post-quantum protocols. What research would help?",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on planning migration away from vulnerable public-key algorithms without starting from scratch.",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover operating keys inside an HSM and managing the lifecycle of signing keys?",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving designing cryptographic agility; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about deploying post-quantum protocols, not cryptocurrency wallet fraud. What should I read?",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions passwordless identity flows, but the real issue is planning migration away from vulnerable public-key algorithms.",
+    "group": "topic",
+    "slug": "cryptography-key-management-and-post-quantum-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "securing automated laboratory workflows?",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on assessing abuse of AI-designed biology.",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about protecting bioinformatics pipelines?",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with threat modeling molecular engineering systems?",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is managing cyber risk in biotechnology. What research would help?",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on securing automated laboratory workflows without starting from scratch.",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover assessing abuse of AI-designed biology and threat modeling molecular engineering systems?",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving protecting bioinformatics pipelines; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about managing cyber risk in biotechnology, not hospital endpoint operations. What should I read?",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions general machine learning, but the real issue is securing automated laboratory workflows.",
+    "group": "topic",
+    "slug": "cyberbiosecurity-and-biotechnology-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "disrupting an online scam operation?",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on studying how criminals monetize stolen accounts.",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about preventing social-engineering fraud?",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with mapping a darknet marketplace?",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is understanding victim targeting by fraud crews. What research would help?",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on disrupting an online scam operation without starting from scratch.",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover studying how criminals monetize stolen accounts and mapping a darknet marketplace?",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving preventing social-engineering fraud; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about understanding victim targeting by fraud crews, not nation-state attribution. What should I read?",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions application penetration testing, but the real issue is disrupting an online scam operation.",
+    "group": "topic",
+    "slug": "cybercrime-fraud-and-social-engineering",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "comparing security vendors for buyers?",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on analyzing product positioning in the security market.",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about studying investment trends in cyber companies?",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with understanding buyer behavior for security tools?",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is planning a vendor go-to-market strategy. What research would help?",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on comparing security vendors for buyers without starting from scratch.",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover analyzing product positioning in the security market and understanding buyer behavior for security tools?",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving studying investment trends in cyber companies; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about planning a vendor go-to-market strategy, not technical product testing. What should I read?",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions enterprise control audits, but the real issue is comparing security vendors for buyers.",
+    "group": "topic",
+    "slug": "cybersecurity-market-and-vendor-strategy",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "recovering evidence from an old computing artifact?",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on preserving a disappearing security website.",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about researching the history of hacker communities?",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with archiving material for future forensic study?",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is reconstructing events from legacy digital media. What research would help?",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on recovering evidence from an old computing artifact without starting from scratch.",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover preserving a disappearing security website and archiving material for future forensic study?",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving researching the history of hacker communities; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about reconstructing events from legacy digital media, not live SOC alert handling. What should I read?",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions current threat attribution, but the real issue is recovering evidence from an old computing artifact.",
+    "group": "topic",
+    "slug": "digital-forensics-preservation-and-cyber-history",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "verifying that a voting system produced the right outcome?",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on testing ballot-marking devices.",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about securing election infrastructure?",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with evaluating risks in internet voting?",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is building public trust through auditable elections. What research would help?",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on verifying that a voting system produced the right outcome without starting from scratch.",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover testing ballot-marking devices and evaluating risks in internet voting?",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving securing election infrastructure; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about building public trust through auditable elections, not general government compliance. What should I read?",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions campaign disinformation analysis, but the real issue is verifying that a voting system produced the right outcome.",
+    "group": "topic",
+    "slug": "election-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "teaching staff how to write useful prompts?",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on building an introductory LLM course.",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about improving everyday model usage?",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with creating AI literacy training?",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is explaining prompt patterns to non-specialists. What research would help?",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on teaching staff how to write useful prompts without starting from scratch.",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover building an introductory LLM course and creating AI literacy training?",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving improving everyday model usage; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about explaining prompt patterns to non-specialists, not prompt injection defense. What should I read?",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions model infrastructure engineering, but the real issue is teaching staff how to write useful prompts.",
+    "group": "topic",
+    "slug": "general-ai-education-and-prompt-engineering",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "using technology to improve a non-security business process?",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on applying software to health or education.",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about studying general productivity tools?",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with preserving software with no clear security angle?",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is finding technical work outside the security taxonomy. What research would help?",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on using technology to improve a non-security business process without starting from scratch.",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover applying software to health or education and preserving software with no clear security angle?",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving studying general productivity tools; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about finding technical work outside the security taxonomy, not security operations. What should I read?",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions AI red teaming, but the real issue is using technology to improve a non-security business process.",
+    "group": "topic",
+    "slug": "general-technology-productivity-and-non-security-applications",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "cloning a building access badge?",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on experimenting with software-defined radio.",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about testing covert entry techniques?",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with hacking a conference hardware badge?",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is finding weaknesses in physical access systems. What research would help?",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on cloning a building access badge without starting from scratch.",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover experimenting with software-defined radio and hacking a conference hardware badge?",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving testing covert entry techniques; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about finding weaknesses in physical access systems, not wireless network monitoring. What should I read?",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions embedded firmware analysis, but the real issue is cloning a building access badge.",
+    "group": "topic",
+    "slug": "hardware-rf-and-physical-security",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "improving technical interview practices?",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on reducing burnout in a security team.",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about building a mentoring program?",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with expanding access to cybersecurity careers?",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is developing workforce skills and resilience. What research would help?",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on improving technical interview practices without starting from scratch.",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover reducing burnout in a security team and expanding access to cybersecurity careers?",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving building a mentoring program; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about developing workforce skills and resilience, not conference event planning. What should I read?",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions security market analysis, but the real issue is improving technical interview practices.",
+    "group": "topic",
+    "slug": "professional-development-workforce-and-hiring",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "running a security conference?",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on designing a community CTF.",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about organizing training for practitioners?",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with documenting conference culture and events?",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is planning non-research security programming. What research would help?",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on running a security conference without starting from scratch.",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover designing a community CTF and documenting conference culture and events?",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving organizing training for practitioners; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about planning non-research security programming, not individual career coaching. What should I read?",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions technical vulnerability research, but the real issue is running a security conference.",
+    "group": "topic",
+    "slug": "security-education-community-and-conference-operations",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "tracking a campaign across multiple intrusions?",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "short"
+  },
+  {
+    "question": "Need material on attributing activity to an adversary group.",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "short"
+  },
+  {
+    "question": "What have practitioners learned about using OSINT to investigate a threat actor?",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "indirect"
+  },
+  {
+    "question": "Where should I start with mapping geopolitical cyber operations?",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "indirect"
+  },
+  {
+    "question": "A team is disrupting hacktivist or criminal infrastructure. What research would help?",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "scenario"
+  },
+  {
+    "question": "We need to make progress on tracking a campaign across multiple intrusions without starting from scratch.",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "scenario"
+  },
+  {
+    "question": "Does the collection cover attributing activity to an adversary group and mapping geopolitical cyber operations?",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "I have a problem involving using OSINT to investigate a threat actor; point me to the closest body of work.",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "ambiguous"
+  },
+  {
+    "question": "This is about disrupting hacktivist or criminal infrastructure, not SOC alert tuning. What should I read?",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "cross-topic"
+  },
+  {
+    "question": "The request mentions consumer scam prevention, but the real issue is tracking a campaign across multiple intrusions.",
+    "group": "topic",
+    "slug": "threat-intelligence-and-adversary-tracking",
+    "kind": "cross-topic"
+  }
+]

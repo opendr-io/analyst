@@ -1,0 +1,35 @@
+malware-analysis-and-reverse-engineering	unpacking executable suspicious binary firmware reversing indicators obfuscated payload dynamic sandbox deobfuscation disassembler
+exploit-development-and-vulnerability-discovery	memory corruption code execution proof of concept privilege bypass attack surface exploitable crash exploit chain remote compromise
+vulnerability-management-and-intelligence	exposed CVE KEV EPSS CVSS remediation scanner backlog exploitability severity patch prioritization asset exposure
+identity-oauth-and-access-delegation	delegated token passkey MFA service-to-service confused deputy OAuth authorization act on behalf identity access
+application-security	API broken access control web application reviewing code for injection paths authentication flow app-layer authorization secure coding
+threat-modeling	finding abuse paths before code is written attack tree architecture review trust boundary misuse case STRIDE proposed design before implementation
+cloud-infrastructure-and-cdr	Kubernetes infrastructure as code cloud telemetry container configuration control plane CNAPP CSPM cloud response suspicious Kubernetes activity
+ot-and-iot-security	industrial protocol connected appliance SCADA embedded controller cyber-physical operational technology IoT firmware
+detection-engineering-soc-siem-and-threat-hunting	telemetry alert SIEM detection threat hunt analyst triage SOC detection validation noisy rule hunting across event data detection catches an attack
+ai-security-prompt-injection-and-jailbreaking	untrusted instruction agent takeover jailbreak LLM red team malicious tool indirect prompt injection promptware
+rag-and-graphrag-security	retrieved document vector search knowledge graph knowledge-graph leakage retrieval pipeline grounded chatbot tenant isolation retrieval poisoning
+software-supply-chain-security	malicious dependency protecting a CI build from tampering SBOM during incident response package publication provenance signature typosquatting repository
+privacy-and-data-leakage	model memorization unintended disclosure deanonymization privacy-preserving sensitive information leakage private record
+machine-learning-model-security	model extraction extracting a model through repeated queries adversarial example training backdoor deserialization robustness model inversion poisoning dataset
+data-loss-detection-and-prevention	secrets leaving egress sensitive file insider data movement regulated data upload exfiltration DLP classification
+governance-risk-and-compliance	regulatory obligation third-party risk audit evidence responsible AI policy enterprise risk control framework compliance
+network-security-and-ndr	DNS traffic packet tunneling packets for tunneling Zeek Suricata BGP suspicious BGP behavior lateral movement network telemetry firewall NDR
+endpoint-security-and-edr	process injection Sysmon ETW kernel driver host telemetry desktop endpoint improving EDR coverage across desktops XDR operating system
+ai-applications-agents-and-workflow-automation	business task assistant orchestrating tools with an LLM tool orchestration document summarization domain workflow practical automation office productivity
+ai-infrastructure-data-engineering-and-model-systems	model server routing data pipeline context memory GPU inference designing retrieval and knowledge-graph infrastructure accelerator model serving
+ai-assisted-software-development-and-developer-tooling	coding agent repository test generation requirements reviewing code with an LLM code review developer workflow software maintenance code generation
+blockchain-and-cryptocurrency-security	smart contract stolen cryptocurrency wallet key decentralized finance exchange fraud blockchain Web3 crypto protocol
+censorship-circumvention-and-resilient-communications	internet shutdown state blocking surveillance-resistant coordination censorship hostile network resilient messaging information access
+cryptography-key-management-and-post-quantum-security	public-key migration operating keys inside an HSM cryptographic agility signing key deploying post-quantum protocols key lifecycle applied cryptography
+cyberbiosecurity-and-biotechnology-security	laboratory workflow AI-designed biology protecting bioinformatics pipelines threat modeling molecular engineering systems biotechnology biological system cyberbiosecurity
+cybercrime-fraud-and-social-engineering	online scam criminal monetization stolen account social-engineering fraud darknet marketplace victim targeting fraud crew
+cybersecurity-market-and-vendor-strategy	security vendor buyer product positioning investment cyber company go-to-market market analysis business strategy
+digital-forensics-preservation-and-cyber-history	old computing artifact disappearing website hacker history archival recovery digital preservation legacy media forensic history
+election-security	voting outcome ballot-marking device election infrastructure internet voting verifiability auditable election ballot integrity
+general-ai-education-and-prompt-engineering	useful prompt introductory LLM course model usage AI literacy prompt pattern non-specialist AI training
+general-technology-productivity-and-non-security-applications	non-security business process health education studying general productivity tools general technology software preservation outside security taxonomy
+hardware-rf-and-physical-security	access badge software-defined radio covert entry hardware badge finding weaknesses in physical access systems maker SDR RF lock
+professional-development-workforce-and-hiring	technical interview burnout mentoring cybersecurity career workforce skill resilience hiring career growth
+security-education-community-and-conference-operations	security conference community CTF practitioner training conference culture event programming opening remarks
+threat-intelligence-and-adversary-tracking	intrusion campaign adversary attribution OSINT threat actor mapping geopolitical cyber operations hacktivist infrastructure actor tracking

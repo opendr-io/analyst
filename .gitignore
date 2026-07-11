@@ -1,0 +1,72 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+
+# Local agent/editor metadata
+.agents/
+.codex/
+.vscode/
+.idea/
+
+# Python caches and tooling
+__pycache__
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Runtime database and knowledge artifacts
+# Keep knowledge/knowledge.sqlite3 in version control.
+knowledge/*.sqlite3-wal
+knowledge/*.sqlite3-shm
+knowledge/*.sqlite3-journal
+knowledge/*.db-wal
+knowledge/*.db-shm
+knowledge/*.db-journal
+knowledge/*.log
+knowledge/daily-*.md
+knowledge/open-topic-*.jsonl
+knowledge/open-topic-*.md
+knowledge/exports/
+knowledge/archive/
+
+# Test-generated data
+data/test-tmp/
+
+# External source artifacts
+youtube_summaries/
+pdf/
+
+# Backups and generated reports
+backups/
+*.bak
+*.backup
+author-record-counts.csv
+
+# Test and smoke-test output
+tests/logs/
+tests/**/test-tmp/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
