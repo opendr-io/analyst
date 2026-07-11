@@ -1,0 +1,7 @@
+openai
+anthropic
+python-dotenv
+pytest
+jupyterlab
+ipywidgets
+markdown

@@ -1,0 +1,81 @@
+# Topic: Author: Glen Sorensen
+
+## Executive Summary
+
+The three records attributed to Glen Sorensen all come from BSidesLV 2025 and present Sorensen’s work as centered on cybersecurity education, facilitation, communication, and stakeholder influence rather than narrow technical tooling. Two records, co-authored with Klaus Agnoletti, focus on using tabletop role-playing game mechanics—especially Dungeons & Dragons-style collaborative storytelling, roles, dice, abilities, and dynamic scenarios—to improve cybersecurity training and incident response exercises [record_id:2425] [record_id:2432]. The third, co-authored with Daniela Parker, shifts from training design to organizational persuasion: helping technical security practitioners translate vulnerabilities, exploit findings, and risk reports into narratives and influence strategies that executives and stakeholders can act on [record_id:2445].
+
+Collectively, these records portray Sorensen’s contributions as bridging technical cybersecurity practice with human-centered methods: roleplay, game-based learning, communication psychology, facilitation, collaborative exercises, and security culture-building. The strongest recurring theme is that security work fails when it is treated as purely technical. Whether training incident responders or persuading executives to prioritize remediation, Sorensen’s records emphasize engagement, narrative, social dynamics, and practical experiential learning [record_id:2425] [record_id:2432] [record_id:2445].
+
+The evidence base is limited to three conference-session abstracts, all from a single event year and source. The records describe intended workshops and talks, not full papers, transcripts, slides, outcomes, or independent evaluations. Still, they are coherent and mutually reinforcing: Sorensen is represented as a speaker developing participatory, human-centered approaches to security education and security advocacy.
+
+## Research Landscape
+
+The included records are all BSidesLV 2025 session listings. They are not long-form publications or technical reports; they are abstracts for conference talks or workshops. Two are tagged as “Training Ground” four-hour hands-on workshops, while one is a shorter “Common Ground” talk [record_id:2425] [record_id:2432] [record_id:2445]. This means the evidence reflects proposed or scheduled educational experiences rather than documented research findings with detailed methodology, results, or evaluation data.
+
+The records cluster around two adjacent areas:
+
+1. **Game-based cybersecurity training and incident response education.**  
+   The first two records describe the use of tabletop role-playing games and Dungeons & Dragons-like mechanics to make cybersecurity training more engaging, collaborative, and realistic [record_id:2425] [record_id:2432]. These records present roleplay as a way to improve incident response exercises, security culture, and professional development.
+
+2. **Security communication, persuasion, and stakeholder influence.**  
+   The third record focuses on the gap between technical security findings and organizational action. It addresses how practitioners can move beyond simply reporting vulnerabilities and instead communicate urgency, quantify value, understand decision-making psychology, and become trusted advisors [record_id:2445].
+
+Across the landscape, Sorensen’s attributed work is not framed primarily as exploit research, malware analysis, red-team tradecraft, or defensive engineering. Instead, the common center is the human layer of cybersecurity: how people learn, collaborate, make decisions, resist or accept security recommendations, and build shared understanding. Even when technical topics appear—MITRE ATT&CK, incident response, zero trust architecture, vulnerabilities, exploits, and risk reporting—they are used as material for training, storytelling, or stakeholder communication rather than as standalone technical subjects [record_id:2425] [record_id:2432] [record_id:2445].
+
+## Major Themes And Trends
+
+### Human-centered cybersecurity practice
+
+The clearest theme across the records is that cybersecurity depends on human engagement. In the incident response workshop, the abstract explicitly says the roleplaying framework “emphasizes the human elements of incident response” and is intended to be accessible to both technical and non-technical audiences [record_id:2425]. The Dungeons & Dragons talk similarly argues that traditional training often isolates learners and remains theoretical, whereas game-based learning creates environments where participants collaborate, engage, and “live” the concepts rather than merely memorize them [record_id:2432].
+
+The stakeholder workshop extends this human-centered lens into governance and risk. It begins with a familiar technical-success/organizational-failure scenario: “You’ve identified the vulnerability, tested the exploit, and written the report. But they just don’t see the urgency” [record_id:2445]. The proposed solution is not more technical detail; it is narrative, value quantification, relationship-building, decision-making psychology, and influence [record_id:2445]. This aligns closely with the training records: in all three, the problem is not that security professionals lack facts, but that facts alone do not produce learning, readiness, or action.
+
+### Roleplaying and game-based learning as serious security tools
+
+Two records make a direct argument for tabletop role-playing games as cybersecurity training tools. The workshop “Cybersecurity Roleplaying Training: Design & Implement Engaging Incident Response Exercises” presents an “innovative roleplaying framework inspired by tabletop RPGs” that uses dice rolls, character abilities, and dynamic scenarios [record_id:2425]. The talk “Dungeons & Dragons: The security tool you didn’t know you needed” broadens that argument, positioning game-based learning as a proven way to help professionals master complex skills through structured play and collaborative storytelling [record_id:2432].
+
+The trend is not simply “make training fun.” Both records frame play as a mechanism for deeper learning and better participation. The Dungeons & Dragons talk says roleplaying games can transform “resistant learners into engaged participants” and turn difficult training scenarios “from incident response to zero trust architecture” into adventures that teams look forward to [record_id:2432]. The workshop makes the approach operational by asking participants to develop their own scenarios in small groups, test one another’s scenarios, and leave with a “ready-to-implement scenario” and facilitation skills as an “Incident Master” [record_id:2425].
+
+This suggests a distinctive contribution: adapting the structure of tabletop RPGs—not merely their theme or aesthetics—to cybersecurity exercises. Character roles, abilities, uncertainty through dice, dynamic events, collaborative storytelling, and facilitator roles are all treated as components of an exercise-design method [record_id:2425] [record_id:2432].
+
+### Moving from passive training to experiential learning
+
+The records repeatedly criticize boring or ineffective traditional formats. The incident response workshop opens by asking whether participants are “Tired of boring tabletop exercises that put your team to sleep?” [record_id:2425]. The Dungeons & Dragons talk similarly asks whether people are tired of security training that “puts your team to sleep” [record_id:2432]. These are rhetorical framings, but they indicate a consistent diagnosis: conventional security training and tabletop exercises often fail because they are passive, disengaging, or too theoretical.
+
+The proposed alternative is experiential. In the workshop, participants first experience a demonstration, then develop their own scenarios in small groups, test each other’s scenarios, receive feedback, and leave with practical materials [record_id:2425]. In the talk, participants are said to learn through structured play and collaborative storytelling, where they “don’t just memorize concepts—they live them” [record_id:2432]. This is a clear pedagogical stance: effective cybersecurity training should simulate decisions, uncertainty, collaboration, and consequences.
+
+### Security communication as influence, not just reporting
+
+The third record develops a parallel theme around persuasion and influence. “From Zero Trust to Trusted Advisor: Selling Security to Stakeholders” addresses the common failure mode where a practitioner has identified a vulnerability, tested an exploit, and written a report, but stakeholders do not perceive urgency [record_id:2445]. The abstract frames the workshop as a bridge between “technical mastery” and executive influence, though the raw text appears to contain a wording issue: “executive and influence” [record_id:2445].
+
+The workshop’s proposed approach includes crafting compelling narratives, quantifying value, building relationships, understanding the psychology of decision-making, and exploring adversarial communication tactics, including tactics used against the security practitioner [record_id:2445]. This positions security advocacy as an active discipline requiring strategy and empathy. It also suggests that Sorensen’s work is concerned with converting security knowledge into organizational outcomes.
+
+This theme complements the roleplaying records. In both training and stakeholder communication, Sorensen’s attributed sessions emphasize translation: translating technical incident response into engaging simulations, translating zero trust or incident response into roleplaying adventures, and translating vulnerability findings into executive-relevant narratives and action [record_id:2425] [record_id:2432] [record_id:2445].
+
+### Bridging technical and non-technical audiences
+
+All three records cross boundaries between technical and non-technical participants. The incident response workshop explicitly says the RPG-inspired approach is accessible to both technical and non-technical audiences [record_id:2425]. The Dungeons & Dragons talk refers to “professionals” mastering complex skills and breaking down professional barriers through play [record_id:2432]. The stakeholder workshop is directly about communicating technical vulnerability and exploit findings to executives and stakeholders who may not share the same sense of urgency [record_id:2445].
+
+The recurring concern is that cybersecurity effectiveness depends on shared understanding among groups with different expertise, incentives, language, and authority. Sorensen’s records propose facilitation, narrative, and structured interaction as ways to close those gaps.
+
+## Methods, Tools, And Approaches Discussed
+
+The records describe methods more than software tools. The primary approaches are pedagogical, facilitative, and communicative.
+
+One major method is the **tabletop RPG-inspired incident response exercise framework**. The workshop record describes using dice rolls, character abilities, and dynamic scenarios to create cybersecurity exercises [record_id:2425]. It also describes role-based participation, where characters have unique abilities, and scenario design tied to realistic incident response challenges [record_id:2425]. The inclusion of the MITRE ATT&CK framework is notable: it appears as a structure for designing realistic incident response challenges rather than as a detection engineering tool in itself [record_id:2425]. The abstract also introduces the facilitator role of an “Incident Master,” clearly borrowing from the “Dungeon Master” concept in tabletop RPGs [record_id:2425].
+
+A second method is **collaborative scenario development and peer testing**. In the four-hour incident response workshop, attendees are expected to experience the approach through demonstration, develop scenarios in small groups, test each other’s scenarios, and provide feedback for refinement [record_id:2425]. This creates a workshop loop of demonstration, creation, playtesting, feedback, and revision. The record implies that this is meant to produce usable outputs: participants leave with a ready-to-implement scenario, facilitation skills, and community resources [record_id:2425].
+
+A third approach is **game-based professional development through structured play and collaborative storytelling**. The Dungeons & Dragons talk says game-based learning works because humans learn best when working together and because structured play can reduce office politics, increase engagement, and help participants build understanding through experience [record_id:2432]. The talk applies tabletop role-playing mechanics to scenarios ranging from incident response to zero trust architecture [record_id:2432]. While the record does not list specific mechanics in as much detail as the workshop record, it reinforces the same method at a conceptual level.
+
+A fourth approach is **security persuasion and stakeholder communication**. The stakeholder workshop focuses on crafting narratives, quantifying value, and building relationships to drive security improvements [record_id:2445]. It adds decision-making psychology and adversarial communication tactics as part of the curriculum [record_id:2445]. This suggests a method for advocacy: understand how stakeholders decide, anticipate manipulative or oppositional communication tactics, frame security in terms of value and urgency, and develop trusted-advisor relationships rather than relying only on reports.
+
+A fifth cross-cutting approach is **translation of technical concepts into experiential or executive-relevant forms**. MITRE ATT&CK is used to craft realistic scenarios [record_id:2425]. Incident response and zero trust architecture are turned into roleplaying adventures [record_id:2432]. Vulnerability findings and exploit validation are transformed into narratives and value arguments for decision-makers [record_id:2445]. This translation function is one of the most consistent methodological through-lines in the records.
+
+## Notable Talks, Records, And Evidence
+
+The most concrete and method-rich record is “Cybersecurity Roleplaying Training: Design & Implement Engaging Incident Response Exercises,” co-authored by Klaus Agnoletti and Glen Sorensen [record_id:2425]. It is a four-hour hands-on BSidesLV 2025 workshop. It matters because it provides the clearest operational description of Sorensen’s game-based training approach: dice rolls, character abilities, dynamic scenarios, MITRE ATT&CK-informed incident response challenges, unexpected events, small-group scenario design, peer testing, and facilitation as an “Incident Master” [record_id:2425]. Among the three records, this one gives downstream researchers the best evidence for practical design elements and implementation workflow.
+
+“Dungeons & Dragons: The security tool you didn’t know you needed,” also co-authored by Klaus Agnoletti and Glen Sorensen, is important because it supplies the broader conceptual argument for using roleplaying games in cybersecurity professional development [record_id:2432]. Where record 2425 is a workshop on designing incident response exercises, record 2432 appears to be a shorter explanatory talk about why game-based learning works and how tabletop role-playing mechanics can apply to areas such as incident response and zero trust architecture [record_id:2432]. It frames roleplay as a serious learning method, not a novelty, emphasizing collaboration, storytelling, reduced workplace barriers, and experiential mastery [record_id:2432].
+
+“From Zero Trust to Trusted Advisor: Selling Security to Stakeholders,” co-authored by Glen Sorensen and Daniela Parker, is notable because it expands the human-centered theme from training into organizational influence [record_id:2445]. It is also a four-hour hands-on workshop, indicating that the topic is treated as a skill-building exercise rather than a purely conceptual presentation [record_id:2445]. It matters because it identifies a common organizational failure point: technical teams may identify vulnerabilities, test exploits, and write reports, yet still fail to generate urgency among stakeholders [record_id:2445]. Its proposed remedies—compelling narratives, value quantification,

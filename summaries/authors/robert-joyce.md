@@ -1,0 +1,79 @@
+# Topic: Author: Robert Joyce
+
+## Executive Summary
+
+The two records attributed to Robert Joyce present a focused research thread at CAMLIS on malware analysis, antivirus-derived labeling, and machine learning-ready datasets or models. Both records are concerned with the evidentiary value and limitations of antivirus ecosystem data: one uses large-scale VirusTotal reports to study how antivirus consensus changes over time, while the other builds benchmark datasets from antivirus labels for malware classification tasks beyond the usual malicious/benign and family-label settings [record_id:200] [record_id:160].
+
+Collectively, the records suggest Joyce’s contributions center on making antivirus labels more analytically useful while also questioning simplistic assumptions about what those labels mean. The 2021 record introduces Temporal Rank-1 Similarity Matrix decomposition, or R1SM-T, to model changes in antivirus-engine consensus over more than a decade of scan data and argues that vendor correlations are volatile and not explained as much by direct “first-order” interactions as prevailing wisdom suggests [record_id:200]. The 2023 record shifts toward benchmark construction: it describes ClarAVy, an antivirus label parser covering 882 label formats across 90 antivirus products, and uses it to release datasets for malware behaviors, platforms, exploited vulnerabilities, and packers, totaling nearly 5.5 million malicious files [record_id:160].
+
+The strongest evidence across the records supports a view of Joyce’s work as infrastructure-oriented malware ML research: building datasets, parsing systems, and modeling methods that help researchers reason about malware classifications at scale. The evidence base is narrow—only two CAMLIS presentation abstracts—but internally coherent. It does not provide implementation details, evaluation metrics, dataset schemas, or full experimental results, so downstream agents should treat these records as high-level descriptions of research contributions rather than complete technical documentation.
+
+## Research Landscape
+
+The included records are CAMLIS presentation-style abstracts from 2021 and 2023, both attributed to Robert Joyce in the provided topic set. They sit at the intersection of malware analysis, reverse engineering support, antivirus telemetry, and machine learning model development. The material is not a broad survey of Joyce’s public work; it is a compact two-record slice focused on malware labeling and antivirus consensus [record_id:200] [record_id:160].
+
+The 2021 record is methodological and empirical. It describes analysis of “25 million VirusTotal reports representing over a decade of antivirus scan data” and introduces a decomposition method to study how antivirus consensus evolves [record_id:200]. Its emphasis is on understanding relationships between antivirus engines: how correlations arise, whether they are due to vendors copying labels, and how stable or volatile those relationships are over time [record_id:200].
+
+The 2023 record is dataset- and benchmark-oriented. It identifies a limitation in existing malware classification research: the field focuses “almost exclusively” on malicious-versus-benign classification and malware-family classification, while other useful malware attributes are underrepresented [record_id:160]. It proposes four alternative classification tasks—malware behaviors, platforms, exploited vulnerabilities, and packers—and describes the construction of benchmark datasets labeled through an antivirus tagging tool called ClarAVy [record_id:160].
+
+Together, these records frame a research landscape where antivirus outputs are both valuable and problematic. They are valuable because they can support large-scale malware labeling and classification tasks; they are problematic because antivirus labels come from many vendors, use many formats, correlate in complex ways, and may change over time in ways that are not fully understood [record_id:200] [record_id:160]. Joyce’s work, as represented here, appears to address both sides: improving how labels are parsed and used, and studying how much confidence researchers should place in the apparent consensus among antivirus engines.
+
+## Major Themes And Trends
+
+### Moving beyond conventional malware classification tasks
+
+A major theme in the 2023 record is dissatisfaction with the narrow scope of common malware classification benchmarks. The abstract states that existing malware classification research focuses “almost exclusively” on distinguishing malicious from benign files and classifying malware by family [record_id:160]. Joyce’s work argues that malware can be categorized by many other attributes, and that identifying such attributes in newly emerging malware via machine learning could be valuable to analysts [record_id:160].
+
+The four underrepresented tasks named in the record are classification by malware behaviors, target or runtime platforms, vulnerabilities exploited, and packers used [record_id:160]. This is a notable reframing of malware ML: instead of treating malware classification as primarily a family-labeling exercise, the record emphasizes operationally and analytically meaningful attributes. Behavior tags could help analysts reason about what a sample does; platform tags could identify where it runs; exploitation tags could connect malware to vulnerability use; and packer tags could assist with unpacking, triage, or reverse engineering workflows [record_id:160].
+
+### Antivirus labels as scalable but complex evidence
+
+Both records rely on antivirus data as a source of large-scale malware intelligence, but neither treats antivirus labels as simple ground truth. The 2023 record uses antivirus labels to create datasets, but only after building ClarAVy, a specialized parser that can handle 882 antivirus label formats across 90 products [record_id:160]. This implies that raw antivirus labels are heterogeneous and require significant normalization before they can support benchmark construction.
+
+The 2021 record is even more explicitly concerned with the interpretation of antivirus outputs. It begins from the observation that strongly correlated groups of antivirus engines are known to exist, while the origin of those correlations remains poorly understood [record_id:200]. It challenges the idea that such correlations mostly come from “first-order” interactions, such as vendors copying labels from leading vendors [record_id:200]. The record’s finding that first-order interactions explain less behavior than previously thought, and that relationships between antivirus engines are “highly volatile,” complicates any simplistic use of antivirus consensus as a stable measure of truth [record_id:200].
+
+A downstream researcher should therefore read the two records together: Joyce’s 2023 work exploits antivirus labels for benchmark creation, while the 2021 work warns that antivirus consensus is dynamic and structurally complex [record_id:160] [record_id:200]. The combination suggests a mature stance toward AV-derived data: useful at scale, but requiring parsing, modeling, and careful interpretation.
+
+### Scale as a recurring contribution
+
+Both records emphasize scale. The 2021 record uses a corpus of 25 million VirusTotal reports spanning more than a decade of antivirus scan data [record_id:200]. The 2023 record releases benchmark datasets comprising nearly 5.5 million malicious files in total [record_id:160]. The ClarAVy parser’s coverage is also presented at scale: 882 label formats from 90 antivirus products [record_id:160].
+
+This scale matters because malware machine learning and antivirus-correlation studies can be highly sensitive to dataset size, time range, vendor coverage, and label diversity. The records do not provide full experimental details, but the abstracts position scale as part of the research value: broad historical VirusTotal coverage in 2021, and multi-million-file benchmark datasets in 2023 [record_id:200] [record_id:160].
+
+### Temporal dynamics and volatility
+
+Temporal change is central to the 2021 record. The proposed R1SM-T method is explicitly temporal: it models how consensus among antivirus engines changes over time [record_id:200]. The record reports that relationships between antivirus engines are “highly volatile,” which suggests that static snapshots of antivirus agreement may be misleading [record_id:200].
+
+This temporal concern is not explicit in the 2023 dataset record, but it is relevant to interpreting AV-labeled benchmarks. If antivirus relationships and consensus patterns shift substantially over time, then datasets derived from AV labels may encode time-specific labeling behavior. The records do not directly connect these issues, but the juxtaposition raises an important research question: how should malware benchmark datasets account for the temporal instability of antivirus labels and vendor relationships? [record_id:200] [record_id:160]
+
+### Infrastructure for downstream machine learning
+
+The 2023 record is particularly oriented toward enabling downstream ML research. It describes the release of benchmark datasets for four classification tasks and states that the ability to identify these malware attributes in newly emerging malware using machine learning could provide significant value to analysts [record_id:160]. The claim that the behavior dataset includes 75 distinct tags—nearly seven times more than the only prior benchmark dataset with behavioral tags—positions the work as an expansion of available supervised-learning targets [record_id:160].
+
+The 2021 record is less directly about building ML classifiers, but it contributes modeling infrastructure for understanding antivirus consensus. R1SM-T is introduced as a method to investigate origins of correlations and model consensus changes through time [record_id:200]. In combination, the records show a research program concerned with the infrastructure around malware ML: label sources, label parsing, benchmark creation, and statistical modeling of antivirus agreement [record_id:160] [record_id:200].
+
+## Methods, Tools, And Approaches Discussed
+
+The most concrete tool described is ClarAVy, an antivirus tagging tool introduced in the 2023 record [record_id:160]. ClarAVy is presented as an AV label parser designed to produce labels for training and evaluating machine learning classifiers on malware behavior, platform, exploitation, and packer classification tasks [record_id:160]. The abstract claims ClarAVy distinguishes itself from prior AV-based taggers through its ability to accurately parse 882 different antivirus label formats used by 90 antivirus products [record_id:160]. This suggests an approach based on large-scale normalization of vendor-specific naming conventions.
+
+ClarAVy’s output is used to create four benchmark datasets: one for malware behaviors, one for platforms, one for exploited vulnerabilities, and one for packers [record_id:160]. The datasets collectively contain nearly 5.5 million malicious files [record_id:160]. The behavior dataset includes 75 distinct tags, which the record says is nearly seven times more than the only prior benchmark dataset with behavioral tags [record_id:160]. The record also claims novelty for platform, exploitation, and packer tag datasets, saying that, to the authors’ knowledge, these are the first released datasets of those types [record_id:160].
+
+The 2021 record introduces Temporal Rank-1 Similarity Matrix decomposition, abbreviated R1SM-T [record_id:200]. This method is used to investigate the origins of correlations among antivirus engines and to model how consensus changes over time [record_id:200]. The input corpus is 25 million VirusTotal reports covering more than a decade of antivirus scan data [record_id:200]. The methodological target is not malware classification directly, but the structure and evolution of agreement among antivirus engines.
+
+A key analytic approach in the 2021 record is testing an explanation for antivirus-engine correlations. The record describes a prevailing view that correlations primarily originate from “first-order” interactions, such as antivirus vendors copying labels from leading vendors [record_id:200]. Joyce’s analysis challenges this view, reporting that first-order interactions do not explain as much antivirus-correlation behavior as previously thought [record_id:200]. This approach combines large-scale historical data with a decomposition model to evaluate assumptions about the antivirus ecosystem.
+
+Together, these methods reveal a dual strategy. One line of work extracts structured labels from messy antivirus naming conventions for downstream ML benchmarks [record_id:160]. The other line models the relationships among the antivirus engines producing those labels, especially over time [record_id:200]. Both are essential to responsible use of AV-derived labels: parsing labels expands their utility, while modeling consensus helps assess their reliability and meaning.
+
+## Notable Talks, Records, And Evidence
+
+The 2023 CAMLIS record, “MalDICT: Benchmark Datasets on Malware Behaviors, Platforms, Exploitation, and Packers,” is the clearest representative of Joyce’s dataset-building contribution [record_id:160]. It matters because it broadens the malware classification agenda beyond malicious/benign and family labels. Its core contribution is the creation of benchmark datasets for four underrepresented malware attribute tasks, using labels generated by ClarAVy [record_id:160]. The record is evidence for several specific claims: ClarAVy parses 882 AV label formats from 90 AV products; the datasets contain nearly 5.5 million malicious files; the behavior dataset includes 75 tags; and the platform, exploitation, and packer datasets are claimed as first-of-their-kind releases, to the authors’ knowledge [record_id:160].
+
+The 2021 CAMLIS record, “Rank-1 Similarity Matrix Decomposition For Modeling Changes inAntivirus Consensus Through Time,” is the clearest representative of Joyce’s work on antivirus consensus dynamics [record_id:200]. It matters because it questions how researchers interpret agreement among antivirus engines. The record uses 25 million VirusTotal reports over more than a decade and introduces R1SM-T to model how consensus changes through time [record_id:200]. Its important substantive finding is that first-order interactions, such as copying labels from leading vendors, do not explain as much antivirus correlation behavior as previously thought, and that relationships between antivirus engines are highly volatile [record_id:200].
+
+The two records are mutually reinforcing. The 2023 record depends on the ability to derive meaningful labels from antivirus outputs [record_id:160]. The 2021 record examines whether and how antivirus outputs correlate, warning that the consensus landscape is unstable and not reducible to simple vendor-copying dynamics [record_id:200]. For downstream researchers, this pairing is important: benchmark datasets built from AV labels are useful, but their provenance and temporal dynamics deserve scrutiny.
+
+## Gaps, Limits, And Open Questions
+
+The evidence base is small. Only two records are included, both from CAMLIS, and both appear to be abstracts rather than full papers or slide decks [record_id:160] [record_id:200]. As a result, the records provide high-level claims but not enough detail to independently evaluate methodology, statistical validity, data quality, or reproducibility.
+
+For the 2023 MalDICT/ClarAVy record, several questions remain open. The abstract does not describe the exact labeling pipeline, the validation process for ClarAVy’s parsed
