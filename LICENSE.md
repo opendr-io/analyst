@@ -1,4 +1,5 @@
 openDR Project License and Special Notice
+Questions? Open an issue or contact: info@opendr.io 
 
 The topic summaries are analytical outputs distilled from publicly available
 sources that may be subject to their original license terms, website terms, and
