@@ -1,6 +1,16 @@
-# Analyst
 
-A local research knowledge base for cybersecurity talks, papers, saved posts, PDFs, and other source material. It stores records in SQLite, enriches them with LLM-generated annotations and topic classifications, generates long-form research summaries, and answers questions from the generated summaries or record annotations.
+### Analyst
+
+An agent that answers questions about certain security conference proceedings using a prepared knowledge base. UI is via Jupyter notebook or command prompt.
+
+SQL queries can alternatively be used to search for researchers, talks, or tools. Answers to free-form questions are given from the pre-processed topic summaries. There are three dozen summaries covering topics across the conference sources. There are also summaries for each conference and for authors with more than one presentation in the data. The current dataset includes the PROMPT|GTFO Youtube channel and these recent conferences:
+
+
+2025 conferences: CAMLIS, DEFCON, Blackhat BSides SF ; 2026 conferences: Unprompted.
+
+- **Question** Answers questions using the pre-processed topic summaries from the conference list above. Summaries are also available for conferences and authors with multiple talks.
+- **Query**  Runs deterministic annotation/database queries and does not call an LLM.
+- **Status** checks the knowledge/index state in the SQLite data layer.
 
 ## Quickstart
 
