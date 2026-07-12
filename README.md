@@ -1,4 +1,5 @@
 
+![Alt text](docs/analyst.gif)
 ### Analyst
 
 An agent that answers questions about certain security conference proceedings using a prepared knowledge base. UI is via Jupyter notebook or command prompt.
