@@ -4,7 +4,7 @@
 
 An agent that answers questions about cybersecurity conference research using an agent curated knowledge base. UI is via Jupyter notebook or command prompt.SQL queries can also be used to search for researchers, talks, or tools. 
 
-Answers to free-form questions are given from the pre-processed topic summaries. There are three dozen summaries covering topics across the conference sources. There are also summaries for each conference and for authors with more than one presentation in the data. The current dataset includes the PROMPT|GTFO Youtube channel and these recent conferences:
+Answers to free-form questions are given from three dozen pre-processed topic summaries compiled by a knowledge agent. There are also summaries for each conference and for authors with more than one presentation in the data. The current dataset includes summaries compiled from publc data in the PROMPT|GTFO Youtube channel and these recent conference abstracts:
 
 2025 conferences: CAMLIS, Blackhat, DEFCON, BsidesLV, BSides SF. 2026 conferences: Unprompted.
 
