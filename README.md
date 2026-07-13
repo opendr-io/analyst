@@ -2,12 +2,11 @@
 ![Alt text](docs/analyst.gif)
 ### Analyst
 
-An agent that answers questions about certain security conference proceedings using a prepared knowledge base. UI is via Jupyter notebook or command prompt.
+An agent that answers questions about cybersecurity conference research using an agent curated knowledge base. UI is via Jupyter notebook or command prompt.SQL queries can also be used to search for researchers, talks, or tools. 
 
-SQL queries can alternatively be used to search for researchers, talks, or tools. Answers to free-form questions are given from the pre-processed topic summaries. There are three dozen summaries covering topics across the conference sources. There are also summaries for each conference and for authors with more than one presentation in the data. The current dataset includes the PROMPT|GTFO Youtube channel and these recent conferences:
+Answers to free-form questions are given from the pre-processed topic summaries. There are three dozen summaries covering topics across the conference sources. There are also summaries for each conference and for authors with more than one presentation in the data. The current dataset includes the PROMPT|GTFO Youtube channel and these recent conferences:
 
-
-2025 conferences: CAMLIS, DEFCON, Blackhat BSides SF ; 2026 conferences: Unprompted.
+2025 conferences: CAMLIS, Blackhat, DEFCON, BsidesLV, BSides SF. 2026 conferences: Unprompted.
 
 - **Question** Answers questions using the pre-processed topic summaries from the conference list above. Summaries are also available for conferences and authors with multiple talks.
 - **Query**  Runs deterministic annotation/database queries and does not call an LLM.
