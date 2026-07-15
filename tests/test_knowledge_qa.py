@@ -1,4 +1,5 @@
 from pathlib import Path
+from types import SimpleNamespace
 from uuid import uuid4
 
 import the_analyst
@@ -557,7 +558,43 @@ def test_help_command_lists_tools_and_bypasses_llm_client(monkeypatch, capsys):
     assert "answer-from-summaries" in output
     assert "generate-topic-summary" in output
 
+def test_run_prefixed_question_reports_llm_client_error(monkeypatch, capsys):
+    def fail_create_client():
+        raise RuntimeError("OPENAI_API_KEY is missing")
 
+    monkeypatch.setattr(the_analyst.llm_client, "create_client", fail_create_client)
+    monkeypatch.setattr(
+        the_analyst,
+        "run_summary_question",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("summary flow should not run")),
+    )
+
+    handled = the_analyst.run_prefixed_turn("question: search for threat modeling")
+
+    assert handled is True
+    output = capsys.readouterr().out
+    assert "[answer-from-summaries]" in output
+    assert "LLM client unavailable: OPENAI_API_KEY is missing" in output
+    assert "query: <text>" in output
+
+
+def test_run_direct_question_reports_llm_client_error(monkeypatch, capsys):
+    def fail_create_client():
+        raise RuntimeError("OPENAI_API_KEY is missing")
+
+    monkeypatch.setattr(the_analyst.llm_client, "create_client", fail_create_client)
+    monkeypatch.setattr(
+        the_analyst,
+        "run_agent_turn",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("agent turn should not run")),
+    )
+
+    result = the_analyst.run(SimpleNamespace(question=["search", "for", "threat", "modeling"]))
+
+    assert result == 1
+    output = capsys.readouterr().out
+    assert "LLM client unavailable: OPENAI_API_KEY is missing" in output
+    assert "query: <text>" in output
 def test_system_prompt_allows_clarifying_questions_for_ambiguous_requests():
     assert the_analyst.ORACLE_SYSTEM_PROMPT.name == "oracle_system.txt"
     assert the_analyst.ORACLE_SYSTEM_PROMPT.parent.name == "prompts"

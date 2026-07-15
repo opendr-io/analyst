@@ -1178,6 +1178,18 @@ def run_summary_question(client: Any, question: str) -> None:
             ki.safe_print(block.text)
 
 
+def create_llm_client_or_report() -> Any | None:
+    try:
+        return llm_client.create_client()
+    except Exception as exc:
+        ki.safe_print(
+            "LLM client unavailable: "
+            f"{exc}\n"
+            "Set the required API key for the configured provider, or use "
+            "'query: <text>' for local annotation search without the LLM."
+        )
+        return None
+
 def run_prefixed_turn(question: str) -> bool:
     mode, payload = parse_prefixed_request(question)
     if not mode:
@@ -1191,7 +1203,9 @@ def run_prefixed_turn(question: str) -> bool:
         return True
     if mode == "question":
         ki.safe_print("[answer-from-summaries]")
-        client = llm_client.create_client()
+        client = create_llm_client_or_report()
+        if client is None:
+            return True
         run_summary_question(client, payload)
         return True
     return False
@@ -1268,7 +1282,9 @@ def run(args: argparse.Namespace) -> int:
             return 0
         if run_prefixed_turn(question):
             return 0
-        client = llm_client.create_client()
+        client = create_llm_client_or_report()
+        if client is None:
+            return 1
         run_agent_turn(client, question)
         return 0
 
@@ -1288,8 +1304,9 @@ def run(args: argparse.Namespace) -> int:
         if run_help_turn(question):
             pass
         elif not run_prefixed_turn(question):
-            client = llm_client.create_client()
-            run_agent_turn(client, question)
+            client = create_llm_client_or_report()
+            if client is not None:
+                run_agent_turn(client, question)
         print()
 
     return 0
