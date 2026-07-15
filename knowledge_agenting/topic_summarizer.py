@@ -168,30 +168,44 @@ def grouped_paths(summary_dir: Path, group: SummaryGroup) -> TopicPaths:
     )
 
 
+def _require_path_within(path: Path, base_dir: Path, label: str) -> Path:
+    resolved_base = base_dir.resolve(strict=False)
+    resolved_path = path.resolve(strict=False)
+    try:
+        resolved_path.relative_to(resolved_base)
+    except ValueError as exc:
+        raise ValueError(f"{label} must stay within summary_dir: {path}") from exc
+    return resolved_path
+
+
 def archive_existing(
     paths: TopicPaths,
     archive_root: Path,
     timestamp: str,
     include_summary: bool = True,
+    summary_dir: Path | None = None,
 ) -> list[str]:
     archived: list[str] = []
     archive_dir = archive_root / timestamp
+    containment_root = summary_dir or archive_root.parent.parent.parent
+    _require_path_within(archive_dir, containment_root, "archive directory")
     files = [paths.audit, paths.prompt_input, paths.manifest]
     if include_summary:
         files.insert(0, paths.summary)
     for path in files:
         if not path.exists():
             continue
+        _require_path_within(path, containment_root, "archive source")
         archive_dir.mkdir(parents=True, exist_ok=True)
         target = archive_dir / path.name
         suffix = 1
         while target.exists():
             target = archive_dir / f"{path.stem}-{suffix}{path.suffix}"
             suffix += 1
+        _require_path_within(target, containment_root, "archive target")
         shutil.move(str(path), str(target))
         archived.append(str(target))
     return archived
-
 
 def run_global_preflight(db_path: Path) -> dict[str, Any]:
     with open_db(db_path) as conn:
@@ -752,7 +766,7 @@ def summarize_group(
     if not dry_run:
         output_dir.mkdir(parents=True, exist_ok=True)
         artifact_dir.mkdir(parents=True, exist_ok=True)
-        archived = archive_existing(paths, artifact_dir / "archive", timestamp, include_summary=True)
+        archived = archive_existing(paths, artifact_dir / "archive", timestamp, include_summary=True, summary_dir=summary_dir)
     elif write_preflight_artifacts:
         artifact_dir.mkdir(parents=True, exist_ok=True)
 

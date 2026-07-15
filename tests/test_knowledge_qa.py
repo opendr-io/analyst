@@ -71,7 +71,7 @@ def test_question_to_fts_query_joins_tokens_with_or():
 def test_question_to_fts_query_drops_stopwords():
     result = question_to_fts_query("what is the best approach for this")
     # "what", "is", "the", "for", "this" are common stopwords; "best" and "approach" may survive
-    tokens = [t.strip() for t in result.split(" OR ")]
+    tokens = [t.strip().strip('"') for t in result.split(" OR ")]
     # stopwords like "the" should not appear
     assert "the" not in tokens
 
@@ -79,7 +79,7 @@ def test_question_to_fts_query_drops_stopwords():
 def test_question_to_fts_query_limits_to_ten_tokens():
     long_question = " ".join(f"keyword{i}" for i in range(20))
     result = question_to_fts_query(long_question)
-    tokens = result.split(" OR ")
+    tokens = [t.strip('"') for t in result.split(" OR ")]
     assert len(tokens) <= 16
 
 
@@ -87,16 +87,26 @@ def test_question_to_fts_query_prioritizes_original_terms_before_expansions():
     result = question_to_fts_query(
         "is there anything about testing for broken authentication at scale across hundred of web applications?"
     )
-    tokens = result.split(" OR ")
+    tokens = [t.strip('"') for t in result.split(" OR ")]
 
     assert "authentication" in tokens
     assert "applications" in tokens
 
 
-def test_question_to_fts_query_returns_original_on_no_tokens():
+def test_question_to_fts_query_returns_empty_on_no_tokens():
     result = question_to_fts_query("!!! ???")
-    assert result == "!!! ???"
+    assert result == ""
 
+
+def test_question_to_fts_query_quotes_hostile_fts_punctuation():
+    result = question_to_fts_query('oauth" OR records_fts MATCH * --')
+    tokens = result.split(" OR ")
+
+    assert '"oauth"' in tokens
+    assert '"match"' in tokens
+    assert all(token.startswith('"') and token.endswith('"') for token in tokens)
+    assert "*" not in result
+    assert "--" not in result
 
 # --- rank_relevant_topics ---
 
