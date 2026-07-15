@@ -314,6 +314,10 @@ def plan_search_query(question: str) -> str:
     return " ".join(search_terms) if search_terms else question
 
 
+def _fts_phrase(token: str) -> str:
+    return f'"{token.replace(chr(34), chr(34) + chr(34))}"'
+
+
 def question_to_fts_query(question: str) -> str:
     planned = plan_search_query(question)
     original_tokens = re.findall(r"[a-zA-Z][a-zA-Z0-9+\-]{2,}", question.lower())
@@ -325,7 +329,7 @@ def question_to_fts_query(question: str) -> str:
             continue
         seen.add(token)
         tokens.append(token)
-    return " OR ".join(tokens[:16]) if tokens else question
+    return " OR ".join(_fts_phrase(token) for token in tokens[:16])
 
 
 def _topic_slug(topic: str) -> str:
@@ -696,12 +700,16 @@ def _optional_positive_limit(limit: Any) -> int | None:
 
 
 def _record_id_from_query(query: str) -> int | None:
+    def valid_record_id(value: str) -> int | None:
+        record_id = int(value)
+        return record_id if 0 < record_id <= 9_223_372_036_854_775_807 else None
+
     stripped = query.strip()
     if re.fullmatch(r"\d+", stripped):
-        return int(stripped)
+        return valid_record_id(stripped)
     match = re.search(r"\b(?:record|record_id)\s*:?\s*#?(\d+)\b", stripped, flags=re.I)
     if match:
-        return int(match.group(1))
+        return valid_record_id(match.group(1))
     return None
 
 
@@ -737,6 +745,8 @@ def tool_search_records(query: str, topic: str = "", limit: int | None = None) -
         return f"Exact record match for id {record_id}:\n\n{_format_compact_record(record)}"
 
     fts_query = question_to_fts_query(query)
+    if not fts_query:
+        return f"No searchable terms found for: {query!r}"
     ranked_topics = rank_relevant_topics(query, ki.list_classification_topics(db_path), limit=3)
     requested_limit = _optional_positive_limit(limit)
     scan_limit = requested_limit or 10_000
@@ -1168,6 +1178,18 @@ def run_summary_question(client: Any, question: str) -> None:
             ki.safe_print(block.text)
 
 
+def create_llm_client_or_report() -> Any | None:
+    try:
+        return llm_client.create_client()
+    except Exception as exc:
+        ki.safe_print(
+            "LLM client unavailable: "
+            f"{exc}\n"
+            "Set the required API key for the configured provider, or use "
+            "'query: <text>' for local annotation search without the LLM."
+        )
+        return None
+
 def run_prefixed_turn(question: str) -> bool:
     mode, payload = parse_prefixed_request(question)
     if not mode:
@@ -1181,7 +1203,9 @@ def run_prefixed_turn(question: str) -> bool:
         return True
     if mode == "question":
         ki.safe_print("[answer-from-summaries]")
-        client = llm_client.create_client()
+        client = create_llm_client_or_report()
+        if client is None:
+            return True
         run_summary_question(client, payload)
         return True
     return False
@@ -1258,7 +1282,9 @@ def run(args: argparse.Namespace) -> int:
             return 0
         if run_prefixed_turn(question):
             return 0
-        client = llm_client.create_client()
+        client = create_llm_client_or_report()
+        if client is None:
+            return 1
         run_agent_turn(client, question)
         return 0
 
@@ -1278,8 +1304,9 @@ def run(args: argparse.Namespace) -> int:
         if run_help_turn(question):
             pass
         elif not run_prefixed_turn(question):
-            client = llm_client.create_client()
-            run_agent_turn(client, question)
+            client = create_llm_client_or_report()
+            if client is not None:
+                run_agent_turn(client, question)
         print()
 
     return 0

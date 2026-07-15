@@ -2,6 +2,8 @@ from knowledge_agenting import topic_summarizer as ts
 from knowledge_indexing.knowledge_authors import split_authors
 from types import SimpleNamespace
 
+import pytest
+
 
 def _record(record_id: int = 42) -> dict:
     return {
@@ -278,6 +280,49 @@ def test_write_preflight_artifacts_requires_dry_run(capsys):
     error = capsys.readouterr().err
     assert result == 2
     assert "--write-preflight-artifacts requires --dry-run" in error
+
+def test_archive_existing_moves_outputs_under_archive_root(tmp_path):
+    group = ts.SummaryGroup("topic", "Threat modeling", "Threat modeling", "", "")
+    paths = ts.grouped_paths(tmp_path, group)
+    paths.summary.parent.mkdir(parents=True)
+    paths.audit.parent.mkdir(parents=True)
+    paths.summary.write_text("old summary", encoding="utf-8")
+    paths.audit.write_text("old audit", encoding="utf-8")
+
+    archived = ts.archive_existing(
+        paths,
+        tmp_path / "artifacts" / "topics" / "archive",
+        "20260715T000000Z",
+        summary_dir=tmp_path,
+    )
+
+    archived_paths = [ts.Path(path) for path in archived]
+    assert tmp_path / "artifacts" / "topics" / "archive" / "20260715T000000Z" / "threat-modeling.md" in archived_paths
+    assert tmp_path / "artifacts" / "topics" / "archive" / "20260715T000000Z" / "threat-modeling.audit.json" in archived_paths
+    assert not paths.summary.exists()
+    assert not paths.audit.exists()
+
+
+def test_archive_existing_rejects_source_outside_summary_dir(tmp_path):
+    outside = tmp_path.parent / f"{tmp_path.name}-outside.md"
+    outside.write_text("do not move", encoding="utf-8")
+    paths = ts.TopicPaths(
+        summary=outside,
+        audit=tmp_path / "artifacts" / "topics" / "safe.audit.json",
+        prompt_input=tmp_path / "artifacts" / "topics" / "safe.prompt-input.md",
+        manifest=tmp_path / "artifacts" / "topics" / "safe.manifest.json",
+    )
+
+    with pytest.raises(ValueError, match="archive source must stay within summary_dir"):
+        ts.archive_existing(
+            paths,
+            tmp_path / "artifacts" / "topics" / "archive",
+            "20260715T000000Z",
+            summary_dir=tmp_path,
+        )
+
+    assert outside.exists()
+    outside.unlink()
 
 
 def test_summarize_group_dry_run_is_read_only_by_default(monkeypatch, tmp_path):
