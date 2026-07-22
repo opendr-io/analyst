@@ -1,5 +1,7 @@
 
 ![Alt text](docs/analyst.gif)
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/opendr-io/analyst/blob/main/the-analyst.ipynb)
 ### Analyst
 
 An agent that answers questions about cybersecurity conference research using an agent curated knowledge base. UI is via Jupyter notebook or command prompt.SQL queries can also be used to search for researchers, talks, or tools. 
@@ -92,6 +94,39 @@ the-analyst.ipynb
 
 The analyst notebook exposes the constrained `question:` path, deterministic `query:`
 path, and status check.
+
+### Google Colab
+
+`the-analyst.ipynb` includes an optional Colab setup cell. Local Jupyter users can
+skip it. Colab users can run the first setup cell as-is; it defaults to
+`https://github.com/opendr-io/analyst.git`. Override `ANALYST_REPO_URL` only when
+working from a fork. Set `ANALYST_REPO_REF` when testing a branch or tag before
+merge. The cell clones the repo into
+`/content/analyst`, installs `requirements-colab.txt` when present, changes into the repo root, and
+enables the Colab widget manager when available.
+
+The public Colab runtime needs these repo paths to be present after clone:
+
+```text
+the_analyst.py
+llm_client.py
+knowledge_indexing/
+knowledge_agenting/
+config/
+requirements-colab.txt
+knowledge/knowledge.sqlite3
+summaries/
+```
+
+No-LLM modes (`Query`, `Topics`, `Summary files`, and `Status`) run from the
+checked-in SQLite database and Markdown summaries. `Question - LLM` requires a
+provider key. For Colab, add `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` in Colab
+Secrets; locally, keep using `.env`. In Colab, rerunning the import cell reloads
+Colab Secrets over any stale runtime value. If OpenAI returns `401` /
+`invalid_api_key`, update the Colab Secret named `OPENAI_API_KEY`, rerun the
+setup/import cells, or run `set_openai_key()` to replace the key for the current
+runtime. If the configured model in `config/llm.ini` is unavailable to a public
+user, set `COLAB_QA_MODEL` or `LLM_MODEL_QA` before importing `the_analyst`.
 
 ## Output Locations
 
