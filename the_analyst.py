@@ -418,10 +418,18 @@ def _score_topic_text(question: str, topic_name: str, search_text: str) -> float
     search_l = search_text.lower()
     question_l = planned_question.lower()
     original_question_l = question.lower()
+    question_numbers = set(re.findall(r"\b(?:19|20)\d{2}\b|\b\d{2}\b", original_question_l))
+    target_numbers = set(re.findall(r"\b(?:19|20)\d{2}\b|\b\d{2}\b", f"{topic_l} {search_l}"))
     if not overlap and topic_l not in question_l and search_l not in question_l:
-        return 0.0
+        if not (question_numbers & target_numbers):
+            return 0.0
     score = float(len(original_overlap) * 4)
     score += float(len(overlap - original_overlap) * 2)
+    if question_numbers:
+        matched_numbers = question_numbers & target_numbers
+        score += float(len(matched_numbers) * 10)
+        if not matched_numbers:
+            score -= 3.0
     if topic_l in original_question_l:
         score += 8.0
     elif topic_l in question_l:

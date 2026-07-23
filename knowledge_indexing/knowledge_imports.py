@@ -26,6 +26,8 @@ def detect_export_kind(data: Any, path: Path) -> str:
         return "camlis"
     if "bsideslv" in name or "bsideslv" in parent:
         return "bsideslv"
+    if "defcon" in name or "defcon" in parent:
+        return "defcon"
     if "rsac" in name or "rsac" in parent:
         return "rsac"
     if "linkedin" in name or "linkedin" in parent:
@@ -33,6 +35,9 @@ def detect_export_kind(data: Any, path: Path) -> str:
     if "promptorgtfo" in name or "promptorgtfo" in parent:
         return "promptorgtfo"
     if isinstance(data, dict):
+        manifest = ((data.get("source") or {}).get("manifest") or {})
+        if clean_text(manifest.get("code", "")).lower().startswith("defcon"):
+            return "defcon"
         config_source = clean_text((data.get("config") or {}).get("source", ""))
         if config_source in {"feed", "saved"}:
             return "linkedin"
@@ -46,16 +51,36 @@ def detect_export_kind(data: Any, path: Path) -> str:
     return "unknown"
 
 
-def record_dedupe_key(source: str, record_id: str, url: str, title: str, author: str, text: str) -> str:
-    if source in {"blackhat", "camlis", "bsideslv", "defcon33", "promptorgtfo", "bsidessf"} and record_id:
-        return f"{source}:id:{record_id}"
+CONFERENCE_RECORD_SOURCES = {"blackhat", "camlis", "bsideslv", "rsac", "bsidessf"}
+
+
+def _dedupe_component(value: str) -> str:
+    value = clean_text(value).lower()
+    value = re.sub(r"[^a-z0-9]+", "-", value).strip("-")
+    return value or "unknown"
+
+
+def record_dedupe_key(
+    source: str,
+    record_id: str,
+    url: str,
+    title: str,
+    author: str,
+    text: str,
+    event: str = "",
+    year: str = "",
+) -> str:
+    if (source in CONFERENCE_RECORD_SOURCES or re.fullmatch(r"defcon\d+", source)) and title:
+        event_key = _dedupe_component(year or event)
+        material = "\n".join([source, event_key, title.lower(), author.lower()])
+        return f"{source}:{event_key}:title-author:{stable_hash(material)}"
     if record_id and ("youtube.com/watch" in url or "youtu.be/" in url):
         return f"{source}:id:{record_id}"
     if url:
         return f"{source}:url:{url.split('?', 1)[0].rstrip('/')}"
     if record_id:
         return f"{source}:id:{record_id}"
-    material = "\n".join([source, title.lower(), author.lower(), text.lower()[:1000]])
+    material = "\n".join([source, year.lower() or event.lower(), title.lower(), author.lower(), text.lower()[:1000]])
     return f"{source}:text:{stable_hash(material)}"
 
 
@@ -78,17 +103,28 @@ def make_record(
     author_text = clean_text(author)
     text_text = clean_text(text)
     url_text = clean_text(url)
+    event_text = clean_text(event)
+    year_text = clean_text(year)
     return KnowledgeRecord(
         source=source,
         source_file=str(source_file),
         source_record_id=source_record_id_text,
-        dedupe_key=record_dedupe_key(source, source_record_id_text, url_text, title_text, author_text, text_text),
+        dedupe_key=record_dedupe_key(
+            source,
+            source_record_id_text,
+            url_text,
+            title_text,
+            author_text,
+            text_text,
+            event=event_text,
+            year=year_text,
+        ),
         title=title_text,
         author=author_text,
         text=text_text,
         url=url_text,
-        event=clean_text(event),
-        year=clean_text(year),
+        event=event_text,
+        year=year_text,
         tags=clean_text(tags),
         raw_json=json_dumps(raw),
     )
@@ -231,6 +267,49 @@ def records_from_rsac(data: dict[str, Any], source_file: Path) -> list[Knowledge
     return records
 
 
+def records_from_defcon(data: dict[str, Any], source_file: Path) -> list[KnowledgeRecord]:
+    records = []
+    source_meta = data.get("source") or {}
+    manifest = source_meta.get("manifest") or {}
+    source_label = clean_text(manifest.get("code", "")).lower() or clean_text(source_meta.get("conference", "")).lower()
+    source_label = source_label or "defcon"
+    event = clean_text(manifest.get("name", "")) or clean_text(source_label.upper())
+    year_match = re.search(r"(20\d{2})", event)
+    default_year = year_match.group(1) if year_match else ""
+    for talk in data.get("talks", []):
+        title = clean_text(talk.get("title", ""))
+        if not title:
+            continue
+        tags = "; ".join(
+            part
+            for part in [
+                talk.get("tags", ""),
+                talk.get("matched_tags", ""),
+                talk.get("track", ""),
+                talk.get("room", ""),
+                talk.get("date", ""),
+                talk.get("time", ""),
+            ]
+            if clean_text(part)
+        )
+        records.append(
+            make_record(
+                source=source_label,
+                source_file=source_file,
+                source_record_id=clean_text(talk.get("session_id", "") or talk.get("content_id", "")),
+                title=title,
+                author=clean_text(talk.get("speakers", "") or talk.get("speaker", "")),
+                text=clean_text(talk.get("abstract", "") or talk.get("description", "")),
+                url=talk.get("url", ""),
+                event=clean_text(talk.get("event", "")) or event,
+                year=talk.get("year", "") or default_year,
+                tags=tags,
+                raw=talk,
+            )
+        )
+    return records
+
+
 def records_from_linkedin(data: dict[str, Any], source_file: Path) -> list[KnowledgeRecord]:
     records = []
     source_name = f"linkedin_{clean_text((data.get('config') or {}).get('source', 'post'))}"
@@ -352,7 +431,7 @@ def records_from_youtube_playlist(data: dict[str, Any], source_file: Path) -> li
             author = re.sub(r"^20\d{2}\s+(?=[A-Z])", "", author)
         if source_slug == "defcon33" and is_defcon_low_value_schedule_record(title, abstract):
             continue
-        year = (clean_text(r.get("upload_date", "")) or "")[:4] or "2025"
+        year = "2025" if source_slug == "defcon33" else (clean_text(r.get("upload_date", "")) or "")[:4] or "2025"
         tags = clean_text(r.get("duration_string", ""))
         records.append(
             make_record(
@@ -403,8 +482,8 @@ def records_from_promptorgtfo(data: list[dict[str, Any]], source_file: Path) -> 
         tool_names = [t.get("name", "") for t in tools if t.get("name")]
         tags = "; ".join(tool_names[:10])
 
-        summary = clean_text(r.get("summary", ""))
-        if not summary:
+        body = clean_text(r.get("text", "") or r.get("summary", ""))
+        if not body:
             continue
 
         records.append(
@@ -414,7 +493,7 @@ def records_from_promptorgtfo(data: list[dict[str, Any]], source_file: Path) -> 
                 source_record_id=clean_text(r.get("url", "")),
                 title=talk_title,
                 author=speaker,
-                text=summary,
+                text=body,
                 url=r.get("url", ""),
                 event="Prompt||GTFO",
                 year="2026",
@@ -520,6 +599,8 @@ def records_from_export(path: Path) -> list[KnowledgeRecord]:
             return records_from_camlis(data, path)
         if kind == "bsideslv":
             return records_from_bsideslv(data, path)
+        if kind == "defcon":
+            return records_from_defcon(data, path)
         if kind == "rsac":
             return records_from_rsac(data, path)
         if kind == "linkedin":

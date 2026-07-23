@@ -44,6 +44,7 @@ from .knowledge_imports import (
     records_from_bsideslv,
     records_from_bsidessf_md,
     records_from_camlis,
+    records_from_defcon,
     records_from_export,
     records_from_linkedin,
     records_from_linkedin_db,
@@ -232,6 +233,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build and search the local knowledge SQLite index.")
     parser.add_argument("--db", type=Path, default=DB_PATH, help="SQLite database path.")
     parser.add_argument("--import-json", type=Path, nargs="*", help="JSON export files to import.")
+    parser.add_argument("--import-dir", type=Path, action="append", help="Import every JSON export file in a directory.")
     parser.add_argument("--all-exports", action="store_true", help="Import every known JSON export instead of only latest per source.")
     parser.add_argument("--rebuild", action="store_true", help="Clear existing records before importing.")
     parser.add_argument("--sync-linkedin-db", action="store_true", help="Sync all unique LinkedIn posts from linkedin_ingest.sqlite3.")
@@ -269,12 +271,24 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def import_paths_from_args(args: argparse.Namespace) -> list[Path]:
+    paths: list[Path] = []
+    if args.import_json is not None:
+        paths.extend(args.import_json)
+    for folder in args.import_dir or []:
+        if folder.exists() and folder.is_dir():
+            paths.extend(sorted(folder.glob("*.json")))
+        else:
+            paths.append(folder)
+    if paths:
+        return paths
+    return default_export_paths(latest_per_source=not args.all_exports)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    if args.import_json is not None or args.rebuild or args.all_exports:
-        paths = args.import_json if args.import_json is not None and args.import_json else default_export_paths(
-            latest_per_source=not args.all_exports
-        )
+    if args.import_json is not None or args.import_dir or args.rebuild or args.all_exports:
+        paths = import_paths_from_args(args)
         stats = import_exports(paths, db_path=args.db, rebuild=args.rebuild)
         print(f"db: {args.db}")
         print(f"files: {stats['files']}")

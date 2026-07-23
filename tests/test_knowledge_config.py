@@ -8,7 +8,7 @@ def test_text_config_files_load_expected_policy_terms():
 
 
 def test_seed_topics_load_from_tsv():
-    assert len(cfg.SEED_TOPICS) == 35
+    assert len(cfg.SEED_TOPICS) == 36
     seed_map = dict(cfg.SEED_TOPICS)
     assert "malicious software" in seed_map["Malware analysis and reverse engineering"]
     assert "proof-of-concept exploit work" in seed_map["Exploit development and vulnerability discovery"]
@@ -16,3 +16,4 @@ def test_seed_topics_load_from_tsv():
     assert "sensitive data movement" in seed_map["Data loss detection and prevention"]
     assert "voting systems" in seed_map["Election security"]
     assert "adversary tracking" in seed_map["Threat intelligence and adversary tracking"]
+    assert "anti-detection behavior" in seed_map["Evasion, bypass, and detection avoidance"]
