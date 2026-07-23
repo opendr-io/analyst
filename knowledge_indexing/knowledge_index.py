@@ -9,11 +9,9 @@ from .knowledge_config import (
     APP_DIR,
     BAD_TOPIC_PHRASES,
     BAD_TOPIC_TOKENS,
-    BSIDESSF_MD,
     CONFIG_DIR,
     DB_PATH,
     DEFCON33_LATEST,
-    LINKEDIN_DB_PATH,
     LOG_PATH,
     PROMPTORGTFO_LATEST,
     SEED_TOPICS,
@@ -37,21 +35,16 @@ from .knowledge_imports import (
     default_export_paths,
     detect_export_kind,
     import_exports,
-    import_markdown_sources,
     make_record,
     record_dedupe_key,
     records_from_blackhat,
     records_from_bsideslv,
-    records_from_bsidessf_md,
     records_from_camlis,
     records_from_defcon,
     records_from_export,
-    records_from_linkedin,
-    records_from_linkedin_db,
     records_from_promptorgtfo,
     records_from_rsac,
     records_from_youtube_playlist,
-    sync_linkedin_db,
     upsert_record,
 )
 from .knowledge_records import (
@@ -236,10 +229,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--import-dir", type=Path, action="append", help="Import every JSON export file in a directory.")
     parser.add_argument("--all-exports", action="store_true", help="Import every known JSON export instead of only latest per source.")
     parser.add_argument("--rebuild", action="store_true", help="Clear existing records before importing.")
-    parser.add_argument("--sync-linkedin-db", action="store_true", help="Sync all unique LinkedIn posts from linkedin_ingest.sqlite3.")
-    parser.add_argument("--linkedin-db", type=Path, default=LINKEDIN_DB_PATH, help="LinkedIn ingest SQLite path.")
-    parser.add_argument("--keep-linkedin-records", action="store_true", help="Do not clear existing LinkedIn records before syncing.")
-    parser.add_argument("--import-markdown", action="store_true", help="Import BSidesSF and other markdown sources.")
     parser.add_argument("--query", help="Search query using SQLite FTS5 syntax.")
     parser.add_argument("--limit", type=int, default=10, help="Maximum search results.")
     parser.add_argument("--unread", action="store_true", help="Only search records where agent_read = 0.")
@@ -298,26 +287,6 @@ def main(argv: list[str] | None = None) -> int:
         print(f"skipped_files: {stats['skipped_files']}")
         if stats["errors"]:
             print(f"errors: {stats['errors']} (see {LOG_PATH})")
-    if args.import_markdown:
-        stats = import_markdown_sources(db_path=args.db)
-        print(f"markdown_records: {stats['records']}")
-        print(f"markdown_inserted: {stats['inserted']}")
-        print(f"markdown_updated: {stats['updated']}")
-        if stats["errors"]:
-            print(f"markdown_errors: {stats['errors']} (see {LOG_PATH})")
-    if args.sync_linkedin_db:
-        stats = sync_linkedin_db(
-            db_path=args.db,
-            linkedin_db_path=args.linkedin_db,
-            rebuild_linkedin=not args.keep_linkedin_records,
-        )
-        print(f"linkedin_db: {args.linkedin_db}")
-        print(f"linkedin_records_seen: {stats['records']}")
-        print(f"linkedin_inserted: {stats['inserted']}")
-        print(f"linkedin_updated: {stats['updated']}")
-        if stats["errors"]:
-            print(f"linkedin_errors: {stats['errors']} (see {LOG_PATH})")
-
     if args.query:
         rows = search_records(args.db, args.query, args.limit, unread=args.unread)
         print_search_results(rows)

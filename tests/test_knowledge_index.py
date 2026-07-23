@@ -34,7 +34,6 @@ from knowledge_indexing.knowledge_index import (
     store_record_classification,
     store_record_classification_error,
     store_topic_candidates,
-    sync_linkedin_db,
     phrase_candidates,
     records_from_youtube_playlist,
     records_from_bsideslv,
@@ -77,7 +76,7 @@ def test_records_from_bsideslv_export_uses_bsideslv_source():
     record = records[0]
     assert record.source == "bsideslv"
     assert record.source_record_id == "HUP7L3"
-    assert record.dedupe_key.startswith("bsideslv:2025:title-author:")
+    assert record.dedupe_key.startswith("bsideslv:2025:title:")
     assert record.event == "BSidesLV 2025"
     assert "Florentine E" in record.tags
 
@@ -85,7 +84,6 @@ def test_import_exports_normalizes_and_searches_sources():
     test_dir = local_tmp_dir()
     blackhat = test_dir / "blackhat-talks.json"
     camlis = test_dir / "camlis-talks.json"
-    linkedin = test_dir / "linkedin-saved.json"
 
     blackhat.write_text(
         """
@@ -124,29 +122,12 @@ def test_import_exports_normalizes_and_searches_sources():
         """,
         encoding="utf-8",
     )
-    linkedin.write_text(
-        """
-        {
-          "config": {"source": "saved"},
-          "ingested_at": "2026-05-15T18:46:55+00:00",
-          "posts": [
-            {
-              "source": "saved",
-              "author": "Poster One",
-              "text": "A saved post about threat modeling AI systems.",
-              "url": "https://www.linkedin.com/feed/update/1"
-            }
-          ]
-        }
-        """,
-        encoding="utf-8",
-    )
     db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
 
-    stats = import_exports([blackhat, camlis, linkedin], db_path=db_path)
+    stats = import_exports([blackhat, camlis], db_path=db_path)
     rows = search_records(db_path, "agentic", limit=10)
 
-    assert stats["inserted"] == 3
+    assert stats["inserted"] == 2
     assert stats["updated"] == 0
     assert stats.get("errors", 0) == 0
     assert {row["source"] for row in rows} == {"blackhat", "camlis"}
@@ -156,8 +137,8 @@ def test_import_exports_normalizes_and_searches_sources():
         blackhat_author = conn.execute(
             "SELECT author FROM records WHERE source = 'blackhat'"
         ).fetchone()[0]
-    assert count == 3
-    assert unread == 3
+    assert count == 2
+    assert unread == 2
     assert blackhat_author == "Researcher One"
 
 
@@ -523,7 +504,7 @@ def test_import_exports_does_not_touch_existing_legacy_session_id_record():
         ("blackhat:id:1", "Existing Title", "2025"),
         (rows[1]["dedupe_key"], "New 2026 Title", "2026"),
     ]
-    assert rows[1]["dedupe_key"].startswith("blackhat:2026:title-author:")
+    assert rows[1]["dedupe_key"].startswith("blackhat:2026:title:")
 
 
 def test_import_exports_keeps_same_talk_distinct_across_conferences():
@@ -618,7 +599,7 @@ def test_records_from_defcon_schedule_export_uses_conference_source():
     assert len(records) == 1
     assert records[0].source == "defcon34"
     assert records[0].source_record_id == "66032"
-    assert records[0].dedupe_key.startswith("defcon34:2026:title-author:")
+    assert records[0].dedupe_key.startswith("defcon34:2026:title:")
     assert records[0].event == "DEF CON 34"
 
 
@@ -654,8 +635,8 @@ def test_records_from_defcon_blank_authors_still_dedupe_by_title():
     )
 
     assert len(records) == 2
-    assert records[0].dedupe_key.startswith("defcon34:2026:title-author:")
-    assert records[1].dedupe_key.startswith("defcon34:2026:title-author:")
+    assert records[0].dedupe_key.startswith("defcon34:2026:title:")
+    assert records[1].dedupe_key.startswith("defcon34:2026:title:")
     assert records[0].dedupe_key != records[1].dedupe_key
 
 
@@ -1351,110 +1332,6 @@ def test_mark_records_read_tracks_agent_state():
     assert mark_records_read(db_path, [first_id], read=False) == 1
     unread_ids = {row["id"] for row in list_unread_records(db_path, limit=10)}
     assert first_id in unread_ids
-
-
-def test_sync_linkedin_db_imports_saved_posts_and_skips_unscreened_feed_posts():
-    test_dir = local_tmp_dir()
-    knowledge_db = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
-    linkedin_db = test_dir / "linkedin.sqlite3"
-    with sqlite3.connect(linkedin_db) as conn:
-        conn.executescript(
-            """
-            CREATE TABLE linkedin_posts (
-                id INTEGER PRIMARY KEY,
-                dedupe_key TEXT NOT NULL,
-                identity_url TEXT NOT NULL DEFAULT '',
-                source_first_seen TEXT NOT NULL,
-                first_seen_at TEXT NOT NULL,
-                last_seen_at TEXT NOT NULL,
-                author TEXT NOT NULL DEFAULT '',
-                headline TEXT NOT NULL DEFAULT '',
-                text TEXT NOT NULL DEFAULT '',
-                url TEXT NOT NULL DEFAULT '',
-                time_text TEXT NOT NULL DEFAULT '',
-                reaction_count TEXT NOT NULL DEFAULT '',
-                comment_count TEXT NOT NULL DEFAULT '',
-                repost_count TEXT NOT NULL DEFAULT '',
-                content_hash TEXT NOT NULL,
-                raw_json TEXT NOT NULL,
-                agent_read INTEGER NOT NULL DEFAULT 0
-            );
-            CREATE TABLE post_observations (
-                id INTEGER PRIMARY KEY,
-                post_id INTEGER NOT NULL,
-                run_id INTEGER NOT NULL,
-                source TEXT NOT NULL,
-                seen_at TEXT NOT NULL,
-                position INTEGER NOT NULL,
-                reaction_count TEXT NOT NULL DEFAULT '',
-                comment_count TEXT NOT NULL DEFAULT '',
-                repost_count TEXT NOT NULL DEFAULT '',
-                raw_json TEXT NOT NULL
-            );
-            """
-        )
-        conn.execute(
-            """
-            INSERT INTO linkedin_posts (
-                dedupe_key, source_first_seen, first_seen_at, last_seen_at, author,
-                text, url, content_hash, raw_json
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
-                "url:https://linkedin.example/1",
-                "saved",
-                "2026-05-15T00:00:00+00:00",
-                "2026-05-15T00:00:00+00:00",
-                "Poster One",
-                "Saved post about OAuth security.",
-                "https://linkedin.example/1",
-                "hash1",
-                '{"source":"saved"}',
-            ),
-        )
-        conn.execute(
-            """
-            INSERT INTO post_observations (post_id, run_id, source, seen_at, position, raw_json)
-            VALUES (1, 1, 'saved', '2026-05-15T00:00:00+00:00', 1, '{}')
-            """
-        )
-        conn.execute(
-            """
-            INSERT INTO linkedin_posts (
-                dedupe_key, source_first_seen, first_seen_at, last_seen_at, author,
-                text, url, content_hash, raw_json
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
-                "url:https://linkedin.example/2",
-                "feed",
-                "2026-05-15T00:00:00+00:00",
-                "2026-05-15T00:00:00+00:00",
-                "Poster Two",
-                "Unscreened feed post about prompt injection.",
-                "https://linkedin.example/2",
-                "hash2",
-                '{"source":"feed"}',
-            ),
-        )
-        conn.execute(
-            """
-            INSERT INTO post_observations (post_id, run_id, source, seen_at, position, raw_json)
-            VALUES (2, 1, 'feed', '2026-05-15T00:00:00+00:00', 2, '{}')
-            """
-        )
-
-    first = sync_linkedin_db(knowledge_db, linkedin_db_path=linkedin_db)
-    second = sync_linkedin_db(knowledge_db, linkedin_db_path=linkedin_db)
-
-    assert first["records"] == 1 and first["inserted"] == 1 and first["updated"] == 0
-    assert second["records"] == 1 and second["inserted"] == 1 and second["updated"] == 0
-    rows = search_records(knowledge_db, "oauth", limit=5)
-    assert len(rows) == 1
-    assert rows[0]["source"] == "linkedin_saved"
-    assert search_records(knowledge_db, "unscreened", limit=5) == []
 
 
 # --- _validate_ident ---
