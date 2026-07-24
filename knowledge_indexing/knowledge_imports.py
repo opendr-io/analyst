@@ -5,16 +5,14 @@ from pathlib import Path
 from typing import Any
 
 from .knowledge_authors import rebuild_author_index, sync_record_authors
-from .knowledge_config import APP_DIR, BSIDESSF_MD, DB_PATH, DEFCON33_LATEST, LINKEDIN_DB_PATH, PROMPTORGTFO_LATEST
-from .knowledge_db import KnowledgeRecord, clean_text, json_dumps, log_warning, open_db, stable_hash, utc_now_iso
-
-
-_TIME_BLOCK_RE = re.compile(r"^\d{1,2}:\d{2}\s*(?:AM|PM)\s*[-–]\s*\d{1,2}:\d{2}\s*(?:AM|PM)", re.IGNORECASE)
-_TYPE_MARKER_RE = re.compile(r"^~\s*\w+(?:\s+\w+)?\s*~$")
-_WORD = r"[A-Z][a-z]+(?:-[A-Z][a-z]+)?"
-_SPEAKER_NAME_RE = re.compile(
-    rf"^((?:{_WORD})\s+(?:{_WORD})(?:,\s+(?:{_WORD})\s+(?:{_WORD}))*)"
+from .knowledge_config import (
+    APP_DIR,
+    CONFERENCE_RECORD_SOURCES,
+    DB_PATH,
+    DEFCON33_LATEST,
+    PROMPTORGTFO_LATEST,
 )
+from .knowledge_db import KnowledgeRecord, clean_text, json_dumps, log_warning, open_db, stable_hash, utc_now_iso
 
 
 def detect_export_kind(data: Any, path: Path) -> str:
@@ -26,16 +24,16 @@ def detect_export_kind(data: Any, path: Path) -> str:
         return "camlis"
     if "bsideslv" in name or "bsideslv" in parent:
         return "bsideslv"
+    if "defcon" in name or "defcon" in parent:
+        return "defcon"
     if "rsac" in name or "rsac" in parent:
         return "rsac"
-    if "linkedin" in name or "linkedin" in parent:
-        return "linkedin"
     if "promptorgtfo" in name or "promptorgtfo" in parent:
         return "promptorgtfo"
     if isinstance(data, dict):
-        config_source = clean_text((data.get("config") or {}).get("source", ""))
-        if config_source in {"feed", "saved"}:
-            return "linkedin"
+        manifest = ((data.get("source") or {}).get("manifest") or {})
+        if clean_text(manifest.get("code", "")).lower().startswith("defcon"):
+            return "defcon"
         if "playlist" in data and "records" in data:
             records = data.get("records") or []
             if records and isinstance(records[0], dict) and "talk_title" in records[0]:
@@ -46,16 +44,33 @@ def detect_export_kind(data: Any, path: Path) -> str:
     return "unknown"
 
 
-def record_dedupe_key(source: str, record_id: str, url: str, title: str, author: str, text: str) -> str:
-    if source in {"blackhat", "camlis", "bsideslv", "defcon33", "promptorgtfo", "bsidessf"} and record_id:
-        return f"{source}:id:{record_id}"
+def _dedupe_component(value: str) -> str:
+    value = clean_text(value).lower()
+    value = re.sub(r"[^a-z0-9]+", "-", value).strip("-")
+    return value or "unknown"
+
+
+def record_dedupe_key(
+    source: str,
+    record_id: str,
+    url: str,
+    title: str,
+    author: str,
+    text: str,
+    event: str = "",
+    year: str = "",
+) -> str:
+    if source in CONFERENCE_RECORD_SOURCES and title:
+        event_key = _dedupe_component(year or event)
+        material = "\n".join([source, event_key, title.lower()])
+        return f"{source}:{event_key}:title:{stable_hash(material)}"
     if record_id and ("youtube.com/watch" in url or "youtu.be/" in url):
         return f"{source}:id:{record_id}"
     if url:
         return f"{source}:url:{url.split('?', 1)[0].rstrip('/')}"
     if record_id:
         return f"{source}:id:{record_id}"
-    material = "\n".join([source, title.lower(), author.lower(), text.lower()[:1000]])
+    material = "\n".join([source, year.lower() or event.lower(), title.lower(), author.lower(), text.lower()[:1000]])
     return f"{source}:text:{stable_hash(material)}"
 
 
@@ -78,17 +93,28 @@ def make_record(
     author_text = clean_text(author)
     text_text = clean_text(text)
     url_text = clean_text(url)
+    event_text = clean_text(event)
+    year_text = clean_text(year)
     return KnowledgeRecord(
         source=source,
         source_file=str(source_file),
         source_record_id=source_record_id_text,
-        dedupe_key=record_dedupe_key(source, source_record_id_text, url_text, title_text, author_text, text_text),
+        dedupe_key=record_dedupe_key(
+            source,
+            source_record_id_text,
+            url_text,
+            title_text,
+            author_text,
+            text_text,
+            event=event_text,
+            year=year_text,
+        ),
         title=title_text,
         author=author_text,
         text=text_text,
         url=url_text,
-        event=clean_text(event),
-        year=clean_text(year),
+        event=event_text,
+        year=year_text,
         tags=clean_text(tags),
         raw_json=json_dumps(raw),
     )
@@ -231,85 +257,44 @@ def records_from_rsac(data: dict[str, Any], source_file: Path) -> list[Knowledge
     return records
 
 
-def records_from_linkedin(data: dict[str, Any], source_file: Path) -> list[KnowledgeRecord]:
+def records_from_defcon(data: dict[str, Any], source_file: Path) -> list[KnowledgeRecord]:
     records = []
-    source_name = f"linkedin_{clean_text((data.get('config') or {}).get('source', 'post'))}"
-    ingested_at = clean_text(data.get("ingested_at", ""))
-    year = ingested_at[:4] if ingested_at else ""
-    for post in data.get("posts", []):
-        text = clean_text(post.get("text", ""))
-        title = text[:120]
-        records.append(
-            make_record(
-                source=source_name,
-                source_file=source_file,
-                source_record_id=post.get("url", ""),
-                title=title,
-                author=post.get("author", ""),
-                text=text,
-                url=post.get("url", ""),
-                event="LinkedIn",
-                year=year,
-                tags=post.get("source", ""),
-                raw=post,
-            )
-        )
-    return records
-
-
-def records_from_linkedin_db(linkedin_db_path: Path = LINKEDIN_DB_PATH) -> list[KnowledgeRecord]:
-    if not linkedin_db_path.exists():
-        return []
-    conn = sqlite3.connect(linkedin_db_path)
-    conn.row_factory = sqlite3.Row
-    try:
-        rows = list(
-            conn.execute(
-                """
-                SELECT
-                    p.*,
-                    COALESCE(
-                        (
-                            SELECT o.source
-                            FROM post_observations o
-                            WHERE o.post_id = p.id
-                            ORDER BY o.seen_at DESC, o.id DESC
-                            LIMIT 1
-                        ),
-                        p.source_first_seen
-                    ) AS latest_source
-                FROM linkedin_posts p
-                ORDER BY p.id
-                """
-            )
-        )
-    finally:
-        conn.close()
-
-    records = []
-    for row in rows:
-        raw = {}
-        try:
-            raw = json.loads(row["raw_json"] or "{}")
-        except json.JSONDecodeError:
-            raw = {key: row[key] for key in row.keys()}
-        source = clean_text(row["latest_source"] or row["source_first_seen"] or raw.get("source") or "post")
-        if source == "feed":
+    source_meta = data.get("source") or {}
+    manifest = source_meta.get("manifest") or {}
+    source_label = clean_text(manifest.get("code", "")).lower() or clean_text(source_meta.get("conference", "")).lower()
+    source_label = source_label or "defcon"
+    event = clean_text(manifest.get("name", "")) or clean_text(source_label.upper())
+    year_match = re.search(r"(20\d{2})", event)
+    default_year = year_match.group(1) if year_match else ""
+    for talk in data.get("talks", []):
+        title = clean_text(talk.get("title", ""))
+        if not title:
             continue
-        text = clean_text(row["text"])
+        tags = "; ".join(
+            part
+            for part in [
+                talk.get("tags", ""),
+                talk.get("matched_tags", ""),
+                talk.get("track", ""),
+                talk.get("room", ""),
+                talk.get("date", ""),
+                talk.get("time", ""),
+            ]
+            if clean_text(part)
+        )
         records.append(
             make_record(
-                source=f"linkedin_{source}",
-                source_file=linkedin_db_path,
-                source_record_id=row["dedupe_key"],
-                title=text[:120],
-                author=row["author"],
-                text=text,
-                url=row["url"],
-                event="LinkedIn",
-                year=clean_text(row["first_seen_at"])[:4],
-                tags=source,
-                raw={**raw, "linkedin_db_id": row["id"], "dedupe_key": row["dedupe_key"]},
+                source=source_label,
+                source_file=source_file,
+                source_record_id=clean_text(talk.get("session_id", "") or talk.get("content_id", "")),
+                title=title,
+                author=clean_text(talk.get("speakers", "") or talk.get("speaker", "")),
+                text=clean_text(talk.get("abstract", "") or talk.get("description", "")),
+                url=talk.get("url", ""),
+                event=clean_text(talk.get("event", "")) or event,
+                year=talk.get("year", "") or default_year,
+                tags=tags,
+                raw=talk,
             )
         )
     return records
@@ -352,7 +337,7 @@ def records_from_youtube_playlist(data: dict[str, Any], source_file: Path) -> li
             author = re.sub(r"^20\d{2}\s+(?=[A-Z])", "", author)
         if source_slug == "defcon33" and is_defcon_low_value_schedule_record(title, abstract):
             continue
-        year = (clean_text(r.get("upload_date", "")) or "")[:4] or "2025"
+        year = "2025" if source_slug == "defcon33" else (clean_text(r.get("upload_date", "")) or "")[:4] or "2025"
         tags = clean_text(r.get("duration_string", ""))
         records.append(
             make_record(
@@ -403,8 +388,8 @@ def records_from_promptorgtfo(data: list[dict[str, Any]], source_file: Path) -> 
         tool_names = [t.get("name", "") for t in tools if t.get("name")]
         tags = "; ".join(tool_names[:10])
 
-        summary = clean_text(r.get("summary", ""))
-        if not summary:
+        body = clean_text(r.get("text", "") or r.get("summary", ""))
+        if not body:
             continue
 
         records.append(
@@ -414,93 +399,12 @@ def records_from_promptorgtfo(data: list[dict[str, Any]], source_file: Path) -> 
                 source_record_id=clean_text(r.get("url", "")),
                 title=talk_title,
                 author=speaker,
-                text=summary,
+                text=body,
                 url=r.get("url", ""),
                 event="Prompt||GTFO",
                 year="2026",
                 tags=tags,
                 raw=r,
-            )
-        )
-    return records
-
-
-def records_from_bsidessf_md(path: Path) -> list[KnowledgeRecord]:
-    text = path.read_text(encoding="utf-8")
-    lines = text.splitlines()
-
-    in_schedule = False
-    schedule_lines: list[str] = []
-    for line in lines:
-        stripped = line.strip()
-        if re.match(r"^#\s+(?:Saturday|Sunday),\s+April", stripped, re.IGNORECASE):
-            in_schedule = True
-        elif in_schedule and re.match(
-            r"^#\s+(?:Many\s+Thanks|Ctf\s+Cross|Customers\s+Rate|Navigate\s+The)", stripped, re.IGNORECASE
-        ):
-            break
-        if in_schedule:
-            schedule_lines.append(stripped)
-
-    blocks: list[list[str]] = []
-    current: list[str] = []
-    for line in schedule_lines:
-        if _TIME_BLOCK_RE.match(line):
-            if current:
-                blocks.append(current)
-            current = [line]
-        elif line:
-            current.append(line)
-    if current:
-        blocks.append(current)
-
-    records = []
-    for block in blocks:
-        if len(block) < 3:
-            continue
-
-        time_str = block[0]
-        rest = block[1:]
-
-        venue = ""
-        if rest and re.search(r"(?:METREON|THEATER|IMAX)", rest[0], re.IGNORECASE):
-            venue = rest[0]
-            rest = rest[1:]
-
-        while rest and _TYPE_MARKER_RE.match(rest[0]):
-            rest = rest[1:]
-
-        if not rest:
-            continue
-
-        title = rest[0]
-        body_lines = rest[1:]
-
-        speaker = ""
-        if body_lines:
-            m = _SPEAKER_NAME_RE.match(body_lines[0])
-            if m:
-                speaker = m.group(1)
-
-        full_text = " ".join(body_lines)
-        if not full_text and not title:
-            continue
-
-        combined_text = (title + " " + full_text).strip() if full_text else title
-
-        records.append(
-            make_record(
-                source="bsidessf",
-                source_file=path,
-                source_record_id=f"{time_str}|{venue}|{title[:80]}",
-                title=title,
-                author=speaker,
-                text=combined_text,
-                url="",
-                event="BSidesSF 2025",
-                year="2025",
-                tags=venue,
-                raw={"time": time_str, "venue": venue, "title": title, "speaker": speaker, "text": full_text},
             )
         )
     return records
@@ -520,10 +424,10 @@ def records_from_export(path: Path) -> list[KnowledgeRecord]:
             return records_from_camlis(data, path)
         if kind == "bsideslv":
             return records_from_bsideslv(data, path)
+        if kind == "defcon":
+            return records_from_defcon(data, path)
         if kind == "rsac":
             return records_from_rsac(data, path)
-        if kind == "linkedin":
-            return records_from_linkedin(data, path)
         if kind == "youtube_playlist":
             return records_from_youtube_playlist(data, path)
         if kind == "promptorgtfo":
@@ -641,50 +545,10 @@ def import_exports(paths: list[Path], db_path: Path = DB_PATH, rebuild: bool = F
     return stats
 
 
-def sync_linkedin_db(
-    db_path: Path = DB_PATH,
-    linkedin_db_path: Path = LINKEDIN_DB_PATH,
-    rebuild_linkedin: bool = True,
-) -> dict[str, int]:
-    stats = {"records": 0, "inserted": 0, "updated": 0, "errors": 0}
-    try:
-        records = records_from_linkedin_db(linkedin_db_path)
-    except Exception as exc:
-        log_warning(f"error reading linkedin db {linkedin_db_path}: {exc}")
-        return stats
-    if not records:
-        log_warning(f"0 records from {linkedin_db_path}")
-    with open_db(db_path) as conn:
-        if rebuild_linkedin:
-            linkedin_ids = [
-                row["id"]
-                for row in conn.execute(
-                    "SELECT id FROM records WHERE source IN ('linkedin_feed', 'linkedin_saved', 'linkedin_post')"
-                )
-            ]
-            if linkedin_ids:
-                placeholders = ", ".join("?" for _ in linkedin_ids)
-                conn.execute(f"DELETE FROM records_fts WHERE rowid IN ({placeholders})", linkedin_ids)
-                conn.execute(f"DELETE FROM records WHERE id IN ({placeholders})", linkedin_ids)
-        for record in records:
-            stats["records"] += 1
-            try:
-                if upsert_record(conn, record):
-                    stats["inserted"] += 1
-                else:
-                    stats["updated"] += 1
-            except Exception as exc:
-                log_warning(f"upsert error [{record.source}] {record.title[:60]!r}: {exc}")
-                stats["errors"] += 1
-        conn.commit()
-    return stats
-
-
 def default_export_paths(latest_per_source: bool = True) -> list[Path]:
     groups = [
         sorted((APP_DIR / "data" / "blackhat" / "exports").glob("*.json")),
         sorted((APP_DIR / "data" / "camlis" / "exports").glob("*.json")),
-        sorted((APP_DIR / "data" / "linkedin" / "exports").glob("*.json")),
     ]
     if latest_per_source:
         paths = [group[-1] for group in groups if group]
@@ -694,41 +558,3 @@ def default_export_paths(latest_per_source: bool = True) -> list[Path]:
         if fixed is not None and fixed.exists() and fixed not in paths:
             paths.append(fixed)
     return paths
-
-
-def import_markdown_sources(db_path: Path = DB_PATH) -> dict[str, int]:
-    stats = {"records": 0, "inserted": 0, "updated": 0, "errors": 0}
-    sources = [BSIDESSF_MD]
-    with open_db(db_path) as conn:
-        for path in sources:
-            if not path.exists():
-                log_warning(f"skip (not found): {path}")
-                continue
-            try:
-                records = records_from_bsidessf_md(path)
-            except Exception as exc:
-                log_warning(f"parser error {path}: {exc}")
-                continue
-            if not records:
-                log_warning(f"skip (0 records): {path}")
-                continue
-            file_inserted = file_updated = file_errors = 0
-            for record in records:
-                stats["records"] += 1
-                try:
-                    if upsert_record(conn, record):
-                        stats["inserted"] += 1
-                        file_inserted += 1
-                    else:
-                        stats["updated"] += 1
-                        file_updated += 1
-                except Exception as exc:
-                    log_warning(f"upsert error [{record.source}] {record.title[:60]!r}: {exc}")
-                    stats["errors"] += 1
-                    file_errors += 1
-            summary = f"  {path.name}: {len(records)} parsed, {file_inserted} inserted, {file_updated} updated"
-            if file_errors:
-                summary += f", {file_errors} errors"
-            print(summary)
-        conn.commit()
-    return stats

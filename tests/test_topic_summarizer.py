@@ -54,26 +54,42 @@ def test_topic_summary_system_prompt_is_external_report_prompt():
 def test_grouped_paths_use_group_subdirectories(tmp_path):
     topic_group = ts.SummaryGroup("topic", "Threat modeling", "Threat modeling", "", "")
     source_group = ts.SummaryGroup("source", "defcon33", "Source: defcon33", "", "")
+    source_year_group = ts.SummaryGroup("source-year", "blackhat-2026", "Source: blackhat (2026)", "", "")
     author_group = ts.SummaryGroup("author", "Example Speaker", "Author: Example Speaker", "", "")
 
     assert ts.grouped_paths(tmp_path, topic_group).summary == tmp_path / "topics" / "threat-modeling.md"
     assert ts.grouped_paths(tmp_path, source_group).summary == tmp_path / "sources" / "defcon33.md"
+    assert ts.grouped_paths(tmp_path, source_year_group).summary == tmp_path / "sources" / "blackhat-2026.md"
     assert ts.grouped_paths(tmp_path, author_group).summary == tmp_path / "authors" / "example-speaker.md"
     assert ts.grouped_paths(tmp_path, topic_group).audit == tmp_path / "artifacts" / "topics" / "threat-modeling.audit.json"
     assert ts.grouped_paths(tmp_path, source_group).prompt_input == tmp_path / "artifacts" / "sources" / "defcon33.prompt-input.md"
+    assert ts.grouped_paths(tmp_path, source_year_group).prompt_input == tmp_path / "artifacts" / "sources" / "blackhat-2026.prompt-input.md"
     assert ts.grouped_paths(tmp_path, author_group).manifest == tmp_path / "artifacts" / "authors" / "example-speaker.manifest.json"
+    assert ts.grouped_paths(tmp_path, source_year_group).validation == tmp_path / "artifacts" / "sources" / "blackhat-2026.validation.json"
 
 
 def test_make_source_and_author_groups_have_report_context(tmp_path):
     source = ts.make_summary_group(tmp_path / "missing.sqlite3", "source", "defcon33")
+    source_year = ts.make_summary_group(tmp_path / "missing.sqlite3", "source-year", "blackhat:2026")
     author = ts.make_summary_group(tmp_path / "missing.sqlite3", "author", "Example Speaker")
 
     assert source.group_by == "source"
     assert source.label == "Source: defcon33"
     assert "all records from source defcon33" in source.description
+    assert source_year.group_by == "source-year"
+    assert source_year.name == "blackhat-2026"
+    assert source_year.label == "Source: blackhat (2026)"
+    assert "blackhat in 2026" in source_year.description
     assert author.group_by == "author"
     assert author.label == "Author: Example Speaker"
     assert "Example Speaker" in author.description
+
+
+def test_parse_args_supports_source_year_group():
+    args = ts.parse_args(["--group-by", "source-year", "--source-year", "blackhat:2026"])
+
+    assert args.group_by == "source-year"
+    assert args.source_year == ["blackhat:2026"]
 
 
 def test_parse_args_supports_parallel():
@@ -98,6 +114,75 @@ def test_model_for_group_uses_author_specific_model():
     assert ts.model_for_group("author") == ts.llm_settings.get_model("summarize_author")
     assert ts.model_for_group("topic") == ts.MODEL_SUMMARIZE
     assert ts.model_for_group("source") == ts.MODEL_SUMMARIZE
+    assert ts.model_for_group("source-year") == ts.MODEL_SUMMARIZE
+
+
+def test_parse_source_year_accepts_common_forms():
+    assert ts.parse_source_year("blackhat:2026") == ("blackhat", "2026")
+    assert ts.parse_source_year("bsideslv/2026") == ("bsideslv", "2026")
+    assert ts.parse_source_year("defcon34-2026") == ("defcon34", "2026")
+
+
+def test_source_year_listing_and_loading_filters_records(tmp_path):
+    db_path = tmp_path / "knowledge.sqlite3"
+    with ts.ki.open_db(db_path) as conn:
+        conn.execute(
+            """
+            INSERT INTO topics (name, query, description, source, created_at, updated_at)
+            VALUES ('Application security', 'appsec', 'appsec', 'seed', 'now', 'now')
+            """
+        )
+        for record_id, source, year in [
+            (1, "blackhat", "2025"),
+            (2, "blackhat", "2026"),
+            (3, "blackhat", "2026"),
+            (4, "bsideslv", "2026"),
+        ]:
+            conn.execute(
+                """
+                INSERT INTO records (
+                    id, source, source_file, source_record_id, dedupe_key, title, author,
+                    text, url, event, year, tags, raw_json, imported_at, agent_topics
+                )
+                VALUES (?, ?, 'test.json', ?, ?, ?, 'Speaker', 'Text', '',
+                        'Event', ?, '', '{}', 'now', '|Application security|')
+                """,
+                (record_id, source, str(record_id), f"{source}:{year}:{record_id}", f"Talk {record_id}", year),
+            )
+            conn.execute(
+                """
+                INSERT INTO record_classifications (
+                    record_id, model, schema_version, primary_topic, secondary_topics_json,
+                    confidence, rationale, new_topic_candidate, raw_json, created_at, updated_at
+                )
+                VALUES (?, 'model', 1, 'Application security', '[]', 'high', '', '', '{}', 'now', 'now')
+                """,
+                (record_id,),
+            )
+            conn.execute(
+                """
+                INSERT INTO record_annotations (
+                    record_id, model, schema_version, short_summary, keywords_json, tools_json,
+                    people_json, claims_json, use_cases_json, ai_relevance, content_types_json,
+                    security_domains_json, source_quality, contains_prompt_injection, relevance_notes,
+                    raw_json, created_at, updated_at
+                )
+                VALUES (?, 'model', 1, 'summary', '[]', '[]', '[]', '[]', '[]', '',
+                        '[]', '[]', '', 0, '', '{}', 'now', 'now')
+                """,
+                (record_id,),
+            )
+        conn.commit()
+
+    assert ts.list_source_years_for_summary(db_path) == [
+        "blackhat:2025",
+        "blackhat:2026",
+        "bsideslv:2026",
+    ]
+    group = ts.make_summary_group(db_path, "source-year", "blackhat:2026")
+    rows = ts.load_group_rows(db_path, group)
+
+    assert [row["id"] for row in rows] == [2, 3]
 
 
 def test_split_authors_expands_common_coauthor_separators():
@@ -170,6 +255,28 @@ def test_print_dry_run_totals_sums_token_estimates(capsys):
     assert "  records: 5" in output
     assert "  estimated_input_tokens: 350" in output
     assert "  output_max_tokens: 11000" in output
+
+
+def test_print_summary_result_includes_validation_status(capsys):
+    ts.print_summary_result(
+        {
+            "summary_status": "complete",
+            "validation_status": "pass",
+            "expected_record_count": 2,
+            "estimated_input_tokens": 100,
+            "output_max_tokens": 3000,
+            "artifacts_written": True,
+            "summary_input_artifact_path": "summaries/artifacts/sources/example.prompt-input.md",
+            "audit_file_path": "summaries/artifacts/sources/example.audit.json",
+            "validation_file_path": "summaries/artifacts/sources/example.validation.json",
+            "summary_file_path": "summaries/sources/example.md",
+        },
+        dry_run=False,
+    )
+
+    output = capsys.readouterr().out
+    assert "  validation_status: pass" in output
+    assert "  validation: summaries/artifacts/sources/example.validation.json" in output
 
 
 def test_list_existing_summaries_reads_manifest_and_audit(tmp_path):
@@ -274,6 +381,127 @@ def test_list_missing_reports_only_missing_summary_files(monkeypatch, tmp_path, 
     assert "missing: 1" in output
 
 
+def _write_validation_artifacts(summary_dir, group, summary):
+    paths = ts.grouped_paths(summary_dir, group)
+    paths.summary.parent.mkdir(parents=True)
+    paths.audit.parent.mkdir(parents=True)
+    prompt = "## [record_id:1]\nSource one\n\n## [record_id:2]\nSource two\n"
+    paths.summary.write_text(summary, encoding="utf-8")
+    paths.prompt_input.write_text(prompt, encoding="utf-8")
+    summary_hash = ts.text_hash(summary)
+    prompt_hash = ts.text_hash(prompt)
+    ts.write_json(
+        paths.audit,
+        {
+            "group_by": group.group_by,
+            "group_name": group.name,
+            "expected_record_count": 2,
+            "expected_record_ids": [1, 2],
+            "summary_hash": summary_hash,
+        },
+    )
+    ts.write_json(
+        paths.manifest,
+        {
+            "group_by": group.group_by,
+            "group_name": group.name,
+            "status": "complete",
+            "summary_hash": summary_hash,
+            "prompt_hash": prompt_hash,
+        },
+    )
+    return paths
+
+
+def test_validate_summary_group_passes_complete_summary(tmp_path):
+    group = ts.SummaryGroup("source", "defcon33", "Source: defcon33", "", "")
+    summary = """# Topic: Source: defcon33
+
+## Executive Summary
+Summary [record_id:1].
+
+## Research Landscape
+Landscape.
+
+## Major Themes And Trends
+Themes.
+
+## Methods, Tools, And Approaches Discussed
+Methods.
+
+## Notable Talks, Records, And Evidence
+Evidence [record_id:2].
+
+## Gaps, Limits, And Open Questions
+Gaps.
+
+## Coverage And Evidence Notes
+Coverage [record_id:1] [record_id:2].
+"""
+    paths = _write_validation_artifacts(tmp_path, group, summary)
+
+    validation = ts.validate_summary_group(tmp_path, group)
+
+    assert validation["validation_status"] == "pass_with_warnings"
+    assert validation["errors"] == []
+    assert paths.validation.exists()
+
+
+def test_validate_summary_group_fails_missing_record_and_section(tmp_path):
+    group = ts.SummaryGroup("source", "defcon33", "Source: defcon33", "", "")
+    summary = """# Topic: Source: defcon33
+
+## Executive Summary
+Summary [record_id:1].
+"""
+    _write_validation_artifacts(tmp_path, group, summary)
+
+    validation = ts.validate_summary_group(tmp_path, group)
+
+    assert validation["validation_status"] == "fail"
+    assert any("missing output record ids" in error for error in validation["errors"])
+    assert any("missing required sections" in error for error in validation["errors"])
+
+
+def test_validate_summaries_cli_reports_selected_group(monkeypatch, tmp_path, capsys):
+    group = ts.SummaryGroup("source", "defcon33", "Source: defcon33", "", "")
+    monkeypatch.setattr(ts, "groups_from_args", lambda args: [group])
+    _write_validation_artifacts(
+        tmp_path,
+        group,
+        """# Topic: Source: defcon33
+
+## Executive Summary
+Summary [record_id:1].
+
+## Research Landscape
+Landscape.
+
+## Major Themes And Trends
+Themes.
+
+## Methods, Tools, And Approaches Discussed
+Methods.
+
+## Notable Talks, Records, And Evidence
+Evidence [record_id:2].
+
+## Gaps, Limits, And Open Questions
+Gaps.
+
+## Coverage And Evidence Notes
+Coverage [record_id:1] [record_id:2].
+""",
+    )
+
+    result = ts.main(["--summary-dir", str(tmp_path), "--group-by", "source", "--source", "defcon33", "--validate-summaries"])
+
+    output = capsys.readouterr().out
+    assert result == 0
+    assert "validation_status: pass_with_warnings" in output
+    assert "validated: 1" in output
+
+
 def test_write_preflight_artifacts_requires_dry_run(capsys):
     result = ts.main(["--topic", "Threat modeling", "--write-preflight-artifacts"])
 
@@ -311,6 +539,7 @@ def test_archive_existing_rejects_source_outside_summary_dir(tmp_path):
         audit=tmp_path / "artifacts" / "topics" / "safe.audit.json",
         prompt_input=tmp_path / "artifacts" / "topics" / "safe.prompt-input.md",
         manifest=tmp_path / "artifacts" / "topics" / "safe.manifest.json",
+        validation=tmp_path / "artifacts" / "topics" / "safe.validation.json",
     )
 
     with pytest.raises(ValueError, match="archive source must stay within summary_dir"):

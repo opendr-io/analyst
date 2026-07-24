@@ -1,0 +1,10 @@
+# Source values that dedupe by (source, year/event, title) instead of by
+# URL or record id, because these sources don't have a stable per-record
+# id/url across re-imports (e.g. printed programs, re-scraped schedules).
+blackhat
+camlis
+bsideslv
+rsac
+promptorgtfo
+defcon33
+defcon34

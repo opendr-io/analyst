@@ -2,112 +2,104 @@
 
 ## Executive Summary
 
-The available records attributed to Art Conklin consist of two BSidesLV 2025 workshop listings for the same training, **“Engineering Cyber Resilience for the Water Sector,”** co-authored or co-presented with Virginia “Ginger” Wright and Andrew Ohrt [record_id:2436] [record_id:2437]. Both records contain identical descriptive text and appear to represent two scheduled instances of the same workshop: one on Monday in Opal and one on Tuesday in Pearl, both under BSidesLV’s “Training Ground” track [record_id:2436] [record_id:2437].
+The records attributed to Art Conklin consist of three BSidesLV training/workshop entries from 2025 and 2026. Collectively, they position Conklin’s contribution around **Cyber-Informed Engineering (CIE)**, **critical infrastructure resilience**, and **designing out cyber risk before systems enter operation**. The emphasis is not on exploit development or incident response, but on engineering education, governance-aware risk reduction, and practical workshop exercises for operational technology and infrastructure contexts.
 
-The workshop centers on **Cyber-Informed Engineering**, or CIE, as a methodology for “designing out cyber-risk before a system is placed into operation” [record_id:2436] [record_id:2437]. Although the title identifies the water sector, the raw abstracts frame the training more broadly around what engineers need to know about cybersecurity, why existing engineering education may leave gaps, and how CIE principles can be applied through a fictionalized engineering case study derived from real-world cases [record_id:2436] [record_id:2437].
+Two 2025 records describe the same BSidesLV workshop, **“Engineering Cyber Resilience for the Water Sector,”** co-authored with Virginia “Ginger” Wright and Andrew Ohrt, offered in two Training Ground sessions on different days/rooms. The workshop uses a hypothetical engineering project, informed by real-world cases, to teach engineers what they need to know about cyber risk and how to apply CIE principles through exercises and a workbook [record_id:2436] [record_id:2437]. A 2026 record, **“Mitigating Digital Risk in Critical Infrastructure,”** co-authored with Virginia Wright, appears to broaden the framing from the water sector to critical infrastructure projects, upgrades, and redesign efforts, while retaining the same core pedagogy: fictionalized case study, real-world grounding, workbook-based learning, and pre-operational cyber-risk reduction [record_id:2833].
 
-Across the records, the dominant themes are operational technology and critical infrastructure security, cyber resilience by design, engineer-focused cybersecurity education, hands-on applied learning, and the integration of cyber-risk considerations early in system design rather than after deployment. Because both records are duplicates of the same workshop abstract, the evidence base is narrow but internally consistent.
+The evidence base is narrow but coherent. It supports a strong conclusion that Conklin’s represented work in these records is focused on **training engineers to incorporate cybersecurity into system design**, especially for OT/critical infrastructure environments. It does not provide enough detail to assess specific CIE tools, technical controls, engineering artifacts, threat models, or case studies beyond the high-level workshop descriptions.
 
 ## Research Landscape
 
-The research set is small: only two records, both from **BSidesLV 2025**, both bearing the same title, authors, and abstract [record_id:2436] [record_id:2437]. The records do not include transcripts, slides, long-form papers, blog posts, code repositories, interviews, or technical deep dives. Instead, they are event-program abstracts for a training workshop. This means the available evidence is best suited for identifying the workshop’s stated goals, educational framing, and intended audience, but not for reconstructing the full curriculum or evaluating technical claims in depth.
+The record set is small: three records, all from **BSidesLV Training Ground** programming. These are not conventional conference talks in the sense of one-way presentations; the raw texts repeatedly describe **hands-on workshops** or training events. The dominant format is a multi-hour workshop centered on a fictional but realistic engineering scenario, workbook-guided exercises, and applied discussion.
 
-The records place the workshop in the broader area of **OT and IoT security**, with secondary relevance to **threat modeling** and **governance, risk, and compliance** according to the classification metadata. The raw text supports the OT and risk-design emphasis through its focus on engineers, system operation, cyber-risk, and application of CIE principles before deployment [record_id:2436] [record_id:2437]. The explicit phrase “water sector” in the title also points toward critical infrastructure, although the abstract itself does not elaborate on specific water-sector assets, architectures, regulatory regimes, or threat actors [record_id:2436] [record_id:2437].
+The records fall into two closely related groupings:
 
-The two records appear to describe repeated offerings of a single hands-on workshop rather than distinct talks. Record 2437 lists the session as occurring Monday, 15:00–19:00 in Opal, while record 2436 lists the session as Tuesday, 10:30–14:30 in Pearl [record_id:2437] [record_id:2436]. The repeated scheduling suggests the training may have been offered twice to accommodate attendees, but the raw text does not explicitly state why there are two sessions.
+1. **BSidesLV 2025: Water-sector cyber resilience.**  
+   Records [record_id:2436] and [record_id:2437] both have the title **“Engineering Cyber Resilience for the Water Sector.”** Their raw descriptions are identical. They present a workshop titled in the body as **“What Engineers Need to Know About Cyber and Why (and are not getting this in school).”** The workshop uses a hypothetical engineering project and applies **Cyber-Informed Engineering principles**. The stated goal is to teach a methodology for “designing out cyber-risk before a system is placed into operation” [record_id:2436] [record_id:2437].
 
-Overall, this topic landscape is not a broad survey of Art Conklin’s publications or talks. It is a focused glimpse into a specific training offering associated with Conklin and collaborators at BSidesLV 2025.
+2. **BSidesLV 2026: Critical infrastructure digital risk mitigation.**  
+   Record [record_id:2833] is titled **“Mitigating Digital Risk in Critical Infrastructure.”** It retains much of the same workshop structure and language but shifts from “engineering cyber resilience for the water sector” to broader **digital risk mitigation in critical infrastructure**. It explicitly says the material is “developed from Cyber-Informed Engineering (CIE)” and demonstrates “additional tools” for reducing digital risk in infrastructure projects, upgrades, and redesign efforts [record_id:2833].
+
+The research area represented by these records is therefore best understood as **OT/critical infrastructure security education for engineers**, with a strong orientation toward **secure-by-design**, **risk-informed engineering**, and **pre-operational resilience**. The records are secondary-topic matches for Art Conklin, and all listed records are co-authored rather than solo-authored. That means the evidence supports conclusions about Conklin’s participation in this body of work, but not necessarily about which ideas or materials are uniquely his versus shared with Virginia Wright, Andrew Ohrt, or institutional CIE sources.
 
 ## Major Themes And Trends
 
-### Cyber-Informed Engineering as a Design-Time Security Methodology
+### Cybersecurity as an engineering responsibility
 
-The central concept across both records is **Cyber-Informed Engineering**, abbreviated as CIE in the abstract [record_id:2436] [record_id:2437]. The workshop is described as a way to support “discussion and application of the principles for Cyber-Informed Engineering” using a case study of a hypothetical engineering project [record_id:2436] [record_id:2437]. This framing suggests a methodology-oriented training rather than a tool-specific session or a conventional vulnerability-focused talk.
+A central theme across all three records is that engineers need cybersecurity knowledge but are not receiving enough of it through traditional education. The repeated phrase **“What Engineers Need to Know About Cyber and Why (and are not getting this in school)”** appears in the 2025 water-sector workshops [record_id:2436] [record_id:2437] and is repeated in the 2026 critical-infrastructure workshop with minor punctuation changes [record_id:2833]. This phrase frames the problem as an educational and professional gap: cyber risk is relevant to engineering decisions, but engineers may not be trained to consider it systematically.
 
-The most important claim in the abstract is that participants will learn “a methodology of designing out cyber-risk before a system is placed into operation” [record_id:2436] [record_id:2437]. This phrase indicates a preventive and engineering-led model of cybersecurity. Rather than treating cyber defense as something added by security teams after systems are built, the workshop appears to advocate incorporating cyber-risk decisions during design and engineering phases.
+The workshops therefore treat cybersecurity not merely as a security-team function but as something that must be incorporated into engineering practice. The described audience is “anyone who is interested in learning a methodology of designing out cyber-risk before a system is placed into operation” [record_id:2436] [record_id:2437]. In 2026, the same idea is applied to “critical infrastructure projects, upgrades and redesign efforts” [record_id:2833]. This suggests a consistent message: cybersecurity should be addressed during project design, upgrade, and redesign phases, not deferred until after deployment.
 
-This is a recurring concern in OT and critical infrastructure security: systems may be long-lived, safety-critical, geographically distributed, and difficult to patch once deployed. The records do not say this explicitly, but the stated emphasis on engineering design before operation aligns with that type of problem space [record_id:2436] [record_id:2437].
+### Cyber-Informed Engineering as the organizing framework
 
-### Closing the Cybersecurity Education Gap for Engineers
+All three records explicitly invoke **Cyber-Informed Engineering**, or CIE. The 2025 records say the workshop supports “discussion and application of the principles for Cyber-Informed Engineering (CIE)” and includes exercises to develop understanding of CIE principles [record_id:2436] [record_id:2437]. The 2026 record uses slightly different wording, describing “principles for digital risk mitigation using material developed from Cyber-Informed Engineering (CIE)” and saying the scenario is crafted to support application of CIE principles [record_id:2833].
 
-Both records open with the same sentence: “What Engineers Need to Know About Cyber and Why (and are not getting this in school)” [record_id:2436] [record_id:2437]. This establishes a strong educational theme. The workshop is not aimed only at cybersecurity practitioners; it is framed around engineers who may be responsible for designing or operating systems but who may not receive sufficient cyber education in traditional curricula.
+This continuity makes CIE the clearest recurring conceptual foundation in the record set. The records do not enumerate the principles, but they show CIE being used as a practical teaching framework. The emphasis is not simply on awareness; it is on structured application through a case study, exercises, and workbook activities.
 
-The abstract implies that cyber risk is becoming an engineering competency, not merely an IT or security specialty. By highlighting what engineers “are not getting” in school, the authors position the workshop as a corrective or supplement to conventional engineering education [record_id:2436] [record_id:2437]. This is one of the clearest contributions visible from the records: Art Conklin and co-presenters are associated here with translating cybersecurity principles into forms that engineers can apply during system design.
+### Designing out cyber risk before operation
 
-### Hands-On, Scenario-Based Learning
+The strongest recurring phrase across the records is the idea of **“designing out cyber-risk before a system is placed into operation.”** It appears in both 2025 workshop descriptions [record_id:2436] [record_id:2437] and again in the 2026 description [record_id:2833]. This establishes a secure-by-design or resilience-by-design orientation.
 
-The workshop is explicitly described as “hands-on” and “filled with exercises” [record_id:2436] [record_id:2437]. Participants receive a workbook to “structure their journey,” capture insights and lessons learned, and provide a takeaway item for further conversations after the event [record_id:2436] [record_id:2437]. This suggests an applied training style rather than a lecture-only format.
+The phrasing is notable because it implies a preference for upstream engineering changes over downstream compensating controls. Instead of treating cybersecurity as something applied after system commissioning, the workshops appear to train participants to identify and mitigate cyber risk while system architecture, process design, and engineering decisions are still malleable.
 
-The use of a fictional case study is another central theme. The abstract says the workshop uses “a case study of a hypothetical engineering project” to support discussion and application of CIE principles [record_id:2436] [record_id:2437]. The scenario is described as fictional but drawn from “a selection of real-world case studies,” suggesting an attempt to balance realism with pedagogical flexibility [record_id:2436] [record_id:2437].
+### Use of fictionalized but real-world-informed case studies
 
-This approach matters because it creates a controlled learning environment where participants can practice applying CIE principles without exposing sensitive details from actual water-sector systems. It also implies that the workshop may focus on reasoning processes, tradeoffs, and design decisions rather than on memorizing a checklist.
+Each record describes a **hypothetical engineering project** used as a workshop scenario. The scenario “draws from a selection of real-world case studies,” is “fictional,” and is “crafted to support the application of CIE principles” [record_id:2436] [record_id:2437] [record_id:2833]. This is an important pedagogical pattern. The workshops appear to avoid reliance on a single actual incident or facility, instead using a composite scenario that can safely expose realistic risk patterns without being constrained by sensitive operational details.
 
-### Water-Sector and Critical Infrastructure Orientation
+This approach is especially relevant to critical infrastructure and OT security, where real-world system details may be sensitive, context-specific, or difficult to disclose publicly. Fictionalized scenarios allow participants to practice engineering risk analysis while still grounding discussion in real operational concerns.
 
-The title, **“Engineering Cyber Resilience for the Water Sector,”** explicitly anchors the workshop in water-sector cyber resilience [record_id:2436] [record_id:2437]. However, the abstract itself is broader and does not mention specific water-sector technologies such as SCADA, programmable logic controllers, treatment plants, distribution systems, pumps, chemical dosing, telemetry, or remote access. It also does not discuss particular water-sector incidents, regulations, or threat groups.
+### Shift from water-sector specificity to broader critical infrastructure framing
 
-The raw text does support a critical-infrastructure orientation through the combination of “water sector,” engineering design, system operation, and cyber-risk reduction [record_id:2436] [record_id:2437]. But downstream researchers should be careful: the records do not provide enough detail to determine how deeply the session addressed water-specific operational constraints versus using the water sector as the thematic setting for a broader CIE training.
+The 2025 records are explicitly titled **“Engineering Cyber Resilience for the Water Sector”** [record_id:2436] [record_id:2437]. The 2026 record is titled **“Mitigating Digital Risk in Critical Infrastructure”** [record_id:2833]. The raw description for 2026 also refers to “critical infrastructure projects, upgrades and redesign efforts” [record_id:2833].
 
-### Cyber Resilience Over Narrow Compliance or Vulnerability Hunting
+This suggests a modest trend or expansion in framing. The 2025 offering appears sector-specific, focused on the water sector, while the 2026 offering broadens to critical infrastructure more generally. However, because the underlying workshop language remains very similar, this should not be overstated as a major methodological change. The evidence supports a claim of **broader positioning**, not necessarily a fundamentally new curriculum.
 
-The workshop title uses the phrase “cyber resilience,” and the abstract emphasizes designing out risk before operation [record_id:2436] [record_id:2437]. This suggests a resilience-oriented approach rather than a narrow focus on compliance documentation, scanning, exploitation, or incident response. The workshop’s intended output appears to be participant understanding of principles and methodology, supported by exercises and a workbook [record_id:2436] [record_id:2437].
+### From “cyber resilience” to “digital risk mitigation”
 
-Although the metadata associates the records with governance, risk, and compliance, the raw abstracts do not explicitly discuss compliance frameworks, standards, audits, or regulatory obligations. The evidence for GRC relevance is indirect: the methodology concerns cyber-risk management during engineering, but the workshop description does not name specific governance mechanisms [record_id:2436] [record_id:2437].
+The titles also indicate a terminology shift. In 2025, the title emphasizes **cyber resilience** in the water sector [record_id:2436] [record_id:2437]. In 2026, the title emphasizes **digital risk** in critical infrastructure [record_id:2833]. The 2026 text states that the material demonstrates “additional tools that can be employed to reduce digital risk” [record_id:2833].
+
+This may reflect an evolution from resilience-centered language to broader risk-management language. “Digital risk” can encompass cyber threats, system dependencies, automation risks, software-driven operational hazards, and other consequences of digitalization in infrastructure. The record does not define the term, so this remains an inference from wording rather than a documented framework.
 
 ## Methods, Tools, And Approaches Discussed
 
-The records identify several instructional and methodological approaches.
+The records describe a consistent workshop methodology rather than a list of named technical tools.
 
-First, the workshop uses a **hypothetical engineering project case study** as the main vehicle for learning [record_id:2436] [record_id:2437]. The case study is fictional, but it draws from a “selection of real-world case studies” [record_id:2436] [record_id:2437]. This approach allows participants to encounter realistic cyber-risk considerations while avoiding the constraints of discussing actual sensitive infrastructure in detail.
+### Case-study-based learning
 
-Second, the workshop teaches the **principles of Cyber-Informed Engineering** [record_id:2436] [record_id:2437]. The raw text does not enumerate those principles, so the records cannot support a detailed description of the CIE framework as presented. What can be said is that CIE is treated as an applied methodology for integrating cyber-risk thinking into engineering design and project decisions [record_id:2436] [record_id:2437].
+All three records use a **hypothetical engineering project** as the central teaching device. The scenario is fictional but built from “a selection of real-world case studies” [record_id:2436] [record_id:2437] [record_id:2833]. This approach lets participants discuss and apply CIE principles in a controlled environment.
 
-Third, the workshop is **exercise-driven**. It is described as “hands-on” and “filled with exercises to develop understanding” [record_id:2436] [record_id:2437]. This indicates that participants likely worked through design scenarios or decision points, though the exact exercise content is not provided.
+The method appears designed to bridge abstract cybersecurity principles and engineering practice. Rather than presenting cyber risk as a compliance checklist, the workshop asks participants to work through a project scenario and identify how CIE principles affect design decisions.
 
-Fourth, participants receive a **workbook** that structures the workshop experience, captures insights and lessons learned, and serves as a takeaway artifact for use after the event [record_id:2436] [record_id:2437]. This is notable because the workshop’s learning model appears to extend beyond the session itself. The workbook is intended to support “further conversations after the event,” suggesting that attendees may be encouraged to bring CIE concepts back to their organizations or teams [record_id:2436] [record_id:2437].
+### Hands-on exercises
 
-The records do not mention specific software tools, threat-modeling frameworks, assessment templates, standards, attack techniques, or engineering analysis methods beyond CIE and the workbook-based case-study format.
+The 2025 records explicitly state that the workshop is “hands-on” and “filled with exercises to develop understanding of the principles of Cyber Informed Engineering” [record_id:2436] [record_id:2437]. The 2026 record does not use the exact “hands-on workshop filled with exercises” phrasing, but it retains the workbook and case-study structure and describes the event as a track for learning a methodology [record_id:2833]. The practical orientation remains evident.
+
+### Workbook-guided process
+
+Each record says participants receive a **workbook** to “structure their journey,” “capture insights and lessons learned,” and provide a “useful takeaway item” for continuing conversations after the event [record_id:2436] [record_id:2437] [record_id:2833]. This suggests the workshops emphasize durable learning artifacts, not just in-session discussion. The workbook may also function as a template or facilitation guide for applying CIE conversations in participants’ home organizations, though the records do not include the workbook contents.
+
+### Cyber-Informed Engineering principles
+
+CIE is the principal methodology named across the records. The 2025 workshops are described as supporting discussion and application of CIE principles throughout the workshop [record_id:2436] [record_id:2437]. The 2026 workshop says its digital risk mitigation material was developed from CIE and that the scenario supports application of CIE principles [record_id:2833].
+
+The records do not enumerate CIE principles, name specific CIE artifacts, or describe how the methodology is operationalized. Still, the repeated use of CIE establishes it as the underlying approach.
+
+### Designing out cyber risk
+
+The primary applied outcome is learning “a methodology of designing out cyber-risk before a system is placed into operation” [record_id:2436] [record_id:2437] [record_id:2833]. This is less a tool than a design philosophy: identify cyber risk during engineering design and modify system architecture, processes, or operational assumptions before deployment.
+
+### Additional tools for digital risk reduction
+
+The 2026 record adds that the material demonstrates “additional tools that can be employed to reduce digital risk in critical infrastructure projects, upgrades and redesign efforts” [record_id:2833]. This is the only record that explicitly mentions tools beyond CIE principles. However, the tools are not named or described. Downstream researchers should treat this as evidence that the 2026 workshop may include a broader or updated toolkit, but the record itself is insufficient to identify those tools.
 
 ## Notable Talks, Records, And Evidence
 
-The most important evidence consists of two records for the same BSidesLV 2025 workshop, each representing a separate scheduled session.
+### “Engineering Cyber Resilience for the Water Sector” at BSidesLV 2025
 
-Record 2436 lists **“Engineering Cyber Resilience for the Water Sector”** as a BSidesLV 2025 Training Ground session in Pearl on Tuesday from 10:30 to 14:30 [record_id:2436]. It names Art Conklin, Virginia “Ginger” Wright, and Andrew Ohrt as authors. The abstract frames the session around what engineers need to know about cyber, the use of a fictionalized but real-world-informed engineering case study, and hands-on application of Cyber-Informed Engineering principles [record_id:2436].
+Records [record_id:2436] and [record_id:2437] are the most concrete evidence for Conklin’s 2025 BSidesLV work. Both list the same title, **“Engineering Cyber Resilience for the Water Sector,”** and the same author group: Art Conklin, Virginia “Ginger” Wright, and Andrew Ohrt. Both raw descriptions are identical. They describe a Training Ground workshop that teaches engineers about cyber issues they are “not getting” in school, using a hypothetical engineering project to apply CIE principles [record_id:2436] [record_id:2437].
 
-Record 2437 provides the same workshop title, authors, and abstract, but as a Monday session from 15:00 to 19:00 in Opal [record_id:2437]. Its value is primarily corroborative: it confirms that the same training was offered as a scheduled BSidesLV workshop and likely repeated during the event [record_id:2437].
+The two records appear to be duplicate offerings of the same workshop rather than distinct content. Their metadata places one on Monday and one on Tuesday in different rooms, while the raw text is the same [record_id:2436] [record_id:2437]. For research purposes, they should be treated as strong evidence that this workshop was offered more than once, or scheduled in multiple slots, but not as independent evidence of two separate curricula.
 
-As representative evidence, both records are strong for the following claims:
+This workshop matters because it provides the most sector-specific framing in the record set. The water sector is a critical infrastructure domain with operational technology, safety, public health, and reliability concerns. Although the raw text does not discuss water-specific attack scenarios or controls, the title anchors the CIE training in that sector [record_id:2436] [record_id:2437].
 
-- Art Conklin was associated with a BSidesLV 2025 workshop on cyber resilience for the water sector [record_id:2436] [record_id:2437].
-- The workshop was co-authored or co-presented with Virginia “Ginger” Wright and Andrew Ohrt [record_id:2436] [record_id:2437].
-- The training focused on Cyber-Informed Engineering principles [record_id:2436] [record_id:2437].
-- The format was hands-on and exercise-based [record_id:2436] [record_id:2437].
-- Participants received a workbook intended to structure learning and support follow-up conversations [record_id:2436] [record_id:2437].
-- The workshop aimed to teach a methodology for designing out cyber-risk before system operation [record_id:2436] [record_id:2437].
-
-The records are weak or insufficient for claims about:
-
-- The exact CIE principles covered.
-- The specific water-sector systems discussed.
-- The identities of real-world case studies that informed the fictional scenario.
-- The technical depth of the training.
-- Whether the session included threat modeling, risk matrices, engineering diagrams, safety analysis, or regulatory content.
-- Art Conklin’s individual contribution relative to the two co-authors.
-
-## Gaps, Limits, And Open Questions
-
-The central limitation is the small and duplicative evidence base. The topic contains only two records, and both contain identical abstract text for the same workshop [record_id:2436] [record_id:2437]. This means the report can confidently summarize the workshop’s advertised purpose and format but cannot provide a broad assessment of Art Conklin’s overall body of work.
-
-Several open questions remain for downstream research:
-
-1. **What specific Cyber-Informed Engineering principles were taught?**  
-   The records mention CIE principles but do not list or explain them [record_id:2436] [record_id:2437].
-
-2. **How water-sector-specific was the workshop?**  
-   The title names the water sector, but the abstract does not specify water infrastructure components, operational scenarios, or sector-specific constraints [record_id:2436] [record_id:2437].
-
-3. **What real-world case studies informed the fictional scenario?**  
-   The abstract says the scenario draws from real-world case studies but does not identify them [record_id:2436] [record_id:2437].
-
-4. **What was Art Conklin’s unique contribution?**  
-   Because the records list three authors and provide only
+### “Mitigating Digital Risk in Critical Infrastructure” at BSidesLV

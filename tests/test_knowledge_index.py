@@ -34,10 +34,13 @@ from knowledge_indexing.knowledge_index import (
     store_record_classification,
     store_record_classification_error,
     store_topic_candidates,
-    sync_linkedin_db,
     phrase_candidates,
     records_from_youtube_playlist,
     records_from_bsideslv,
+    records_from_defcon,
+    records_from_promptorgtfo,
+    parse_args,
+    import_paths_from_args,
 )
 
 
@@ -73,7 +76,7 @@ def test_records_from_bsideslv_export_uses_bsideslv_source():
     record = records[0]
     assert record.source == "bsideslv"
     assert record.source_record_id == "HUP7L3"
-    assert record.dedupe_key == "bsideslv:id:HUP7L3"
+    assert record.dedupe_key.startswith("bsideslv:2025:title:")
     assert record.event == "BSidesLV 2025"
     assert "Florentine E" in record.tags
 
@@ -81,7 +84,6 @@ def test_import_exports_normalizes_and_searches_sources():
     test_dir = local_tmp_dir()
     blackhat = test_dir / "blackhat-talks.json"
     camlis = test_dir / "camlis-talks.json"
-    linkedin = test_dir / "linkedin-saved.json"
 
     blackhat.write_text(
         """
@@ -120,29 +122,12 @@ def test_import_exports_normalizes_and_searches_sources():
         """,
         encoding="utf-8",
     )
-    linkedin.write_text(
-        """
-        {
-          "config": {"source": "saved"},
-          "ingested_at": "2026-05-15T18:46:55+00:00",
-          "posts": [
-            {
-              "source": "saved",
-              "author": "Poster One",
-              "text": "A saved post about threat modeling AI systems.",
-              "url": "https://www.linkedin.com/feed/update/1"
-            }
-          ]
-        }
-        """,
-        encoding="utf-8",
-    )
     db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
 
-    stats = import_exports([blackhat, camlis, linkedin], db_path=db_path)
+    stats = import_exports([blackhat, camlis], db_path=db_path)
     rows = search_records(db_path, "agentic", limit=10)
 
-    assert stats["inserted"] == 3
+    assert stats["inserted"] == 2
     assert stats["updated"] == 0
     assert stats.get("errors", 0) == 0
     assert {row["source"] for row in rows} == {"blackhat", "camlis"}
@@ -152,8 +137,8 @@ def test_import_exports_normalizes_and_searches_sources():
         blackhat_author = conn.execute(
             "SELECT author FROM records WHERE source = 'blackhat'"
         ).fetchone()[0]
-    assert count == 3
-    assert unread == 3
+    assert count == 2
+    assert unread == 2
     assert blackhat_author == "Researcher One"
 
 
@@ -379,7 +364,7 @@ def test_records_missing_classifications_ignores_legacy_read_state():
     assert list_records_missing_classifications(db_path, limit=10) == []
 
 
-def test_import_exports_dedupes_by_normalized_url():
+def test_import_exports_dedupes_conference_records_by_year_title_author():
     test_dir = local_tmp_dir()
     export = test_dir / "blackhat-talks.json"
     export.write_text(
@@ -391,6 +376,7 @@ def test_import_exports_dedupes_by_normalized_url():
               "title": "First Title",
               "speakers": "A",
               "abstract": "First body",
+              "year": 2026,
               "url": "https://blackhat.example/talk?tracking=1"
             }
           ]
@@ -406,6 +392,252 @@ def test_import_exports_dedupes_by_normalized_url():
     assert first["inserted"] == 1
     assert second["inserted"] == 0
     assert second["updated"] == 1
+
+
+def test_import_exports_does_not_collapse_reused_session_ids_across_years():
+    test_dir = local_tmp_dir()
+    first_export = test_dir / "blackhat-talks-2025.json"
+    second_export = test_dir / "blackhat-talks-2026.json"
+    first_export.write_text(
+        """
+        {
+          "talks": [
+            {
+              "session_id": "1",
+              "title": "First Title",
+              "speakers": "A",
+              "abstract": "First body",
+              "year": 2025
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    second_export.write_text(
+        """
+        {
+          "talks": [
+            {
+              "session_id": "1",
+              "title": "First Title",
+              "speakers": "A",
+              "abstract": "Updated body",
+              "year": 2026
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
+
+    stats = import_exports([first_export, second_export], db_path=db_path)
+
+    assert stats["inserted"] == 2
+    assert stats["updated"] == 0
+    with open_db(db_path) as conn:
+        rows = conn.execute(
+            "SELECT source_record_id, year, dedupe_key FROM records ORDER BY year"
+        ).fetchall()
+    assert [row["source_record_id"] for row in rows] == ["1", "1"]
+    assert [row["year"] for row in rows] == ["2025", "2026"]
+    assert rows[0]["dedupe_key"] != rows[1]["dedupe_key"]
+
+
+def test_import_exports_does_not_touch_existing_legacy_session_id_record():
+    test_dir = local_tmp_dir()
+    export = test_dir / "blackhat-talks-2026.json"
+    export.write_text(
+        """
+        {
+          "talks": [
+            {
+              "session_id": "1",
+              "title": "New 2026 Title",
+              "speakers": "A",
+              "abstract": "New 2026 body.",
+              "year": 2026
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
+    with open_db(db_path) as conn:
+        conn.execute(
+            """
+            INSERT INTO records (
+                source, source_file, source_record_id, dedupe_key, title, author,
+                text, url, event, year, tags, raw_json, imported_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                "blackhat",
+                "legacy.json",
+                "1",
+                "blackhat:id:1",
+                "Existing Title",
+                "A",
+                "Existing body.",
+                "",
+                "Black Hat",
+                "2025",
+                "",
+                "{}",
+                "2025-01-01T00:00:00+00:00",
+            ),
+        )
+        conn.commit()
+
+    stats = import_exports([export], db_path=db_path)
+
+    assert stats["inserted"] == 1
+    assert stats["updated"] == 0
+    with open_db(db_path) as conn:
+        rows = conn.execute(
+            "SELECT dedupe_key, title, year FROM records ORDER BY id"
+        ).fetchall()
+    assert [(row["dedupe_key"], row["title"], row["year"]) for row in rows] == [
+        ("blackhat:id:1", "Existing Title", "2025"),
+        (rows[1]["dedupe_key"], "New 2026 Title", "2026"),
+    ]
+    assert rows[1]["dedupe_key"].startswith("blackhat:2026:title:")
+
+
+def test_import_exports_keeps_same_talk_distinct_across_conferences():
+    test_dir = local_tmp_dir()
+    blackhat = test_dir / "blackhat-talks.json"
+    camlis = test_dir / "camlis-talks.json"
+    blackhat.write_text(
+        """
+        {
+          "talks": [
+            {
+              "session_id": "1",
+              "title": "Shared Talk",
+              "speakers": "A",
+              "abstract": "Black Hat variant.",
+              "year": 2026
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    camlis.write_text(
+        """
+        {
+          "talks": [
+            {
+              "title": "Shared Talk",
+              "speaker": "A",
+              "abstract": "CAMLIS variant.",
+              "year": 2026
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
+
+    stats = import_exports([blackhat, camlis], db_path=db_path)
+
+    assert stats["inserted"] == 2
+    assert stats["updated"] == 0
+    with open_db(db_path) as conn:
+        sources = {
+            row["source"]
+            for row in conn.execute("SELECT source FROM records ORDER BY source").fetchall()
+        }
+    assert sources == {"blackhat", "camlis"}
+
+
+def test_import_paths_from_args_expands_json_files_in_directory():
+    test_dir = local_tmp_dir()
+    first = test_dir / "a.json"
+    second = test_dir / "b.json"
+    ignored = test_dir / "c.csv"
+    first.write_text("{}", encoding="utf-8")
+    second.write_text("{}", encoding="utf-8")
+    ignored.write_text("", encoding="utf-8")
+
+    args = parse_args(["--import-dir", str(test_dir)])
+    paths = import_paths_from_args(args)
+
+    assert paths == [first, second]
+
+
+def test_records_from_defcon_schedule_export_uses_conference_source():
+    records = records_from_defcon(
+        {
+            "source": {
+                "manifest": {
+                    "code": "DEFCON34",
+                    "name": "DEF CON 34",
+                }
+            },
+            "talks": [
+                {
+                    "content_id": "64867",
+                    "session_id": "66032",
+                    "title": "Welcome to DEF CON 34!",
+                    "speakers": "Jeff Moss",
+                    "abstract": "Opening remarks.",
+                    "url": "https://info.defcon.org/defcon34/content/?id=64867",
+                    "year": 2026,
+                    "tags": "DEF CON Official Talk",
+                }
+            ],
+        },
+        Path("defcon-talks-2026.json"),
+    )
+
+    assert len(records) == 1
+    assert records[0].source == "defcon34"
+    assert records[0].source_record_id == "66032"
+    assert records[0].dedupe_key.startswith("defcon34:2026:title:")
+    assert records[0].event == "DEF CON 34"
+
+
+def test_records_from_defcon_blank_authors_still_dedupe_by_title():
+    records = records_from_defcon(
+        {
+            "source": {
+                "manifest": {
+                    "code": "DEFCON34",
+                    "name": "DEF CON 34",
+                }
+            },
+            "talks": [
+                {
+                    "content_id": "66679",
+                    "session_id": "67960",
+                    "title": "DEF CON Badge Talk",
+                    "speakers": "",
+                    "url": "https://info.defcon.org/defcon34/content/?id=66679&tag=49235",
+                    "year": 2026,
+                },
+                {
+                    "content_id": "66828",
+                    "session_id": "68109",
+                    "title": "Contest Closing Ceremonies & Awards",
+                    "speakers": "",
+                    "url": "https://info.defcon.org/defcon34/content/?id=66828&tag=49235",
+                    "year": 2026,
+                },
+            ],
+        },
+        Path("defcon-talks-2026.json"),
+    )
+
+    assert len(records) == 2
+    assert records[0].dedupe_key.startswith("defcon34:2026:title:")
+    assert records[1].dedupe_key.startswith("defcon34:2026:title:")
+    assert records[0].dedupe_key != records[1].dedupe_key
 
 
 def test_import_exports_preserves_blackhat_hash_urls_as_distinct_records():
@@ -559,6 +791,68 @@ def test_defcon_video_team_segment_is_not_treated_as_an_author():
 
     assert records[0].title == "AIxCC with ShellPhish"
     assert records[0].author == ""
+
+
+def test_defcon33_youtube_records_use_event_year_not_upload_year():
+    records = records_from_youtube_playlist(
+        {
+            "playlist": "DEF CON 33",
+            "records": [
+                {
+                    "id": "video-one",
+                    "talk_title": "Late Posted DEF CON Talk",
+                    "speakers": "Researcher One",
+                    "abstract": "A substantive DEF CON talk that was uploaded after the event year.",
+                    "url": "https://www.youtube.com/watch?v=video-one",
+                    "upload_date": "20260218",
+                }
+            ],
+        },
+        Path("defcon33_latest.json"),
+    )
+
+    assert len(records) == 1
+    assert records[0].event == "DEF CON 33"
+    assert records[0].year == "2025"
+
+
+def test_promptorgtfo_records_use_text_when_present():
+    records = records_from_promptorgtfo(
+        [
+            {
+                "title": "Speaker One - Prompt Tooling | Prompt||GTFO",
+                "summary": "A compact summary.",
+                "text": "A substantive text column body for a prompt tooling segment.",
+                "url": "https://example.test/prompt-tooling",
+                "tools": [{"name": "Tool One"}],
+                "transcript_available": True,
+            }
+        ],
+        Path("promptorgtfo_2026.json"),
+    )
+
+    assert len(records) == 1
+    assert records[0].title == "Prompt Tooling"
+    assert records[0].author == "Speaker One"
+    assert records[0].text == "A substantive text column body for a prompt tooling segment."
+
+
+def test_promptorgtfo_records_fall_back_to_summary_when_text_is_empty():
+    records = records_from_promptorgtfo(
+        [
+            {
+                "title": "Speaker One - Prompt Tooling | Prompt||GTFO",
+                "summary": "A compact summary.",
+                "text": "",
+                "url": "https://example.test/prompt-tooling",
+                "transcript_available": True,
+            }
+        ],
+        Path("promptorgtfo_2026.json"),
+    )
+
+    assert len(records) == 1
+    assert records[0].text == "A compact summary."
 
 
 def test_defcon_generic_panel_is_not_treated_as_an_author():
@@ -1038,110 +1332,6 @@ def test_mark_records_read_tracks_agent_state():
     assert mark_records_read(db_path, [first_id], read=False) == 1
     unread_ids = {row["id"] for row in list_unread_records(db_path, limit=10)}
     assert first_id in unread_ids
-
-
-def test_sync_linkedin_db_imports_saved_posts_and_skips_unscreened_feed_posts():
-    test_dir = local_tmp_dir()
-    knowledge_db = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
-    linkedin_db = test_dir / "linkedin.sqlite3"
-    with sqlite3.connect(linkedin_db) as conn:
-        conn.executescript(
-            """
-            CREATE TABLE linkedin_posts (
-                id INTEGER PRIMARY KEY,
-                dedupe_key TEXT NOT NULL,
-                identity_url TEXT NOT NULL DEFAULT '',
-                source_first_seen TEXT NOT NULL,
-                first_seen_at TEXT NOT NULL,
-                last_seen_at TEXT NOT NULL,
-                author TEXT NOT NULL DEFAULT '',
-                headline TEXT NOT NULL DEFAULT '',
-                text TEXT NOT NULL DEFAULT '',
-                url TEXT NOT NULL DEFAULT '',
-                time_text TEXT NOT NULL DEFAULT '',
-                reaction_count TEXT NOT NULL DEFAULT '',
-                comment_count TEXT NOT NULL DEFAULT '',
-                repost_count TEXT NOT NULL DEFAULT '',
-                content_hash TEXT NOT NULL,
-                raw_json TEXT NOT NULL,
-                agent_read INTEGER NOT NULL DEFAULT 0
-            );
-            CREATE TABLE post_observations (
-                id INTEGER PRIMARY KEY,
-                post_id INTEGER NOT NULL,
-                run_id INTEGER NOT NULL,
-                source TEXT NOT NULL,
-                seen_at TEXT NOT NULL,
-                position INTEGER NOT NULL,
-                reaction_count TEXT NOT NULL DEFAULT '',
-                comment_count TEXT NOT NULL DEFAULT '',
-                repost_count TEXT NOT NULL DEFAULT '',
-                raw_json TEXT NOT NULL
-            );
-            """
-        )
-        conn.execute(
-            """
-            INSERT INTO linkedin_posts (
-                dedupe_key, source_first_seen, first_seen_at, last_seen_at, author,
-                text, url, content_hash, raw_json
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
-                "url:https://linkedin.example/1",
-                "saved",
-                "2026-05-15T00:00:00+00:00",
-                "2026-05-15T00:00:00+00:00",
-                "Poster One",
-                "Saved post about OAuth security.",
-                "https://linkedin.example/1",
-                "hash1",
-                '{"source":"saved"}',
-            ),
-        )
-        conn.execute(
-            """
-            INSERT INTO post_observations (post_id, run_id, source, seen_at, position, raw_json)
-            VALUES (1, 1, 'saved', '2026-05-15T00:00:00+00:00', 1, '{}')
-            """
-        )
-        conn.execute(
-            """
-            INSERT INTO linkedin_posts (
-                dedupe_key, source_first_seen, first_seen_at, last_seen_at, author,
-                text, url, content_hash, raw_json
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
-                "url:https://linkedin.example/2",
-                "feed",
-                "2026-05-15T00:00:00+00:00",
-                "2026-05-15T00:00:00+00:00",
-                "Poster Two",
-                "Unscreened feed post about prompt injection.",
-                "https://linkedin.example/2",
-                "hash2",
-                '{"source":"feed"}',
-            ),
-        )
-        conn.execute(
-            """
-            INSERT INTO post_observations (post_id, run_id, source, seen_at, position, raw_json)
-            VALUES (2, 1, 'feed', '2026-05-15T00:00:00+00:00', 2, '{}')
-            """
-        )
-
-    first = sync_linkedin_db(knowledge_db, linkedin_db_path=linkedin_db)
-    second = sync_linkedin_db(knowledge_db, linkedin_db_path=linkedin_db)
-
-    assert first["records"] == 1 and first["inserted"] == 1 and first["updated"] == 0
-    assert second["records"] == 1 and second["inserted"] == 1 and second["updated"] == 0
-    rows = search_records(knowledge_db, "oauth", limit=5)
-    assert len(rows) == 1
-    assert rows[0]["source"] == "linkedin_saved"
-    assert search_records(knowledge_db, "unscreened", limit=5) == []
 
 
 # --- _validate_ident ---

@@ -6,11 +6,9 @@ STATE_DIR = APP_DIR / "knowledge"
 DB_PATH = STATE_DIR / "knowledge.sqlite3"
 LOG_PATH = STATE_DIR / "import.log"
 SUMMARY_ARCHIVE_DIR = STATE_DIR / "archive" / "summaries"
-LINKEDIN_DB_PATH = APP_DIR / "data" / "linkedin" / "linkedin_ingest.sqlite3"
 CONFIG_DIR = APP_DIR / "config"
 
 DEFCON33_LATEST = APP_DIR / "youtube_summaries" / "defcon33" / "defcon33_latest.json"
-BSIDESSF_MD = APP_DIR / "pdf" / "markdown" / "BSidesSF_2025_PrintedProgram_PROOF-10.md"
 
 
 def _find_latest_promptorgtfo() -> Path | None:
@@ -53,3 +51,4 @@ STOPWORDS = _load_text_set(CONFIG_DIR / "stopwords.txt")
 BAD_TOPIC_TOKENS = _load_text_set(CONFIG_DIR / "bad_topic_tokens.txt")
 BAD_TOPIC_PHRASES = _load_text_set(CONFIG_DIR / "bad_topic_phrases.txt")
 SEED_TOPICS = _load_seed_topics(CONFIG_DIR / "seed_topics.tsv")
+CONFERENCE_RECORD_SOURCES = _load_text_set(CONFIG_DIR / "conference_record_sources.txt")
