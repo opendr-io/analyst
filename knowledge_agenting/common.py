@@ -1,4 +1,4 @@
-import json
+﻿import json
 from pathlib import Path
 
 from knowledge_indexing import knowledge_index as ki
@@ -11,9 +11,6 @@ MODEL_CLASSIFY = llm_settings.get_model("classify")
 MODEL_ANNOTATE = llm_settings.get_model("annotate")
 MODEL_SUMMARIZE = llm_settings.get_model("summarize")
 
-SUMMARY_RECORD_LIMIT = llm_settings.get_int("summary", "record_limit")
-SUMMARY_RECORD_CHARS = llm_settings.get_int("summary", "record_chars")
-SUMMARY_CHUNK_SIZE = llm_settings.get_int("summary", "chunk_size")
 SUMMARY_CHARS_PER_TOKEN = llm_settings.get_int("summary", "chars_per_token")
 ANNOTATION_SCHEMA_VERSION = llm_settings.get_int("annotation", "schema_version")
 ANNOTATION_RECORD_CHARS = llm_settings.get_int("annotation", "record_chars")
@@ -78,3 +75,4 @@ def json_list_text(value: str | None) -> str:
 
 def estimate_tokens(text: str) -> int:
     return max(1, (len(text) + SUMMARY_CHARS_PER_TOKEN - 1) // SUMMARY_CHARS_PER_TOKEN)
+
