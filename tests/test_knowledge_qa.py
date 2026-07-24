@@ -866,6 +866,34 @@ def test_load_summary_files_loads_grouped_topic_summary_folder(tmp_path):
     assert "Grouped topic report." in result
 
 
+def test_load_summary_files_enriches_record_citations_from_database(tmp_path):
+    db_path = tmp_path / "knowledge.sqlite3"
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    topics_dir = summary_dir / "topics"
+    state_dir.mkdir()
+    topics_dir.mkdir(parents=True)
+    (topics_dir / "ai-security.md").write_text(
+        "# Topic: AI security\nImportant evidence [record_id:7].",
+        encoding="utf-8",
+    )
+    with the_analyst.ki.open_db(db_path) as conn:
+        _insert_author_record(conn, 7, "Alice Example", "Important Talk")
+        conn.commit()
+
+    result = load_summary_files(
+        state_dir,
+        topic="AI security",
+        summary_dir=summary_dir,
+        db_path=db_path,
+    )
+
+    assert "Important evidence [Important Talk, Alice Example, <https://example.test>]." in result
+    assert "# Citation details" in result
+    assert "- Important Talk, Alice Example, <https://example.test>" in result
+    assert "[record_id:7]" not in result
+    assert "Source: test" not in result
+
 def test_load_summary_files_resolves_partial_topic_name(tmp_path):
     state_dir = tmp_path / "knowledge"
     summary_dir = tmp_path / "summaries"
@@ -1141,5 +1169,6 @@ def test_tool_answer_from_summaries_loads_multiple_relevant_summaries(monkeypatc
     assert "Prompt injection details." in result
     assert "Retrieval pipeline details." in result
     assert "Voting details." not in result
+
 
 

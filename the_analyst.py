@@ -164,7 +164,7 @@ TOOLS = [
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Search term — author name, talk title, tool name, or keyword",
+                    "description": "Search term ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â author name, talk title, tool name, or keyword",
                 },
                 "topic": {
                     "type": "string",
@@ -569,6 +569,63 @@ def rank_relevant_summary_topics(
     return focused[:limit]
 
 
+def _record_ids_in_text(text: str) -> list[int]:
+    seen: set[int] = set()
+    record_ids: list[int] = []
+    for match in re.finditer(r"\[record_id:(\d+)\]", text):
+        record_id = int(match.group(1))
+        if record_id not in seen:
+            seen.add(record_id)
+            record_ids.append(record_id)
+    return record_ids
+
+
+def _record_citation_text(row: Any) -> str:
+    title = str(row["title"] or "").strip() or "(untitled)"
+    author = str(row["author"] or "").strip() or "(unknown)"
+    url = str(row["url"] or "").strip()
+    if url:
+        return f"{title}, {author}, <{url}>"
+    return f"{title}, {author}"
+
+
+def enrich_summary_citations(text: str, db_path: Path | None = None) -> str:
+    record_ids = _record_ids_in_text(text)
+    resolved_db_path = db_path or ki.DB_PATH
+    if not record_ids or not resolved_db_path.exists():
+        return text
+
+    rows_by_id: dict[int, Any] = {}
+    with ki.open_db(resolved_db_path) as conn:
+        for record_id in record_ids:
+            row = conn.execute(
+                """
+                SELECT id, title, author, source, year, url
+                FROM records
+                WHERE id = ?
+                """,
+                (record_id,),
+            ).fetchone()
+            if row:
+                rows_by_id[record_id] = row
+
+    def replace_record_id(match: re.Match[str]) -> str:
+        record_id = int(match.group(1))
+        row = rows_by_id.get(record_id)
+        if not row:
+            return match.group(0)
+        return "[" + _record_citation_text(row) + "]"
+
+    enriched_text = re.sub(r"\[record_id:(\d+)\]", replace_record_id, text)
+    detail_lines: list[str] = []
+    for record_id in record_ids:
+        row = rows_by_id.get(record_id)
+        if row:
+            detail_lines.append(f"- {_record_citation_text(row)}")
+
+    if not detail_lines:
+        return enriched_text
+    return f"{enriched_text.rstrip()}\n\n# Citation details\n\n" + "\n".join(detail_lines)
 def load_summary_files(
     state_dir: Path,
     topic: str = "",
@@ -576,6 +633,7 @@ def load_summary_files(
     max_topics: int = 1,
     summary_dir: Path | None = None,
     include_auxiliary: bool = True,
+    db_path: Path | None = None,
 ) -> str:
     state_dir_resolved = state_dir.resolve()
     summary_dir = summary_dir or state_dir
@@ -590,7 +648,7 @@ def load_summary_files(
             ranked = rank_relevant_summary_topics(
                 topic,
                 state_dir,
-                db_path=ki.DB_PATH,
+                db_path=db_path or ki.DB_PATH,
                 limit=1,
                 summary_dir=summary_dir,
             )
@@ -612,7 +670,7 @@ def load_summary_files(
                 "Use ONLY the summary file below to answer. Do not use outside knowledge.\n\n"
                 f"Selected summary file: {path}\n"
                 f"Selected summary: {item.topic}\n\n"
-                f"# {item.topic}\n\n{path.read_text(encoding='utf-8')}"
+                f"# {item.topic}\n\n{enrich_summary_citations(path.read_text(encoding='utf-8'), db_path=db_path)}"
             )
         return ""
     parts = []
@@ -624,6 +682,7 @@ def load_summary_files(
             for name, _score in rank_relevant_summary_topics(
                 question,
                 state_dir,
+                db_path=db_path or ki.DB_PATH,
                 limit=max_topics,
                 summary_dir=summary_dir,
             )
@@ -639,7 +698,7 @@ def load_summary_files(
         parts.append(
             f"# Summary file: {item.topic}\n\n"
             f"Source file: {item.path}\n\n"
-            f"{item.path.read_text(encoding='utf-8')}"
+            f"{enrich_summary_citations(item.path.read_text(encoding='utf-8'), db_path=db_path)}"
         )
     if include_auxiliary:
         for path in sorted(state_dir.glob("pdf-*.md")):
@@ -1226,7 +1285,9 @@ def tool_answer_from_summaries(
                 "# Summary Evidence Instructions\n\n"
                 "Use ONLY the summary files included in this tool result. "
                 "Do not use general knowledge or any source not listed here. "
-                "The final answer must start with a short 'Sources used' line naming every selected summary used.\n\n"
+                "The final answer must start with a short 'Sources used' line naming every selected summary used. "
+                "When citing records, use the expanded citation format from the summary evidence: title, author or speaker, URL. Preserve URLs as Markdown autolinks when available. "
+                "Do not reduce expanded citations back to bare record IDs.\n\n"
                 "# Relevant summaries selected\n\n"
                 f"{selected_lines}\n\n---\n\n{text}"
             )
@@ -1379,6 +1440,8 @@ def run_summary_question(client: Any, question: str) -> None:
                     "Then answer directly in natural prose. "
                     "Avoid report-style sections and numbered lists unless they are necessary for clarity. "
                     "If the question asks about talks, presentations, or records, include the title, speaker or author when available, source or venue, and what each contributes. "
+                    "When citing records, use the expanded citation format from the summary evidence: title, author or speaker, URL. Preserve URLs as Markdown autolinks when available. "
+                    "Do not reduce expanded citations back to bare record IDs. "
                     "Call out common themes and unique items.\n\n"
                     f"{evidence}"
                 ),
@@ -1537,3 +1600,6 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
