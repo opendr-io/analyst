@@ -418,18 +418,10 @@ def _score_topic_text(question: str, topic_name: str, search_text: str) -> float
     search_l = search_text.lower()
     question_l = planned_question.lower()
     original_question_l = question.lower()
-    question_numbers = set(re.findall(r"\b(?:19|20)\d{2}\b|\b\d{2}\b", original_question_l))
-    target_numbers = set(re.findall(r"\b(?:19|20)\d{2}\b|\b\d{2}\b", f"{topic_l} {search_l}"))
     if not overlap and topic_l not in question_l and search_l not in question_l:
-        if not (question_numbers & target_numbers):
-            return 0.0
+        return 0.0
     score = float(len(original_overlap) * 4)
     score += float(len(overlap - original_overlap) * 2)
-    if question_numbers:
-        matched_numbers = question_numbers & target_numbers
-        score += float(len(matched_numbers) * 10)
-        if not matched_numbers:
-            score -= 3.0
     if topic_l in original_question_l:
         score += 8.0
     elif topic_l in question_l:
@@ -438,7 +430,7 @@ def _score_topic_text(question: str, topic_name: str, search_text: str) -> float
     for first, second in zip(topic_parts, topic_parts[1:]):
         if f"{first} {second}" in original_question_l:
             score += 6.0
-    question_parts = re.findall(r"[a-zA-Z][a-zA-Z0-9+\-]{2,}", original_question_l)
+    question_parts = re.findall(r"[a-zA-Z0-9][a-zA-Z0-9+\-]{1,}", original_question_l)
     for first, second in zip(question_parts, question_parts[1:]):
         phrase = f"{first} {second}"
         if (
@@ -447,9 +439,15 @@ def _score_topic_text(question: str, topic_name: str, search_text: str) -> float
             and phrase in search_l
         ):
             score += 4.0
+    question_numbers = set(re.findall(r"(?<!\d)\d{2,4}(?!\d)", original_question_l))
+    topic_numbers = set(re.findall(r"(?<!\d)\d{2,4}(?!\d)", search_l))
+    if question_numbers:
+        matched_numbers = question_numbers & topic_numbers
+        score += float(len(matched_numbers) * 8)
+        if topic_numbers and not matched_numbers:
+            score -= 3.0
     score += len(overlap) / max(len(topic_tokens), 1)
     return score
-
 
 def _topic_from_summary_path(path: Path, legacy: bool = False) -> str:
     stem = path.stem
@@ -726,6 +724,162 @@ def _get_record_by_id(db_path: Path, record_id: int) -> Any | None:
         return conn.execute("SELECT * FROM records WHERE id = ?", (record_id,)).fetchone()
 
 
+SOURCE_QUERY_ALIASES: dict[str, tuple[str, ...]] = {
+    "defcon": ("defcon33", "defcon34"),
+    "def con": ("defcon33", "defcon34"),
+    "defcon 33": ("defcon33",),
+    "def con 33": ("defcon33",),
+    "dc33": ("defcon33",),
+    "defcon 34": ("defcon34",),
+    "def con 34": ("defcon34",),
+    "dc34": ("defcon34",),
+    "black hat": ("blackhat",),
+    "blackhat": ("blackhat",),
+    "bsideslv": ("bsideslv",),
+    "bsides lv": ("bsideslv",),
+    "bsides las vegas": ("bsideslv",),
+    "prompt or gtfo": ("promptorgtfo",),
+    "promptorgtfo": ("promptorgtfo",),
+    "unprompted": ("unprompted2026",),
+    "unprompted2026": ("unprompted2026",),
+    "[un]prompted": ("unprompted2026",),
+}
+
+SOURCE_QUERY_FILLER_WORDS = {
+    "all",
+    "about",
+    "any",
+    "by",
+    "for",
+    "from",
+    "in",
+    "list",
+    "of",
+    "records",
+    "record",
+    "show",
+    "source",
+    "talks",
+    "the",
+}
+
+
+def _available_record_sources(db_path: Path = ki.DB_PATH) -> set[str]:
+    if not db_path.exists():
+        return set()
+    with ki.open_db(db_path) as conn:
+        return {
+            str(row["source"]).strip()
+            for row in conn.execute("SELECT DISTINCT source FROM records ORDER BY source")
+            if str(row["source"]).strip()
+        }
+
+
+def _source_alias_map(db_path: Path = ki.DB_PATH) -> dict[str, tuple[str, ...]]:
+    aliases = dict(SOURCE_QUERY_ALIASES)
+    for source_name in _available_record_sources(db_path):
+        aliases[source_name.lower()] = (source_name,)
+        aliases[source_name.lower().replace("-", " ")] = (source_name,)
+    return aliases
+
+
+def _resolve_source_names(value: str, db_path: Path = ki.DB_PATH) -> list[str]:
+    cleaned = " ".join(value.strip().lower().replace("_", " ").split())
+    aliases = _source_alias_map(db_path)
+    sources = list(aliases.get(cleaned, ()))
+    available = _available_record_sources(db_path)
+    if available:
+        sources = [source for source in sources if source in available]
+    return sources
+
+
+def _sources_matching_years(sources: list[str], years: list[str], db_path: Path = ki.DB_PATH) -> list[str]:
+    if not sources or not years:
+        return sources
+    source_set = set(sources)
+    year_set = set(years)
+    if {"defcon33", "defcon34"}.issubset(source_set):
+        if "2026" in year_set:
+            return ["defcon34"]
+        if "2025" in year_set:
+            return ["defcon33"]
+    if not db_path.exists():
+        return sources
+    placeholders = ", ".join("?" for _ in sources)
+    year_placeholders = ", ".join("?" for _ in years)
+    with ki.open_db(db_path) as conn:
+        rows = conn.execute(
+            f"""
+            SELECT DISTINCT source
+            FROM records
+            WHERE source IN ({placeholders})
+              AND year IN ({year_placeholders})
+            ORDER BY source
+            """,
+            [*sources, *years],
+        ).fetchall()
+    narrowed = [str(row["source"]) for row in rows]
+    return narrowed or sources
+
+def _extract_source_filter(query: str = "", source: str = "", db_path: Path = ki.DB_PATH) -> tuple[list[str], list[str], str]:
+    sources: list[str] = []
+    years: list[str] = []
+    residual = query.strip()
+
+    def add_sources(values: list[str]) -> None:
+        for value in values:
+            if value not in sources:
+                sources.append(value)
+
+    def add_year(value: str) -> None:
+        if re.fullmatch(r"20\d{2}", value) and value not in years:
+            years.append(value)
+
+    if source:
+        add_sources(_resolve_source_names(source, db_path=db_path) or [source.strip()])
+
+    explicit = re.search(r"\bsource\s*[:=]\s*([a-zA-Z0-9_\-\[\] ]+)", residual, flags=re.IGNORECASE)
+    if explicit:
+        value = explicit.group(1).strip()
+        add_sources(_resolve_source_names(value, db_path=db_path))
+        residual = (residual[: explicit.start()] + " " + residual[explicit.end() :]).strip()
+
+    year_matches = re.findall(r"(?<!\d)(20\d{2})(?!\d)", residual)
+    for year in year_matches:
+        add_year(year)
+    residual = re.sub(r"(?<!\d)20\d{2}(?!\d)", " ", residual).strip()
+
+    aliases = _source_alias_map(db_path)
+    for alias in sorted(aliases, key=len, reverse=True):
+        pattern = r"(?<![a-zA-Z0-9])" + re.escape(alias) + r"(?![a-zA-Z0-9])"
+        if re.search(pattern, residual, flags=re.IGNORECASE):
+            add_sources(list(aliases[alias]))
+            residual = re.sub(pattern, " ", residual, flags=re.IGNORECASE).strip()
+            break
+
+    residual_tokens = re.findall(r"[a-zA-Z][a-zA-Z0-9_\-]*", residual.lower())
+    if sources and residual_tokens and all(token in SOURCE_QUERY_FILLER_WORDS for token in residual_tokens):
+        residual = ""
+    sources = _sources_matching_years(sources, years, db_path=db_path)
+    return sources, years, " ".join(residual.split())
+
+def _format_source_record_results(
+    records: list[Any],
+    sources: list[str],
+    requested_limit: int | None,
+    years: list[str] | None = None,
+) -> str:
+    filters = [f"source: {', '.join(sources)}"]
+    if years:
+        filters.append(f"year: {', '.join(years)}")
+    filter_text = "; ".join(filters)
+    if not records:
+        return f"No records found for {filter_text}"
+    limit_note = f" (limit {requested_limit})" if requested_limit is not None else ""
+    parts = [f"{len(records)} source record match(es) for {filter_text}{limit_note}\n"]
+    parts.extend(_format_compact_record(record) for record in records)
+    return "\n\n---\n\n".join(parts)
+
 def _format_compact_record(r: Any) -> str:
     topics = ki.decode_topics(r["agent_topics"])
     part = (
@@ -752,12 +906,25 @@ def tool_search_records(query: str, topic: str = "", limit: int | None = None) -
             return f"No record found with id: {record_id}"
         return f"Exact record match for id {record_id}:\n\n{_format_compact_record(record)}"
 
-    fts_query = question_to_fts_query(query)
-    if not fts_query:
-        return f"No searchable terms found for: {query!r}"
-    ranked_topics = rank_relevant_topics(query, ki.list_classification_topics(db_path), limit=3)
+    source_names, years, search_query = _extract_source_filter(query, db_path=db_path)
     requested_limit = _optional_positive_limit(limit)
     scan_limit = requested_limit or 10_000
+    if source_names and not search_query and not topic:
+        records = ki.list_records_for_sources(db_path, source_names, limit=scan_limit, years=years)
+        if requested_limit is not None:
+            records = records[:requested_limit]
+        return _format_source_record_results(records, source_names, requested_limit, years=years)
+
+    search_text = search_query or query
+    fts_query = question_to_fts_query(search_text)
+    if not fts_query:
+        if source_names:
+            records = ki.list_records_for_sources(db_path, source_names, limit=scan_limit, years=years)
+            if requested_limit is not None:
+                records = records[:requested_limit]
+            return _format_source_record_results(records, source_names, requested_limit, years=years)
+        return f"No searchable terms found for: {query!r}"
+    ranked_topics = rank_relevant_topics(search_text, ki.list_classification_topics(db_path), limit=3)
 
     if topic:
         topic_rows = ki.list_records_for_topic(db_path, topic, limit=scan_limit)
@@ -769,6 +936,12 @@ def tool_search_records(query: str, topic: str = "", limit: int | None = None) -
                 records = list(topic_rows)
         except Exception:
             records = list(topic_rows)
+        if source_names:
+            source_set = set(source_names)
+            records = [r for r in records if r["source"] in source_set]
+        if years:
+            year_set = set(years)
+            records = [r for r in records if str(r["year"]) in year_set]
         if requested_limit is not None:
             records = records[:requested_limit]
     else:
@@ -776,6 +949,12 @@ def tool_search_records(query: str, topic: str = "", limit: int | None = None) -
             records = ki.search_records(db_path, fts_query, limit=scan_limit)
         except Exception:
             return f"Search failed for query: {query!r}"
+        if source_names:
+            source_set = set(source_names)
+            records = [r for r in records if r["source"] in source_set]
+        if years:
+            year_set = set(years)
+            records = [r for r in records if str(r["year"]) in year_set]
         if ranked_topics:
             ranked_names = [name for name, _score in ranked_topics]
             ranked_set = set(ranked_names)
@@ -789,9 +968,21 @@ def tool_search_records(query: str, topic: str = "", limit: int | None = None) -
             records = records[:requested_limit]
 
     if not records:
-        return f"No records found for: {query!r}"
+        filters = []
+        if source_names:
+            filters.append(f"source={', '.join(source_names)}")
+        if years:
+            filters.append(f"year={', '.join(years)}")
+        if topic:
+            filters.append(f"topic={topic}")
+        suffix = f" ({'; '.join(filters)})" if filters else ""
+        return f"No records found for: {search_text!r}{suffix}"
 
     parts = [f"{len(records)} compact record match(es) found:\n"]
+    if source_names:
+        parts.append("Source filter: " + ", ".join(source_names))
+    if years:
+        parts.append("Year filter: " + ", ".join(years))
     if ranked_topics:
         parts.append(
             "Relevant topics considered: "
@@ -801,7 +992,6 @@ def tool_search_records(query: str, topic: str = "", limit: int | None = None) -
         parts.append(_format_compact_record(r))
 
     return "\n\n---\n\n".join(parts)
-
 
 def _row_value(row: object, key: str, default: str = "") -> Any:
     try:
@@ -903,20 +1093,30 @@ def tool_query_annotations(
     match: str = "any",
     limit: int | None = None,
 ) -> str:
-    terms = _annotation_terms(query=query, keywords=keywords)
-    if not terms:
-        return "No annotation keywords provided."
+    source_names, years, filtered_query = _extract_source_filter(query, source=source, db_path=ki.DB_PATH)
+    terms = _annotation_terms(query=filtered_query, keywords=keywords)
 
     requested_limit = _optional_positive_limit(limit)
     scan_limit = requested_limit or 10_000
+    if not terms:
+        if source_names:
+            records = ki.list_records_for_sources(ki.DB_PATH, source_names, limit=scan_limit, years=years)
+            if requested_limit is not None:
+                records = records[:requested_limit]
+            return _format_source_record_results(records, source_names, requested_limit, years=years)
+        return "No annotation keywords provided."
+
     match = match if match in {"any", "all"} else "any"
     candidate_rows: dict[int, object] = {}
+    sources_to_scan = source_names or [""]
     for term in terms:
-        for row in ki.list_record_annotations(ki.DB_PATH, limit=scan_limit, source=source, query=term):
-            record_id = int(_row_value(row, "record_id", 0))
-            if record_id:
-                candidate_rows[record_id] = row
-
+        for source_name in sources_to_scan:
+            for row in ki.list_record_annotations(ki.DB_PATH, limit=scan_limit, source=source_name, query=term):
+                if years and str(_row_value(row, "year")) not in set(years):
+                    continue
+                record_id = int(_row_value(row, "record_id", 0))
+                if record_id:
+                    candidate_rows[record_id] = row
     scored: list[tuple[int, object, list[str]]] = []
     topic_l = topic.strip().lower()
     for row in candidate_rows.values():
@@ -939,8 +1139,10 @@ def tool_query_annotations(
         filters = []
         if topic:
             filters.append(f"topic={topic!r}")
-        if source:
-            filters.append(f"source={source!r}")
+        if source_names:
+            filters.append(f"source={', '.join(source_names)!r}")
+        if years:
+            filters.append(f"year={', '.join(years)!r}")
         suffix = f" ({', '.join(filters)})" if filters else ""
         return f"No annotation matches found for: {', '.join(terms)}{suffix}"
 
@@ -950,8 +1152,10 @@ def tool_query_annotations(
     ]
     if topic:
         parts.append(f"topic filter: {topic}")
-    if source:
-        parts.append(f"source filter: {source}")
+    if source_names:
+        parts.append(f"source filter: {', '.join(source_names)}")
+    if years:
+        parts.append(f"year filter: {', '.join(years)}")
 
     cards = ["\n".join(parts)]
     for score, row, fields in scored:

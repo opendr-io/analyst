@@ -521,6 +521,176 @@ def test_tool_query_annotations_without_limit_returns_all_matches(monkeypatch):
     assert "[record_id:3]" in result
 
 
+def test_tool_query_annotations_lists_records_for_source_only_query(monkeypatch):
+    class FakeRow(dict):
+        def __getitem__(self, key):
+            return dict.__getitem__(self, key)
+
+    rows = [
+        FakeRow({
+            "id": 1,
+            "source": "blackhat",
+            "year": "2025",
+            "title": "Black Hat Talk",
+            "author": "Example Author",
+            "agent_topics": "[]",
+            "url": "",
+            "text": "conference abstract",
+        })
+    ]
+
+    monkeypatch.setattr(the_analyst, "_available_record_sources", lambda _db_path=the_analyst.ki.DB_PATH: {"blackhat"})
+    monkeypatch.setattr(the_analyst.ki, "list_records_for_sources", lambda _db_path, sources, limit=500, years=None: rows[:limit])
+    monkeypatch.setattr(
+        the_analyst.ki,
+        "list_record_annotations",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("annotation keyword search should not run")),
+    )
+
+    result = tool_query_annotations(query="blackhat")
+
+    assert "1 source record match(es) for source: blackhat" in result
+    assert "Black Hat Talk" in result
+
+
+def test_tool_query_annotations_expands_generic_defcon_source(monkeypatch):
+    captured = {}
+
+    monkeypatch.setattr(the_analyst, "_available_record_sources", lambda _db_path=the_analyst.ki.DB_PATH: {"defcon33", "defcon34"})
+    def fake_list_records_for_sources(_db_path, sources, limit=500, years=None):
+        captured["sources"] = list(sources)
+        return []
+
+    monkeypatch.setattr(the_analyst.ki, "list_records_for_sources", fake_list_records_for_sources)
+
+    result = tool_query_annotations(query="show defcon records")
+
+    assert captured["sources"] == ["defcon33", "defcon34"]
+    assert "No records found for source: defcon33, defcon34" in result
+
+
+def test_tool_query_annotations_filters_source_by_year(monkeypatch):
+    captured = {}
+
+    monkeypatch.setattr(the_analyst, "_available_record_sources", lambda _db_path=the_analyst.ki.DB_PATH: {"blackhat"})
+
+    def fake_list_records_for_sources(_db_path, sources, limit=500, years=None):
+        captured["sources"] = list(sources)
+        captured["years"] = list(years or [])
+        return []
+
+    monkeypatch.setattr(the_analyst.ki, "list_records_for_sources", fake_list_records_for_sources)
+
+    result = tool_query_annotations(query="blackhat 2026")
+
+    assert captured == {"sources": ["blackhat"], "years": ["2026"]}
+    assert "No records found for source: blackhat; year: 2026" in result
+
+
+def test_tool_query_annotations_filters_generic_defcon_by_year(monkeypatch):
+    captured = {}
+
+    monkeypatch.setattr(the_analyst, "_available_record_sources", lambda _db_path=the_analyst.ki.DB_PATH: {"defcon33", "defcon34"})
+
+    def fake_list_records_for_sources(_db_path, sources, limit=500, years=None):
+        captured["sources"] = list(sources)
+        captured["years"] = list(years or [])
+        return []
+
+    monkeypatch.setattr(the_analyst.ki, "list_records_for_sources", fake_list_records_for_sources)
+
+    result = tool_query_annotations(query="defcon 2026")
+
+    assert captured == {"sources": ["defcon34"], "years": ["2026"]}
+    assert "No records found for source: defcon34; year: 2026" in result
+
+def _insert_source_year_record(conn, record_id: int, source: str, year: str, title: str) -> None:
+    conn.execute(
+        """
+        INSERT INTO records (
+            id, source, source_file, source_record_id, dedupe_key, title, author,
+            text, url, event, year, tags, raw_json, imported_at, agent_topics
+        )
+        VALUES (?, ?, 'test.json', ?, ?, ?, 'Example Author', ?, '', 'Test Event', ?, '', '{}', '2026-06-23T00:00:00+00:00', '[]')
+        """,
+        (
+            record_id,
+            source,
+            str(record_id),
+            f"{source}:{year}:{record_id}",
+            title,
+            f"Evidence for {title}.",
+            year,
+        ),
+    )
+
+
+def test_tool_query_annotations_source_year_result_excludes_other_years(tmp_path, monkeypatch):
+    db_path = tmp_path / "knowledge.sqlite3"
+    with the_analyst.ki.open_db(db_path) as conn:
+        _insert_source_year_record(conn, 1, "blackhat", "2025", "Black Hat 2025 Talk")
+        _insert_source_year_record(conn, 2, "blackhat", "2026", "Black Hat 2026 Talk")
+        _insert_source_year_record(conn, 3, "bsideslv", "2026", "BSidesLV 2026 Talk")
+        conn.commit()
+    monkeypatch.setattr(the_analyst.ki, "DB_PATH", db_path)
+
+    result = tool_query_annotations(query="blackhat 2026")
+
+    assert "1 source record match(es) for source: blackhat; year: 2026" in result
+    assert "[2] blackhat 2026" in result
+    assert "Black Hat 2026 Talk" in result
+    assert "[1] blackhat 2025" not in result
+    assert "Black Hat 2025 Talk" not in result
+    assert "BSidesLV 2026 Talk" not in result
+
+
+def test_tool_search_records_source_year_result_excludes_other_years(tmp_path, monkeypatch):
+    db_path = tmp_path / "knowledge.sqlite3"
+    with the_analyst.ki.open_db(db_path) as conn:
+        _insert_source_year_record(conn, 1, "blackhat", "2025", "Black Hat 2025 Talk")
+        _insert_source_year_record(conn, 2, "blackhat", "2026", "Black Hat 2026 Talk")
+        conn.commit()
+    monkeypatch.setattr(the_analyst.ki, "DB_PATH", db_path)
+    monkeypatch.setattr(the_analyst.ki, "list_classification_topics", lambda _db_path: [])
+
+    result = tool_search_records("blackhat 2026")
+
+    assert "1 source record match(es) for source: blackhat; year: 2026" in result
+    assert "[2] blackhat 2026" in result
+    assert "[1] blackhat 2025" not in result
+
+def test_tool_search_records_lists_records_for_source_only_query(monkeypatch):
+    class FakeRow(dict):
+        def __getitem__(self, key):
+            return dict.__getitem__(self, key)
+
+    rows = [
+        FakeRow({
+            "id": 2,
+            "source": "unprompted2026",
+            "year": "2026",
+            "title": "Unprompted Talk",
+            "author": "Example Author",
+            "agent_topics": "[]",
+            "url": "",
+            "text": "workflow automation abstract",
+        })
+    ]
+
+    monkeypatch.setattr(the_analyst, "_available_record_sources", lambda _db_path=the_analyst.ki.DB_PATH: {"unprompted2026"})
+    monkeypatch.setattr(the_analyst.ki, "list_records_for_sources", lambda _db_path, sources, limit=500, years=None: rows[:limit])
+    monkeypatch.setattr(the_analyst.ki, "list_classification_topics", lambda _db_path: [])
+    monkeypatch.setattr(
+        the_analyst.ki,
+        "search_records",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("FTS should not run")),
+    )
+
+    result = tool_search_records("source:unprompted2026")
+
+    assert "1 source record match(es) for source: unprompted2026" in result
+    assert "Unprompted Talk" in result
+
 def test_run_prefixed_query_bypasses_llm_client(monkeypatch, capsys):
     monkeypatch.setattr(
         the_analyst,
@@ -884,14 +1054,14 @@ def test_rank_relevant_summary_topics_routes_defcon_number_alias(monkeypatch, tm
     source_dir = summary_dir / "sources"
     state_dir.mkdir()
     source_dir.mkdir(parents=True)
-    (source_dir / "defcon33.md").write_text("DEF CON 33 summary", encoding="utf-8")
-    (source_dir / "defcon34.md").write_text("DEF CON 34 summary", encoding="utf-8")
+    (source_dir / "defcon-2025.md").write_text("DEF CON 33 summary", encoding="utf-8")
+    (source_dir / "defcon-2026.md").write_text("DEF CON 34 summary", encoding="utf-8")
     aliases = tmp_path / "aliases.tsv"
     aliases.write_text(
         "\n".join(
             [
-                "defcon33\tDEF CON 33 DEFCON 33 DC33 DEF CON 2025",
-                "defcon34\tDEF CON 34 DEFCON 34 DC34 DEF CON 2026",
+                "defcon-2025\tDEF CON 33 DEFCON 33 DC33 DEF CON 2025 defcon33",
+                "defcon-2026\tDEF CON 34 DEFCON 34 DC34 DEF CON 2026 defcon34",
             ]
         )
         + "\n",
@@ -906,7 +1076,7 @@ def test_rank_relevant_summary_topics_routes_defcon_number_alias(monkeypatch, tm
         limit=2,
     )
 
-    assert ranked[0][0] == "defcon34"
+    assert ranked[0][0] == "defcon 2026"
 
 
 def test_tool_answer_from_summaries_names_selected_sources(monkeypatch, tmp_path):

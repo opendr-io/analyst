@@ -343,6 +343,30 @@ def list_records_for_topic(
         ))
 
 
+def list_records_for_sources(
+    db_path: Path,
+    sources: list[str],
+    limit: int = 500,
+    years: list[str] | None = None,
+) -> list[sqlite3.Row]:
+    clean_sources = [source.strip() for source in sources if source.strip()]
+    if not clean_sources:
+        return []
+    placeholders = ", ".join("?" for _ in clean_sources)
+    sql = f"SELECT * FROM records WHERE source IN ({placeholders})"
+    params: list[Any] = list(clean_sources)
+    clean_years = [year.strip() for year in years or [] if year.strip()]
+    if clean_years:
+        year_placeholders = ", ".join("?" for _ in clean_years)
+        sql += f" AND year IN ({year_placeholders})"
+        params.extend(clean_years)
+    sql += " ORDER BY id"
+    if limit and limit > 0:
+        sql += " LIMIT ?"
+        params.append(limit)
+    with open_db(db_path) as conn:
+        return list(conn.execute(sql, params))
+
 def list_records_missing_annotations(
     db_path: Path = DB_PATH,
     limit: int = 20,
