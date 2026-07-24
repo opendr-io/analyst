@@ -14,8 +14,8 @@ from typing import Callable
 APP_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP_DIR))
 
-from knowledge_indexing.knowledge_config import BSIDESSF_MD, DB_PATH  # noqa: E402
-from knowledge_indexing.knowledge_imports import records_from_bsidessf_md, records_from_export  # noqa: E402
+from knowledge_indexing.knowledge_config import DB_PATH  # noqa: E402
+from knowledge_indexing.knowledge_imports import records_from_export  # noqa: E402
 
 
 @dataclass(frozen=True)
@@ -57,7 +57,6 @@ SOURCE_SPECS = [
     SourceSpec("camlis", latest("data/camlis/exports/camlis-talks-*.json")),
     SourceSpec("bsideslv", latest("ingesters/data/bsideslv/exports/bsideslv-talks-*.json")),
     SourceSpec("defcon33", fixed("youtube_summaries/defcon33/defcon33_latest.json")),
-    SourceSpec("bsidessf", lambda _root: BSIDESSF_MD if BSIDESSF_MD.exists() else None, kind="bsidessf-md"),
     SourceSpec("promptorgtfo", latest("youtube_summaries/promptorgtfo_*.json")),
     SourceSpec("unprompted2026", fixed("youtube_summaries/unprompted2026/unprompted2026_latest.json")),
 ]
@@ -91,12 +90,6 @@ def raw_json_count(path: Path) -> int | None:
 
 
 def source_expected_count(spec: SourceSpec, path: Path) -> tuple[int | None, int | None, str]:
-    if spec.kind == "bsidessf-md":
-        records = records_from_bsidessf_md(path)
-        unique = len({record.dedupe_key for record in records})
-        note = "parser unique dedupe count" if unique != len(records) else "parser count"
-        return unique, len(records), note
-
     records = records_from_export(path)
     if not records:
         return None, raw_json_count(path), "0 parser records"

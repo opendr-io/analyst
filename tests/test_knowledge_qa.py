@@ -812,6 +812,103 @@ def test_rank_relevant_summary_topics_filters_weak_generic_security_matches(tmp_
     assert [name for name, _score in ranked] == ["election security"]
 
 
+def test_rank_relevant_summary_topics_prefers_source_year_alias(monkeypatch, tmp_path):
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    source_dir = summary_dir / "sources"
+    state_dir.mkdir()
+    source_dir.mkdir(parents=True)
+    (source_dir / "blackhat.md").write_text("General Black Hat summary", encoding="utf-8")
+    (source_dir / "blackhat-2025.md").write_text("Black Hat 2025 summary", encoding="utf-8")
+    (source_dir / "blackhat-2026.md").write_text("Black Hat 2026 summary", encoding="utf-8")
+    aliases = tmp_path / "aliases.tsv"
+    aliases.write_text(
+        "\n".join(
+            [
+                "blackhat\tBlack Hat Black Hat USA BHUSA",
+                "blackhat-2025\tBlack Hat 2025 Black Hat USA 2025 BHUSA 2025",
+                "blackhat-2026\tBlack Hat 2026 Black Hat USA 2026 BHUSA 2026",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(the_analyst, "TOPIC_ROUTING_ALIASES_PATH", aliases)
+
+    ranked = rank_relevant_summary_topics(
+        "What did BHUSA 2026 say about AI security?",
+        state_dir,
+        summary_dir=summary_dir,
+        limit=3,
+    )
+
+    assert ranked[0][0] == "blackhat 2026"
+
+
+def test_rank_relevant_summary_topics_keeps_generic_source_for_generic_question(monkeypatch, tmp_path):
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    source_dir = summary_dir / "sources"
+    state_dir.mkdir()
+    source_dir.mkdir(parents=True)
+    (source_dir / "blackhat.md").write_text("General Black Hat summary", encoding="utf-8")
+    (source_dir / "blackhat-2025.md").write_text("Black Hat 2025 summary", encoding="utf-8")
+    (source_dir / "blackhat-2026.md").write_text("Black Hat 2026 summary", encoding="utf-8")
+    aliases = tmp_path / "aliases.tsv"
+    aliases.write_text(
+        "\n".join(
+            [
+                "blackhat\tBlack Hat Black Hat USA BHUSA",
+                "blackhat-2025\tBlack Hat 2025 Black Hat USA 2025 BHUSA 2025",
+                "blackhat-2026\tBlack Hat 2026 Black Hat USA 2026 BHUSA 2026",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(the_analyst, "TOPIC_ROUTING_ALIASES_PATH", aliases)
+
+    ranked = rank_relevant_summary_topics(
+        "What did Black Hat cover?",
+        state_dir,
+        summary_dir=summary_dir,
+        limit=3,
+    )
+
+    assert ranked[0][0] == "blackhat"
+
+
+def test_rank_relevant_summary_topics_routes_defcon_number_alias(monkeypatch, tmp_path):
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    source_dir = summary_dir / "sources"
+    state_dir.mkdir()
+    source_dir.mkdir(parents=True)
+    (source_dir / "defcon33.md").write_text("DEF CON 33 summary", encoding="utf-8")
+    (source_dir / "defcon34.md").write_text("DEF CON 34 summary", encoding="utf-8")
+    aliases = tmp_path / "aliases.tsv"
+    aliases.write_text(
+        "\n".join(
+            [
+                "defcon33\tDEF CON 33 DEFCON 33 DC33 DEF CON 2025",
+                "defcon34\tDEF CON 34 DEFCON 34 DC34 DEF CON 2026",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(the_analyst, "TOPIC_ROUTING_ALIASES_PATH", aliases)
+
+    ranked = rank_relevant_summary_topics(
+        "What stood out at DEF CON 34?",
+        state_dir,
+        summary_dir=summary_dir,
+        limit=2,
+    )
+
+    assert ranked[0][0] == "defcon34"
+
+
 def test_tool_answer_from_summaries_names_selected_sources(monkeypatch, tmp_path):
     state_dir = tmp_path / "knowledge"
     summary_dir = tmp_path / "summaries"

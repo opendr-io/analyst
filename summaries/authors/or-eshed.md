@@ -2,107 +2,97 @@
 
 ## Executive Summary
 
-The two available records attributed to Or Eshed are both BSidesLV 2025 PasswordsCon talks focused on password exposure risks in modern identity environments. Together, they frame password insecurity as a problem that has moved beyond traditional corporate account governance. One talk examines “hidden” identities: non-corporate, non-SSO, SaaS-related accounts that may be used for work but fall outside organizational identity provider controls and password policies [record_id:2418]. The other examines malicious or compromised browser extensions as a practical mechanism for stealing passwords and authentication data from users [record_id:2438].
+The three records attributed to Or Eshed form a compact but coherent body of security work focused on identity exposure at the boundary between users, browsers, SaaS applications, and emerging agentic systems. Two BSidesLV 2025 talks focus on password and credential risk in modern browser- and SaaS-mediated work environments: hidden non-corporate/non-SSO identities that escape organizational identity governance, and malicious browser extensions that steal passwords and authentication details [record_id:2418] [record_id:2438]. A BSidesLV 2026 talk extends the browser-centered threat model into the AI era, arguing that agentic AI browsers can become exploitable autonomous actors or “autonomous insider threats” through both AI-specific attacks and traditional web exploitation techniques [record_id:2798].
 
-Across the records, Eshed’s recurring contribution appears to be expanding the password-security threat model into under-governed or client-side spaces: identities not visible to centralized identity security systems, and browser extensions operating close to user credentials. Both talks combine threat-surface definition, technical or risk analysis, and defensive guidance. The evidence base is narrow—only two abstracts from the same event and year—but coherent: Eshed’s BSidesLV 2025 work emphasizes the gap between formal identity-security programs and the realities of SaaS usage, browser-mediated authentication, credential reuse, password sharing, and credential theft.
+Across the records, Eshed’s recurring contribution is to identify security blind spots created when user identity and browser-based workflows move outside conventional enterprise control planes. In 2025, the blind spot is unmanaged SaaS identities and compromised extensions; in 2026, it is AI-enabled browsers that no longer merely render content but take actions on behalf of users [record_id:2418] [record_id:2438] [record_id:2798]. The records suggest an evolution from password governance and credential theft toward broader browser-mediated exploitation, including prompt injection, memory poisoning, guardrail bypass, CSRF, font-based injection, and RCE in agentic browsing contexts [record_id:2798].
+
+The evidence base is limited to three conference abstract-style records, all from BSidesLV, with no slides, papers, measurements, implementation details, or post-talk artifacts included. Nevertheless, the abstracts provide enough information to identify a consistent research agenda: understanding identity and credential exposure where enterprise identity providers, security policies, endpoint controls, and traditional web assumptions do not fully apply.
 
 ## Research Landscape
 
-The available corpus consists of two conference-session abstracts from BSidesLV 2025, both tagged under PasswordsCon and both attributed to Or Eshed. They are not full papers, slide decks, or transcripts; therefore, the records provide strong evidence of topic selection and talk framing, but limited evidence about detailed empirical findings, measurements, datasets, or implementation specifics.
+The records are conference talk descriptions from BSidesLV, spanning 2025 and 2026. They appear to be presentation abstracts rather than full research papers or technical writeups. Two talks are part of the BSidesLV 2025 program and tagged with PasswordsCon, indicating an emphasis on password security and credential exposure [record_id:2418] [record_id:2438]. The third is a BSidesLV 2026 talk tagged “[un]prompted,” placing it in an AI security and prompt-injection-oriented track [record_id:2798].
 
-Both records sit at the intersection of identity security, application security, and password governance. The first record, “Cracking Hidden Identities: Understanding the Threat Surface of Hidden Identities and Protecting them Against Password Exposure,” is primarily about non-corporate and non-SSO identities that are used for work activity yet remain outside corporate identity-provider enforcement [record_id:2418]. The second, “Extending Password (in)Security to the Browser: How Malicious Browser Extensions Are Used to Steal User Passwords,” shifts the focus from identity governance gaps to browser-extension abuse as an endpoint and application-layer credential-theft vector [record_id:2438].
+The landscape is dominated by identity security, password insecurity, browser security, and application security. The 2025 records focus on human and enterprise identity management gaps: non-corporate identities used for work but unmanaged by corporate identity providers, and browser extensions that can steal credential data [record_id:2418] [record_id:2438]. The 2026 record shifts into agentic AI browser security, but it remains strongly connected to the earlier browser and identity themes because it treats browsers as action-taking intermediaries that can be exploited to compromise user and organizational security [record_id:2798].
 
-The research area represented by these talks is therefore not password cracking in the narrow sense of offline hash attacks, but broader password exposure in modern work environments. The records emphasize:
+The overall research area is not traditional password cracking in isolation. Instead, it is about the changing threat surface around credentials and identity in modern workflows. The records highlight several environmental shifts:
 
-- SaaS-driven proliferation of accounts outside corporate identity policy [record_id:2418].
-- Non-SSO and non-corporate identities as a hidden attack surface [record_id:2418].
-- Password strength, reuse, and sharing risks in unmanaged identity contexts [record_id:2418].
-- Browser extensions as an emerging vector for credential and authentication-data theft [record_id:2438].
-- Extension permissions, compromise pathways, and technical methods used to steal credentials [record_id:2438].
-- Organizational and individual defensive practices [record_id:2418; record_id:2438].
+- The rise of the “SaaS economy,” which creates non-corporate and non-SSO identities outside corporate IdP governance [record_id:2418].
+- The browser as a privileged environment where extensions may access passwords, authentication details, or user identity information [record_id:2438].
+- The transformation of browsers into AI-driven, agentic participants that can autonomously interact with web content and systems [record_id:2798].
 
-Because both records are abstracts from the same conference, they likely represent a concentrated snapshot of Eshed’s 2025 speaking agenda rather than a comprehensive author bibliography.
+Taken together, these records position Or Eshed’s work around a key question: what happens when identity-bearing user activity moves into systems that organizations do not fully inventory, govern, or constrain?
 
 ## Major Themes And Trends
 
-### 1. Password risk outside traditional identity governance
+### Hidden Identity Surfaces Outside Enterprise Governance
 
-A central theme across the records is that password security cannot be confined to accounts governed by corporate identity providers, single sign-on, or formal security policies. In the “hidden identities” talk, Eshed explicitly identifies the “SaaS economy” as producing “non-corporate and non-SSO identities” that are “not covered by corporate IdPs” [record_id:2418]. The concern is that these identities may still be used for work and may process or access sensitive corporate information, even though they fall outside conventional controls [record_id:2418].
+The strongest theme in the 2025 material is that enterprise identity programs often cover only part of the real identity surface. In the talk “Cracking Hidden Identities,” Eshed describes the rise of “non-corporate and non-SSO identities” created by the SaaS economy, emphasizing that these identities are “not covered by corporate IdPs” and are “hidden from organizational security systems” [record_id:2418]. The record frames these identities as a practical enterprise risk because they may still be used for work activity and may handle sensitive corporate information, despite being outside identity security policy and password governance [record_id:2418].
 
-This framing suggests a broader trend: enterprise identity programs may appear mature when measured through managed accounts, but the practical work environment includes identities created and used beyond those systems. The record characterizes these identities as “hidden from organizational security systems” and outside the “purview of organizational password policies and identity security posture” [record_id:2418]. That language points to a visibility and governance problem as much as a password-complexity problem.
+This theme broadens the meaning of identity security. Rather than focusing only on managed enterprise accounts, the talk asks whether unmanaged accounts used in business contexts should be treated as part of the organization’s security posture. The abstract indicates that Eshed intends to define and quantify these hidden identities, then analyze password strength, password reuse, and password sharing as specific risks [record_id:2418]. The implied trend is that SaaS decentralization has outpaced centralized identity governance.
 
-### 2. Credential exposure through unmanaged SaaS and browser ecosystems
+### Password Exposure Through Browser-Centric Attack Surfaces
 
-The two talks cover different parts of the same extended credential-exposure chain. The hidden-identities talk focuses on the account layer: identities that exist outside organizational control and may have weak, reused, or shared passwords [record_id:2418]. The browser-extension talk focuses on the client-side collection layer: extensions that can steal passwords and authentication details from users [record_id:2438].
+The second BSidesLV 2025 talk moves from unmanaged identities to browser extension compromise. “Extending Password (in)Security to the Browser” identifies malicious browser extensions as an “emerging attack vector” for stealing user identity information and passwords [record_id:2438]. The abstract promises a technical breakdown of how browser extensions steal credential data, including the permissions and methods compromised extensions invoke, the types of password and credential data that can be stolen, and live examples [record_id:2438].
 
-Together, they suggest a modern password threat surface shaped by SaaS adoption and browser-based workflows. SaaS accounts create more credential-bearing surfaces; browsers become the interface through which those credentials are entered, stored, managed, or intercepted. Browser extensions, according to the second abstract, can be “used for theft of credential data” and can steal “passwords and other authentication details” through specific permissions and methods [record_id:2438]. This complements the first talk’s concern that unmanaged accounts may be especially vulnerable to password reuse, sharing, and weak governance [record_id:2418].
+This talk complements the hidden identities talk. If hidden SaaS accounts create unmanaged credentials, malicious extensions create a browser-resident mechanism for credential theft. Both talks treat passwords not merely as secrets stored in a vault or typed into a login page, but as artifacts exposed across workflows, browser features, application integrations, and user behavior [record_id:2418] [record_id:2438].
 
-### 3. Visibility gaps as a root cause
+A recurring concern is that existing organizational controls may not see the full risk. Corporate identity providers may not govern non-SSO accounts [record_id:2418], while endpoint or browser management may not adequately prevent extension-based credential theft [record_id:2438]. The records therefore share a common structure: identify a modern convenience or productivity pattern, show how it escapes standard controls, then propose security practices to reduce exposure.
 
-Both talks implicitly or explicitly address visibility. Hidden identities are a visibility problem because organizations may not know the accounts exist or may not enforce policy over them [record_id:2418]. Malicious browser extensions are also a visibility and control problem because they may become compromised, request or abuse permissions, and operate in the browser context where credentials are handled [record_id:2438].
+### The Browser Evolves From Passive Surface to Agentic Actor
 
-In the hidden-identities abstract, the accounts are described as “hidden from organizational security systems” [record_id:2418]. In the browser-extension abstract, the session promises to analyze “what permissions and methods compromised extensions invoke to steal passwords and other authentication details” [record_id:2438]. Both records therefore point toward the need to discover and monitor areas of identity risk that may sit outside standard identity and access management dashboards.
+The 2026 record marks a notable shift from conventional browser security to AI-enabled browser security. In “Abusing Agentic AI Browsers,” Eshed argues that AI browsers are transforming the browser “from a passive observer of the web into an active, agentic participant” [record_id:2798]. The key security claim is that this shift can turn AI browsers into “autonomous insider threats” when exploited [record_id:2798].
 
-### 4. Password reuse, sharing, and strength remain relevant, but in new contexts
+This is an important trend because it reframes the browser not just as an execution environment for web content or extensions, but as an actor capable of making decisions and taking actions. The record says the talk will examine building blocks and architectures for “LLM, SLM, and MCP-based deployments,” then demonstrate how each can be exploited and compromised [record_id:2798]. This suggests a systematic approach to comparing different agentic browser architectures and their respective attack surfaces.
 
-The hidden-identities record directly names password strength, password reuse, and password sharing as specific risks [record_id:2418]. The significance is not merely that these risks exist, but that they apply to accounts outside the reach of corporate enforcement. Even if an organization has password rules, SSO, MFA, or identity-security posture management for official accounts, those protections may not apply to non-corporate SaaS identities [record_id:2418].
+The talk also links AI-native attacks with traditional web exploitation. The abstract lists prompt injection, bending guardrails, and AI memory poisoning alongside CSRF, font-based injections, and RCEs “that have been given new life by agentic browsers” [record_id:2798]. This creates a bridge between AI security and established application/browser exploitation: agentic browsing does not replace traditional web risk, but amplifies or recontextualizes it.
 
-The browser-extension record does not emphasize reuse or strength directly, but it does describe credential theft from the browser, which can defeat even relatively strong passwords if credentials or authentication details are captured at the point of use [record_id:2438]. This broadens the discussion from “are passwords strong enough?” to “where are passwords used, stored, entered, synchronized, exposed, or intercepted?”
+### Continuity Between Password Security and AI Browser Exploitation
 
-### 5. Defensive guidance is a recurring endpoint
+Although the 2026 talk appears to belong to a different AI security track, it fits the broader pattern of Eshed’s records. All three talks concern trust boundaries around user-mediated access. In the 2025 password talks, the concern is that credentials and identities are exposed through unmanaged SaaS accounts or compromised browser extensions [record_id:2418] [record_id:2438]. In the 2026 AI browser talk, the concern is that agentic browsers may act with user authority and therefore become exploitable intermediaries [record_id:2798].
 
-Both abstracts conclude with protective methods or best practices. The hidden-identities talk promises “methods and best practices on how to secure” non-corporate and non-SSO identities [record_id:2418]. The browser-extension talk likewise promises “best practices and methods” for how individuals and organizations should protect themselves against malicious-extension tactics [record_id:2438].
+The trend across the records is a widening of the identity threat surface:
 
-The records do not provide the actual recommendations in detail, but the repetition is notable: Eshed’s talks appear structured to move from threat-surface definition, to risk or technical analysis, to practical defense. For downstream researchers, this suggests that full slides or recordings, if available, may contain actionable controls around SaaS identity discovery, password policy extension, extension permission review, browser hardening, and credential-theft monitoring.
+1. Accounts outside centralized identity governance create hidden password risks [record_id:2418].
+2. Browser extensions can capture identity and authentication data from user browsing activity [record_id:2438].
+3. AI browsers can be manipulated into autonomous action through both AI-specific and traditional web attacks [record_id:2798].
+
+This progression suggests an authorial focus on how security assumptions fail when user access is mediated by increasingly complex browser and SaaS ecosystems.
 
 ## Methods, Tools, And Approaches Discussed
 
-The records are abstracts, so they summarize intended content rather than giving full technical procedures. Still, several methods and approaches are identifiable.
+The records do not provide implementation details, code, datasets, or named tools, but they do describe several methodological approaches.
 
-### Defining and quantifying hidden identities
+In the hidden identities talk, Eshed proposes to “define” and “quantify” non-corporate and non-SSO identities, then analyze their implications for password security and exploitation [record_id:2418]. The stated analytical dimensions include password strength, password reuse, and password sharing [record_id:2418]. This implies an approach grounded in identity inventory, measurement, and risk characterization. The talk also promises “methods and best practices” for securing these identities, though the abstract does not enumerate them [record_id:2418].
 
-The hidden-identities talk states that it will “define these identities” and “quantify them” [record_id:2418]. This implies an approach that begins with taxonomy and measurement: distinguishing corporate/SSO-managed identities from non-corporate/non-SSO identities, then estimating their prevalence or risk exposure. The abstract does not reveal the data source or methodology for quantification, but the inclusion of quantification suggests the talk may contain empirical or semi-empirical analysis rather than purely conceptual warning [record_id:2418].
+In the browser extension talk, the method is more technical and attack-analysis oriented. The session will break down how browser extensions can be used for credential theft, analyze the permissions and methods used by compromised extensions, examine how extensions become compromised, and explore the kinds of password and credential data that can be stolen [record_id:2438]. The inclusion of “live examples” indicates a demonstrative format, likely showing extension behavior or credential access patterns in practice, although the record does not specify exact examples or browser APIs [record_id:2438].
 
-### Risk analysis of password strength, reuse, and sharing
+In the AI browser talk, the approach is explicitly exploit-based and architecture-aware. Eshed plans to examine the building blocks of AI browsers and key architectures for “LLM, SLM, and MCP-based deployments,” then systematically demonstrate exploitation and compromise pathways for each [record_id:2798]. The listed attack categories include:
 
-The same talk promises to “dive into specific risks such as password strength, password re-use, and password sharing” [record_id:2418]. These are classic password-security categories, but the method is applied to hidden SaaS or non-SSO identities. A likely analytical structure is to examine how unmanaged identities differ from managed corporate accounts in password policy enforcement, credential reuse likelihood, and shared-account practices. The record does not provide findings or metrics, so downstream agents should seek the full talk materials before making quantitative claims.
+- AI-specific attacks: prompt injection, guardrail bending, and AI memory poisoning [record_id:2798].
+- Traditional exploitation pathways revived or intensified by agentic browsers: CSRF, font-based injections, and RCEs [record_id:2798].
 
-### Technical analysis of browser-extension permissions
+The record’s phrase “exploit-based approach” and its emphasis on “real-life exploitation pathways” suggest a practical offensive-security framing rather than a purely conceptual AI safety discussion [record_id:2798]. It also suggests that the talk treats agentic AI browser security as a hybrid domain combining LLM threat modeling, browser architecture, web application security, and exploit chains.
 
-The browser-extension talk explicitly promises “a technical analysis of what permissions and methods compromised extensions invoke to steal passwords and other authentication details” [record_id:2438]. This indicates a method centered on extension permission models and abuse patterns. Browser extensions often operate through declared permissions, content scripts, background scripts, access to web pages, or API capabilities; however, those details are not specified in the record, so they should not be attributed to Eshed without additional evidence. What can be safely said is that the talk focuses on permissions and methods used by compromised extensions for credential theft [record_id:2438].
+Across the records, the repeated workflow is:
 
-### Compromise-pathway analysis
-
-The browser-extension abstract says the session will discuss “how they become compromised” [record_id:2438]. This suggests a lifecycle view of malicious extensions: not only purpose-built malicious add-ons, but also benign extensions that become compromised. The record does not detail whether compromise occurs through developer account takeover, supply-chain acquisition, malicious updates, dependency abuse, or other means. The abstract supports only the broader claim that extension compromise pathways are part of the presentation [record_id:2438].
-
-### Live examples and practical demonstrations
-
-The browser-extension talk states that it will “show live examples” [record_id:2438]. This is important evidence about the talk format: it likely includes demonstrations of credential theft or extension behavior, not merely conceptual discussion. The abstract does not identify the extensions, browsers, code samples, or test environment. Still, live examples make this record the more explicitly technical and demonstrative of the two [record_id:2438].
-
-### Best-practice-oriented mitigation
-
-Both talks include a defensive component. The hidden-identities talk offers “methods and best practices” for securing hidden identities [record_id:2418]. The browser-extension talk discusses best practices for individuals and organizations to protect against malicious-extension tactics [record_id:2438]. The abstracts do not enumerate controls, but they imply that Eshed’s work is aimed at practitioner audiences seeking mitigations, not solely at academic threat characterization.
+- Identify a newly important or overlooked identity/browser surface.
+- Explain why existing organizational controls may not cover it.
+- Analyze concrete mechanisms of exposure or compromise.
+- Demonstrate or quantify the risk where possible.
+- Offer best practices or defensive methods [record_id:2418] [record_id:2438] [record_id:2798].
 
 ## Notable Talks, Records, And Evidence
 
-### “Cracking Hidden Identities” and the unmanaged identity problem
+The most representative record for Eshed’s password and identity governance work is “Cracking Hidden Identities: Understanding the Threat Surface of Hidden Identities and Protecting them Against Password Exposure” from BSidesLV 2025 [record_id:2418]. Its importance lies in its framing of non-corporate and non-SSO identities as a hidden enterprise threat surface. The abstract explicitly links SaaS adoption to identities that are outside corporate IdPs, outside password policies, and outside identity security posture, yet still used for work and sensitive data handling [record_id:2418]. This is the clearest record for researchers interested in unmanaged identities, SaaS sprawl, password reuse, password sharing, and enterprise identity governance gaps.
 
-“Cracking Hidden Identities: Understanding the Threat Surface of Hidden Identities and Protecting them Against Password Exposure” is the clearest record for Eshed’s thinking on identity governance gaps caused by SaaS adoption [record_id:2418]. Its central claim is that the rise of the “SaaS economy” has led to more non-corporate and non-SSO identities, which are not covered by corporate identity providers and therefore may not be governed by corporate password policies [record_id:2418].
+The most representative record for Eshed’s browser credential-theft work is “Extending Password (in)Security to the Browser: How Malicious Browser Extensions Are Used to Steal User Passwords,” also from BSidesLV 2025 [record_id:2438]. It matters because it identifies malicious browser extensions as an emerging vector for theft of passwords and user identity information, and it promises technical analysis of permissions, methods, compromise routes, stolen credential types, and live examples [record_id:2438]. For downstream researchers, this record is the strongest evidence that Eshed’s work includes browser extension security and credential exfiltration mechanisms.
 
-This talk matters because it reframes password exposure as an organizational blind spot. The abstract argues that these identities are often used for work activity and may handle sensitive corporate information, even though they are outside organizational identity-security systems [record_id:2418]. It also identifies concrete risk categories: password strength, reuse, and sharing [record_id:2418]. For downstream research agents, this record is the primary evidence for Eshed’s contribution around “hidden identities” and SaaS-era password governance.
+The most forward-looking record is “Abusing Agentic AI Browsers: An Exploit-Based Approach” from BSidesLV 2026 [record_id:2798]. It expands the browser-security theme into AI security by treating agentic AI browsers as systems that can be exploited and compromised. The record is notable for combining AI-specific attack vectors—prompt injection, guardrail bending, AI memory poisoning—with traditional exploitation pathways such as CSRF, font-based injections, and RCE [record_id:2798]. It is also the only record that mentions AI browser architectures, specifically LLM, SLM, and MCP-based deployments [record_id:2798].
 
-The evidence strength is moderate for topic and framing, but weak for details. The abstract says the talk will define and quantify hidden identities, but it does not provide the definitions, quantities, sample population, or measurement technique [record_id:2418]. Any detailed claims about prevalence or severity require the full talk.
-
-### “Extending Password (in)Security to the Browser” and browser-extension credential theft
-
-“Extending Password (in)Security to the Browser: How Malicious Browser Extensions Are Used to Steal User Passwords” is the more technical of the two records [record_id:2438]. It presents malicious browser extensions as an “emerging attack vector” for stealing identity information and passwords [record_id:2438]. The abstract promises a detailed breakdown of extension-based credential theft, including the permissions and methods used by compromised extensions, the types of password and credential data that can be stolen, and live examples [record_id:2438].
-
-This talk matters because it connects password security to browser extension ecosystems and endpoint/browser security. It moves the password discussion from policy and governance into the browser execution environment, where extensions may be able to observe or manipulate authentication flows [record_id:2438]. It also emphasizes both individual and organizational defense, suggesting relevance for enterprise browser management, extension allowlisting or monitoring, and user-level hygiene, though the exact controls are not specified in the abstract [record_id:2438].
-
-The evidence strength is strong for identifying the subject of the talk and the kinds of technical analysis promised, but weak for any specific implementation details. The record does not list actual permissions, attack code, examples, browsers, extension stores, or mitigations [record_id:2438].
+Together, these three talks show a progression from password exposure in unmanaged identity contexts, to browser-mediated credential theft, to AI browser exploitation. The evidence is strong for identifying the topics Eshed presents on, but weaker for evaluating empirical results, novelty, or technical validity because the records are abstracts rather than full artifacts.
 
 ## Gaps, Limits, And Open Questions
 
-The records form a coherent but very small corpus. Several important limitations remain.
+The main limitation is that the corpus contains only three records, all conference abstracts. There are no transcripts, slide decks, videos, code repositories, datasets, measurement results, or post-event writeups included. As a result, the records reveal what the talks claim to cover, but not what evidence was ultimately presented.
 
-First, both records are abstracts from BSidesLV 2025, not full transcripts or technical papers. They indicate what the talks planned to cover but do not supply the actual findings, measurements, examples, or recommendations. For the hidden-identities talk, the abstract says Eshed will “define” and “
+For the hidden identities talk, important unanswered questions include how non-corporate and non-SSO identities are detected, what data sources are used to quantify them, how password strength or reuse is measured, and what defensive controls are recommended beyond general “methods and best practices” [record_id:2418].

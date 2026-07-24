@@ -49,6 +49,7 @@ class TopicPaths:
     audit: Path
     prompt_input: Path
     manifest: Path
+    validation: Path
 
 
 @dataclass(frozen=True)
@@ -139,7 +140,7 @@ def resolve_summary_dir(path: Path) -> Path:
 def group_summary_dir(summary_dir: Path, group_by: str) -> Path:
     if group_by == "topic":
         return summary_dir / "topics"
-    if group_by == "source":
+    if group_by in {"source", "source-year"}:
         return summary_dir / "sources"
     if group_by == "author":
         return summary_dir / "authors"
@@ -149,7 +150,7 @@ def group_summary_dir(summary_dir: Path, group_by: str) -> Path:
 def group_artifact_dir(summary_dir: Path, group_by: str) -> Path:
     if group_by == "topic":
         return summary_dir / "artifacts" / "topics"
-    if group_by == "source":
+    if group_by in {"source", "source-year"}:
         return summary_dir / "artifacts" / "sources"
     if group_by == "author":
         return summary_dir / "artifacts" / "authors"
@@ -165,6 +166,7 @@ def grouped_paths(summary_dir: Path, group: SummaryGroup) -> TopicPaths:
         audit=artifact_base / f"{slug}.audit.json",
         prompt_input=artifact_base / f"{slug}.prompt-input.md",
         manifest=artifact_base / f"{slug}.manifest.json",
+        validation=artifact_base / f"{slug}.validation.json",
     )
 
 
@@ -189,7 +191,7 @@ def archive_existing(
     archive_dir = archive_root / timestamp
     containment_root = summary_dir or archive_root.parent.parent.parent
     _require_path_within(archive_dir, containment_root, "archive directory")
-    files = [paths.audit, paths.prompt_input, paths.manifest]
+    files = [paths.audit, paths.prompt_input, paths.manifest, paths.validation]
     if include_summary:
         files.insert(0, paths.summary)
     for path in files:
@@ -294,6 +296,24 @@ def list_sources_for_summary(db_path: Path, min_records: int = 1) -> list[str]:
         ]
 
 
+def list_source_years_for_summary(db_path: Path, min_records: int = 1) -> list[str]:
+    with open_db(db_path) as conn:
+        return [
+            f"{row['source']}:{row['year']}"
+            for row in conn.execute(
+                """
+                SELECT source, year, COUNT(*) AS records
+                FROM records
+                WHERE trim(COALESCE(year, '')) != ''
+                GROUP BY source, year
+                HAVING records >= ?
+                ORDER BY source, year
+                """,
+                (max(1, min_records),),
+            )
+        ]
+
+
 def list_authors_for_summary(db_path: Path, min_records: int = 1) -> list[str]:
     with open_db(db_path) as conn:
         return [
@@ -366,6 +386,41 @@ def load_source_rows(db_path: Path, source: str) -> list[sqlite3.Row]:
                 ORDER BY records.id
                 """,
                 (source,),
+            )
+        )
+
+
+def parse_source_year(value: str) -> tuple[str, str]:
+    if ":" in value:
+        source, year = value.split(":", 1)
+    elif "/" in value:
+        source, year = value.rsplit("/", 1)
+    elif "-" in value:
+        source, year = value.rsplit("-", 1)
+    else:
+        raise ValueError(f"source-year must be SOURCE:YEAR, SOURCE/YEAR, or SOURCE-YEAR: {value!r}")
+    source = source.strip()
+    year = year.strip()
+    if not source or not re.fullmatch(r"\d{4}", year):
+        raise ValueError(f"source-year must include a source and 4-digit year: {value!r}")
+    return source, year
+
+
+def source_year_name(source: str, year: str) -> str:
+    return f"{source}-{year}"
+
+
+def load_source_year_rows(db_path: Path, source: str, year: str) -> list[sqlite3.Row]:
+    with open_db(db_path) as conn:
+        return list(
+            conn.execute(
+                _record_select_sql()
+                + """
+                WHERE records.source = ?
+                  AND records.year = ?
+                ORDER BY records.id
+                """,
+                (source, year),
             )
         )
 
@@ -527,6 +582,19 @@ def make_summary_group(db_path: Path, group_by: str, name: str) -> SummaryGroup:
                 "summarizing the talks, posts, presentations, and themes present in that source."
             ),
         )
+    if group_by == "source-year":
+        source, year = parse_source_year(name)
+        canonical_name = source_year_name(source, year)
+        return SummaryGroup(
+            group_by="source-year",
+            name=canonical_name,
+            label=f"Source: {source} ({year})",
+            query=f"All records imported from source {source} for year {year}.",
+            description=(
+                f"Research report over records from source {source} in {year}, "
+                "summarizing the talks, presentations, and themes present in that conference year."
+            ),
+        )
     if group_by == "author":
         return SummaryGroup(
             group_by="author",
@@ -546,6 +614,9 @@ def load_group_rows(db_path: Path, group: SummaryGroup) -> list[sqlite3.Row]:
         return load_topic_rows(db_path, group.name)
     if group.group_by == "source":
         return load_source_rows(db_path, group.name)
+    if group.group_by == "source-year":
+        source, year = parse_source_year(group.name)
+        return load_source_year_rows(db_path, source, year)
     if group.group_by == "author":
         return load_author_rows(db_path, group.name)
     raise ValueError(f"unknown group_by: {group.group_by!r}")
@@ -747,6 +818,156 @@ def print_topic_list(topics: list[str]) -> None:
     print(f"topics: {len(topics)}")
 
 
+REQUIRED_SUMMARY_SECTIONS = [
+    "Executive Summary",
+    "Research Landscape",
+    "Major Themes And Trends",
+    "Methods, Tools, And Approaches Discussed",
+    "Notable Talks, Records, And Evidence",
+    "Gaps, Limits, And Open Questions",
+    "Coverage And Evidence Notes",
+]
+
+FORBIDDEN_SUMMARY_SECTIONS = [
+    "Subtopic Index",
+    "Tool And Project Index",
+    "Technique And Method Index",
+    "Threat / Risk / Use Case Index",
+    "People And Organizations Index",
+    "Question Routing Hints",
+]
+
+
+def _heading_present(markdown: str, heading: str) -> bool:
+    pattern = rf"(?im)^##+\s+{re.escape(heading)}\s*$"
+    return re.search(pattern, markdown) is not None
+
+
+def _summary_validation_status(errors: list[str], warnings: list[str]) -> str:
+    if errors:
+        return "fail"
+    if warnings:
+        return "pass_with_warnings"
+    return "pass"
+
+
+def validate_summary_group(summary_dir: Path, group: SummaryGroup, write: bool = True) -> dict[str, Any]:
+    paths = grouped_paths(summary_dir, group)
+    errors: list[str] = []
+    warnings: list[str] = []
+    audit = read_json_file(paths.audit)
+    manifest = read_json_file(paths.manifest)
+    summary = ""
+    prompt = ""
+
+    if not paths.summary.exists():
+        errors.append("summary file missing")
+    else:
+        summary = paths.summary.read_text(encoding="utf-8")
+    if not audit:
+        errors.append("audit file missing or invalid")
+    if not manifest:
+        errors.append("manifest file missing or invalid")
+    if paths.prompt_input.exists():
+        prompt = paths.prompt_input.read_text(encoding="utf-8")
+    else:
+        warnings.append("prompt input artifact missing")
+
+    expected_ids = [int(record_id) for record_id in audit.get("expected_record_ids", []) if str(record_id).isdigit()]
+    output_ids = extract_record_ids(summary)
+    output_check = compare_ids(expected_ids, output_ids) if expected_ids else {
+        "missing": [],
+        "unexpected": [],
+        "duplicates": [],
+        "unique_observed": sorted(set(output_ids)),
+        "exact": not output_ids,
+        "all_expected_present": True,
+    }
+    if expected_ids and output_check["missing"]:
+        errors.append(f"missing output record ids: {output_check['missing']}")
+    if output_check["unexpected"]:
+        errors.append(f"unexpected output record ids: {output_check['unexpected']}")
+
+    prompt_ids = extract_record_ids(prompt) if prompt else []
+    prompt_check = compare_ids(expected_ids, prompt_ids) if expected_ids and prompt else {}
+    if prompt_check and not prompt_check["exact"]:
+        errors.append(
+            "prompt record ID coverage mismatch "
+            f"(missing={prompt_check['missing']}, unexpected={prompt_check['unexpected']}, duplicates={prompt_check['duplicates']})"
+        )
+
+    summary_hash = text_hash(summary) if summary else ""
+    for label, expected_hash in [
+        ("audit", audit.get("summary_hash")),
+        ("manifest", manifest.get("summary_hash")),
+    ]:
+        if expected_hash and expected_hash != summary_hash:
+            errors.append(f"{label} summary_hash does not match summary file")
+
+    prompt_hash = text_hash(prompt) if prompt else ""
+    manifest_prompt_hash = manifest.get("prompt_hash")
+    if prompt and manifest_prompt_hash and manifest_prompt_hash != prompt_hash:
+        errors.append("manifest prompt_hash does not match prompt input artifact")
+
+    missing_sections = [section for section in REQUIRED_SUMMARY_SECTIONS if not _heading_present(summary, section)]
+    if missing_sections:
+        errors.append(f"missing required sections: {missing_sections}")
+    forbidden_sections = [section for section in FORBIDDEN_SUMMARY_SECTIONS if _heading_present(summary, section)]
+    if forbidden_sections:
+        errors.append(f"forbidden index sections present: {forbidden_sections}")
+
+    output_tokens = estimate_tokens(summary) if summary else 0
+    if expected_ids and output_tokens < min(3000, max(800, len(expected_ids) * 20)):
+        warnings.append("summary is unusually short for the record count")
+
+    validation = {
+        "group_by": group.group_by,
+        "group_name": group.name,
+        "group_label": group.label,
+        "validation_status": _summary_validation_status(errors, warnings),
+        "validated_at": utc_now_iso(),
+        "summary_file_path": str(paths.summary),
+        "audit_file_path": str(paths.audit),
+        "manifest_file_path": str(paths.manifest),
+        "prompt_input_file_path": str(paths.prompt_input),
+        "validation_file_path": str(paths.validation),
+        "errors": errors,
+        "warnings": warnings,
+        "expected_record_count": len(expected_ids),
+        "expected_record_ids": expected_ids,
+        "record_ids_found_in_summary": sorted(set(output_ids)),
+        "record_id_occurrences_in_summary": len(output_ids),
+        "output_id_check": output_check,
+        "prompt_id_check": prompt_check,
+        "missing_required_sections": missing_sections,
+        "forbidden_sections_present": forbidden_sections,
+        "summary_hash": summary_hash,
+        "summary_hash_matches_audit": not audit.get("summary_hash") or audit.get("summary_hash") == summary_hash,
+        "summary_hash_matches_manifest": not manifest.get("summary_hash") or manifest.get("summary_hash") == summary_hash,
+        "prompt_hash": prompt_hash,
+        "prompt_hash_matches_manifest": not prompt or not manifest_prompt_hash or manifest_prompt_hash == prompt_hash,
+        "output_token_estimate": output_tokens,
+        "output_character_count": len(summary),
+    }
+    if write:
+        paths.validation.parent.mkdir(parents=True, exist_ok=True)
+        write_json(paths.validation, validation)
+    return validation
+
+
+def print_validation_result(validation: dict[str, Any]) -> None:
+    print(f"  validation_status: {validation['validation_status']}")
+    print(f"  records: {validation['expected_record_count']}")
+    print(f"  output_token_estimate: {validation['output_token_estimate']}")
+    print(f"  errors: {len(validation['errors'])}")
+    print(f"  warnings: {len(validation['warnings'])}")
+    print(f"  validation: {validation['validation_file_path']}")
+    for error in validation["errors"]:
+        print(f"    error: {error}")
+    for warning in validation["warnings"]:
+        print(f"    warning: {warning}")
+
+
 def summarize_group(
     group: SummaryGroup,
     db_path: Path,
@@ -901,10 +1122,22 @@ def summarize_group(
 
     write_json(paths.audit, audit)
     write_json(paths.manifest, manifest)
+    validation = validate_summary_group(summary_dir, group, write=True)
+    audit["validation_status"] = validation["validation_status"]
+    audit["validation_file_path"] = validation["validation_file_path"]
+    manifest["validation_status"] = validation["validation_status"]
+    manifest["validation_file_path"] = validation["validation_file_path"]
+    write_json(paths.audit, audit)
+    write_json(paths.manifest, manifest)
     if not complete:
         raise ValueError(
             f"summary incomplete for {group.group_by} {group.name!r}; missing={output_check['missing']} "
             f"unexpected={output_check['unexpected']}; summary file requires review"
+        )
+    if validation["validation_status"] == "fail":
+        raise ValueError(
+            f"summary validation failed for {group.group_by} {group.name!r}; "
+            f"errors={validation['errors']}; summary file requires review"
         )
     return audit
 
@@ -929,7 +1162,7 @@ def summarize_topic(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate spec-compliant summaries grouped by topic, source, or author."
+        description="Generate spec-compliant summaries grouped by topic, source, source-year, or author."
     )
     parser.add_argument("--db", type=Path, default=ki.DB_PATH, help="SQLite database path.")
     parser.add_argument(
@@ -941,9 +1174,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "such as summaries-validation are placed under summaries/."
         ),
     )
-    parser.add_argument("--group-by", choices=["topic", "source", "author"], default="topic", help="Record grouping to summarize.")
+    parser.add_argument("--group-by", choices=["topic", "source", "source-year", "author"], default="topic", help="Record grouping to summarize.")
     parser.add_argument("--topic", action="append", default=[], help="Topic to summarize. Can be passed more than once.")
     parser.add_argument("--source", action="append", default=[], help="Source to summarize. Can be passed more than once.")
+    parser.add_argument("--source-year", action="append", default=[], help="Source/year to summarize as SOURCE:YEAR. Can be passed more than once.")
     parser.add_argument("--author", action="append", default=[], help="Author to summarize. Can be passed more than once.")
     parser.add_argument("--all", action="store_true", help="Summarize every group with records.")
     parser.add_argument(
@@ -965,6 +1199,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--list-topics",
         action="store_true",
         help="List topics that have classified records and can be summarized by --all.",
+    )
+    parser.add_argument(
+        "--validate-summaries",
+        action="store_true",
+        help="Validate selected existing summaries without regenerating them.",
     )
     parser.add_argument(
         "--min-records",
@@ -991,6 +1230,9 @@ def groups_from_args(args: argparse.Namespace) -> list[SummaryGroup]:
     elif args.group_by == "source":
         minimum = 1 if args.min_records is None else args.min_records
         names = list_sources_for_summary(args.db, min_records=minimum) if args.all else args.source
+    elif args.group_by == "source-year":
+        minimum = 1 if args.min_records is None else args.min_records
+        names = list_source_years_for_summary(args.db, min_records=minimum) if args.all else args.source_year
     elif args.group_by == "author":
         minimum = DEFAULT_AUTHOR_MIN_RECORDS if args.min_records is None else args.min_records
         names = list_authors_for_summary(args.db, min_records=minimum) if args.all else args.author
@@ -1016,12 +1258,16 @@ def normalized_parallelism(value: int) -> int:
 
 def print_summary_result(audit: dict[str, Any], dry_run: bool) -> None:
     print(f"  status: {audit['summary_status']}")
+    if audit.get("validation_status"):
+        print(f"  validation_status: {audit['validation_status']}")
     print(f"  records: {audit['expected_record_count']}")
     print(f"  estimated_input_tokens: {audit['estimated_input_tokens']}")
     print(f"  output_max_tokens: {audit['output_max_tokens']}")
     print(f"  artifacts_written: {audit['artifacts_written']}")
     print(f"  prompt: {audit['summary_input_artifact_path']}")
     print(f"  audit: {audit['audit_file_path']}")
+    if audit.get("validation_file_path"):
+        print(f"  validation: {audit['validation_file_path']}")
     if not dry_run:
         print(f"  summary: {audit['summary_file_path']}")
 
@@ -1053,6 +1299,21 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     groups = groups_from_args(args)
+    if args.validate_summaries:
+        if not groups:
+            flag = {"topic": "--topic", "source": "--source", "source-year": "--source-year", "author": "--author"}[args.group_by]
+            print(f"specify {flag} VALUE or --all", file=sys.stderr)
+            return 2
+        failed = 0
+        for group in groups:
+            print(f"\n{group.group_by}: {group.name}")
+            validation = validate_summary_group(args.summary_dir, group, write=True)
+            print_validation_result(validation)
+            if validation["validation_status"] == "fail":
+                failed += 1
+        print(f"\nvalidated: {len(groups)}")
+        print(f"failed: {failed}")
+        return 1 if failed else 0
     if args.list_missing:
         missing, _existing = filter_existing_groups(args.summary_dir, groups)
         for group in missing:
@@ -1068,7 +1329,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"skipped_existing: {len(skipped_existing)}")
             print("no summaries to generate")
             return 0
-        flag = {"topic": "--topic", "source": "--source", "author": "--author"}[args.group_by]
+        flag = {"topic": "--topic", "source": "--source", "source-year": "--source-year", "author": "--author"}[args.group_by]
         print(f"specify {flag} VALUE or --all", file=sys.stderr)
         return 2
 

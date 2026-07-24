@@ -2,146 +2,92 @@
 
 ## Executive Summary
 
-The two records attributed to Tod Beardsley center on vulnerability governance, vulnerability prioritization, and the institutional systems used to decide which software flaws matter most. They are both 2025 conference records and both deal with the problem of turning vulnerability information into actionable decisions. One record is a Black Hat USA briefing focused on the practical and conceptual limits of vulnerability scoring systems such as CVSS, EPSS, and SSVC [record_id:64]. The other is a BSidesLV panel-style session on the future of the CVE Program amid funding, governance, fragmentation, and policy challenges [record_id:2571].
+The three records attributed to Tod Beardsley cluster tightly around vulnerability governance, vulnerability intelligence infrastructure, and the practical problem of turning vulnerability information into decisions. Across the records, Beardsley appears as a contributor to discussions about how the security ecosystem scores, prioritizes, names, funds, governs, and debates vulnerabilities.
 
-Collectively, the records portray Beardsley’s contribution in this dataset as a critical, governance-aware voice in vulnerability management. The emphasis is not on exploit development or low-level technical research, but on the systems that mediate vulnerability knowledge: scoring frameworks, advisory shortcuts, vulnerability databases, institutional funding, policymaker communication, and ecosystem trust. The strongest recurring theme is skepticism toward supposedly objective vulnerability infrastructure. The records ask whether scoring and cataloging mechanisms genuinely improve defender decisions, whether they are sustainable, and how they should evolve under political, operational, and international pressure [record_id:64] [record_id:2571].
+The strongest theme is skepticism toward overly mechanical vulnerability prioritization. In the Black Hat 2025 talk “Vulnerability Haruspicy,” Beardsley frames CVSS, EPSS, SSVC, KEV lists, vendor advisories, and practitioner judgment as imperfect tools that defenders use to distinguish urgent vulnerabilities from lower-priority ones, while questioning whether these models actually improve decisions or merely rationalize decisions teams already wanted to make [record_id:64]. The other two records situate Beardsley in public community discussions about the CVE Program: its future governance, funding pressures, relationship to the U.S. National Vulnerability Database, the emergence of the EU Vulnerability Database, and how policymakers should understand the program’s importance [record_id:2571]. A follow-on “AMA” format continues that CVE-focused conversation by explicitly inviting open audience questions and discussion after a prior CVE panel ran out of time [record_id:2732].
 
-Because the corpus contains only two records, the evidence base is narrow. Still, the two records are thematically coherent: both concern how security teams and broader institutions classify, prioritize, and govern vulnerability information.
+Collectively, the records suggest Beardsley’s represented contribution is not a narrow technical exploit-development focus, but rather a public, governance-aware, practitioner-oriented view of vulnerability management: how vulnerability data systems are maintained, how they influence real-world security operations, and how community institutions such as CVE should adapt under political, funding, and operational pressure.
 
 ## Research Landscape
 
-The dataset consists of two 2025 conference-session records:
+The record set is small: three conference-session records, all from 2025–2026 event contexts, with no long-form articles, slides, transcripts, code repositories, or post-event materials included. The sources are Black Hat and BSidesLV, indicating that the evidence base is drawn from public security conference programming rather than from publications or technical artifacts.
 
-- A Black Hat USA briefing titled “Vulnerability Haruspicy: Picking Out Risk Signals from Scoring System Entrails,” attributed to Tod Beardsley [record_id:64].
-- A BSidesLV 2025 session titled “What Should CVE Be When It Grows Up?,” attributed to multiple speakers including Tod Beardsley [record_id:2571].
+The records divide into two related areas:
 
-The landscape is therefore dominated by public conference abstracts rather than full papers, transcripts, slide decks, tools, code repositories, or empirical studies. The records provide session framing and research questions, but not detailed results, experimental data, or final conclusions. They are best read as evidence of topics Beardsley was associated with in 2025, not as complete documentation of his positions.
+1. **Vulnerability prioritization and risk scoring.**  
+   The Black Hat 2025 briefing “Vulnerability Haruspicy: Picking Out Risk Signals from Scoring System Entrails” focuses on vulnerability scoring and prioritization frameworks. It explicitly names CVSS, EPSS, SSVC, KEV lists, vendor advisories, and “lived experience” as signals defenders use in vulnerability risk management [record_id:64]. This is the only solo-authored record in the set and appears to be the most directly attributable to Tod Beardsley as an individual speaker.
 
-The broader research area is vulnerability management and governance. The Black Hat record addresses the defender-facing challenge of making risk decisions from scoring systems and signals such as CVSS, EPSS, SSVC, KEV lists, vendor advisories, and practitioner experience [record_id:64]. The BSidesLV record shifts from prioritization mechanisms to ecosystem infrastructure, examining the CVE Program, the US National Vulnerability Database, the EU Vulnerability Database, congressional attention, and possible new governance models [record_id:2571].
+2. **CVE governance and ecosystem sustainability.**  
+   The two BSidesLV records are panel or group-format sessions involving Beardsley and other named participants. “What Should CVE Be When It Grows Up?” frames the CVE Program as a foundational cybersecurity institution that has served for more than a quarter century, but one now facing funding challenges, governance questions, policy scrutiny, and potential ecosystem fragmentation [record_id:2571]. “I am CVE, AMA!” appears to continue that discussion in a more interactive audience-question format, explicitly referencing a prior BSidesLV CVE panel that ran out of time for audience questions [record_id:2732].
 
-Together, these records sit at the intersection of:
-
-- Vulnerability intelligence.
-- Risk scoring and prioritization.
-- Security operations decision-making.
-- Public vulnerability infrastructure.
-- Policy and governance.
-- Sustainability and funding of shared cybersecurity resources.
-
-The records do not suggest a focus on one narrow technology stack. Instead, they point to high-level security infrastructure: the labels, scores, identifiers, databases, and institutional processes that defenders rely on to decide what to fix.
+The research landscape is therefore governance-heavy and vulnerability-management-heavy. There is little evidence here of product-specific security research, malware analysis, offensive tradecraft, reverse engineering, or tool release. Instead, the records portray Beardsley’s role as a public discussant and analyst of vulnerability-management systems, especially the tension between formalized structures and messy operational reality.
 
 ## Major Themes And Trends
 
-### 1. Skepticism toward vulnerability scoring as objective science
+### 1. Vulnerability scoring as useful but questionable decision support
 
-The clearest theme is skepticism about vulnerability scoring systems. The Black Hat abstract opens by saying vulnerability scoring is intended to “bring order to the chaos of risk management,” but in practice can feel “more like reading tarot cards or poking at entrails than applying science” [record_id:64]. This framing suggests a central concern: defenders often treat scoring systems as rational prioritization mechanisms, but the talk questions whether those mechanisms are as scientific or decision-improving as their presentation implies.
+The clearest theme appears in “Vulnerability Haruspicy,” which treats vulnerability scoring as an attempt to “bring order to the chaos of risk management” while also suggesting that, in practice, it can resemble divination more than science [record_id:64]. The abstract uses intentionally comic and skeptical language: CVSS is said to perform “monkey math,” EPSS is described as trying to predict exploitation with “statistical black magicks,” and SSVC is characterized as abandoning math in favor of “structured gut feelings” [record_id:64].
 
-The abstract names three major frameworks:
+Behind the humor is a serious research question: whether scoring systems meaningfully improve vulnerability-management decisions. The record says defenders mix CVSS, EPSS, SSVC, KEV lists, vendor advisories, and experience to determine which issues are “truly urgent” and which are “merely annoying” [record_id:64]. The central concern is not just whether scoring models are accurate in abstraction, but whether they help actual security teams prioritize work under constraints.
 
-- CVSS, described in the abstract as performing “monkey math to force fractal bell curves” [record_id:64].
-- EPSS, described as attempting to “predict exploitation with statistical black magicks” [record_id:64].
-- SSVC, described as ditching “math entirely in favor of structured gut feelings” [record_id:64].
+This theme suggests a pragmatic stance: formal systems are evaluated not by elegance, but by whether they change outcomes for defenders. The talk’s stated intent is to examine “where these models help, where they mislead,” and whether any are better than “rolling a D20 saving throw vs exploitation” [record_id:64]. The framing implies that vulnerability scoring may be both necessary and absurd: necessary because teams need triage, absurd because risk is context-dependent, uncertain, and often reduced to artificial numeric or categorical outputs.
 
-The language is intentionally humorous and provocative, but the underlying theme is serious: scoring systems embed assumptions, simplifications, and artifacts. They may help defenders triage, but they may also obscure uncertainty or lend false authority to decisions that remain contextual and judgment-driven.
+### 2. Vulnerability intelligence depends on public infrastructure and governance
 
-### 2. Tension between formal frameworks and real-world defender behavior
+The CVE-focused BSidesLV records shift from scoring to the institutional infrastructure that makes vulnerability management possible. “What Should CVE Be When It Grows Up?” describes the CVE Program as “a pillar of the cybersecurity ecosystem” and an “authoritative source of data about vulnerabilities for software users” [record_id:2571]. It also emphasizes CVE’s role in driving “security into the design and development process,” meaning the program is not framed merely as a database of labels, but as part of a broader software-security feedback loop [record_id:2571].
 
-Record 64 contrasts formal scoring frameworks with how “security teams actually handle vulnerabilities” [record_id:64]. It says defenders “mix and match shortcuts” including “KEV lists, vendor advisories, and lived experience” to distinguish “the truly urgent from the merely annoying” [record_id:64]. This is an important theme because it suggests that operational vulnerability management is not reducible to a single score.
+The same record highlights current stressors: funding challenges affecting both the CVE Program and the U.S. National Vulnerability Database over the preceding 18 months, the creation of the EU Vulnerability Database, congressional attention, and a requested formal audit of the program [record_id:2571]. The central question becomes how to communicate CVE’s challenges to policymakers while preserving its “critical function” and avoiding “fractioning of the ecosystem” [record_id:2571].
 
-The record asks whether defenders are “actually making better risk decisions” or simply using frameworks “to justify what we were going to do anyway” [record_id:64]. That question frames scoring not only as a technical problem but as a behavioral and organizational one. Risk systems may function as post-hoc justification, coordination tools, or compliance artifacts rather than as independent decision engines.
+This record therefore connects vulnerability intelligence to public policy, transnational governance, funding stability, and institutional legitimacy. It suggests that vulnerability data systems are not self-sustaining technical utilities; they require governance models, public trust, and coordination among national and international actors.
 
-This theme links naturally to the BSidesLV record. CVE and NVD are foundational sources of vulnerability data, but the panel abstract suggests that governance and funding pressures can affect the stability of those sources [record_id:2571]. If the underlying identifiers and databases are politically or institutionally fragile, then downstream scoring and prioritization workflows inherit that fragility.
+### 3. Concern over fragmentation of vulnerability ecosystems
 
-### 3. Vulnerability infrastructure as public-interest governance
+A recurring concern in the CVE material is fragmentation. Record 2571 explicitly asks how challenges should be communicated to policymakers “in a way that maintains the critical function and avoids a fractioning of the ecosystem” [record_id:2571]. The reference to both the U.S. National Vulnerability Database and the EU Vulnerability Database implies a changing landscape in which multiple vulnerability-data authorities or repositories may coexist, with potential benefits but also risks to consistency and interoperability [record_id:2571].
 
-The BSidesLV record frames the CVE Program as “a pillar of the cybersecurity ecosystem” and “an authoritative source of data about vulnerabilities for software users” [record_id:2571]. It also says the program is “critical for continuing to drive security into the design and development process” [record_id:2571]. This moves beyond technical enumeration and treats CVE as infrastructure: a shared, public-interest mechanism that supports users, vendors, policymakers, and security practitioners.
+This concern complements the scoring theme. If vulnerability scoring is already uncertain and context-sensitive, fragmentation in the identifiers and databases that feed vulnerability management could further complicate prioritization. CVE identifiers, NVD enrichment, vendor advisories, KEV catalogs, and scoring systems are all part of the information pipeline defenders rely on. The records do not provide a technical architecture for preventing fragmentation, but they clearly identify it as a governance risk.
 
-The session raises governance questions prompted by funding and institutional stress. It states that over the prior 18 months, both the CVE Program and the US National Vulnerability Database faced “funding challenges” [record_id:2571]. It also notes the creation of the EU Vulnerability Database, congressional interest, and a June request by members of Congress for a formal audit of the program [record_id:2571].
+### 4. Community discussion as a method for shaping vulnerability institutions
 
-The major trend here is the politicization and internationalization of vulnerability infrastructure. CVE is no longer presented merely as a technical naming scheme; it is a governance object subject to funding models, audits, policymaker communication, and possible ecosystem fragmentation [record_id:2571].
+The two BSidesLV records emphasize panel discussion and audience engagement. “What Should CVE Be When It Grows Up?” is framed around open questions: challenges facing the program, communication to policymakers, and new governance models [record_id:2571]. The later “I am CVE, AMA!” record explicitly says the previous BSidesLV panel ran out of time for audience questions and that the new session would be an “Oops all questions!” version [record_id:2732].
 
-### 4. Avoiding fragmentation of the vulnerability ecosystem
+This indicates a participatory mode of governance discourse. The CVE Program’s future is not presented as an issue for a single vendor, agency, or technical committee alone, but as a topic for community debate. The AMA record’s statement that “No topic is taboo, modulo the code of conduct” suggests an intention to surface difficult or controversial questions within community norms [record_id:2732].
 
-The BSidesLV abstract explicitly asks how challenges facing the CVE Program should be communicated to policymakers “in a way that maintains the critical function and avoids a fractioning of the ecosystem” [record_id:2571]. This is one of the most important policy concerns in the records.
+The trend across these records is toward public, community-facing deliberation on vulnerability management institutions. Beardsley’s presence in these sessions links him to that deliberative style: challenging assumptions, inviting debate, and treating vulnerability infrastructure as a shared responsibility.
 
-Fragmentation could mean competing vulnerability identifiers, divergent national or regional databases, inconsistent data quality, or incompatible governance practices. The record mentions developments in the European Union leading to the creation of the EU Vulnerability Database [record_id:2571]. It does not portray that development as inherently negative, but it places it in the context of concerns about ecosystem coherence.
+### 5. Humor and irreverence used to discuss serious operational problems
 
-This theme complements record 64’s concern with decision quality. If defenders already struggle to interpret CVSS, EPSS, SSVC, KEV lists, advisories, and local experience, then fragmentation in core vulnerability data sources may further complicate prioritization [record_id:64] [record_id:2571].
+The Black Hat abstract is unusually colorful. It invokes “tarot cards,” “entrails,” “statistical black magicks,” “structured gut feelings,” “rolling a D20,” and “astrology jokes” [record_id:64]. This humor is not incidental; it frames the topic as one in which the security community may overstate the scientific precision of vulnerability scoring. The rhetorical style lowers the barrier to discussing a dry governance and metrics problem while sharpening criticism of false precision.
 
-### 5. Humor and provocation as a communication style
-
-The Black Hat abstract uses deliberately colorful language: “tarot cards,” “entrails,” “monkey math,” “statistical black magicks,” “structured gut feelings,” “rolling a D20 saving throw vs exploitation,” and “astrology jokes” [record_id:64]. This suggests a talk style that uses humor and skepticism to invite debate about familiar but contested security practices.
-
-That communication style matters because vulnerability scoring can be dry, bureaucratic, and compliance-heavy. The record’s rhetorical strategy appears designed to make the topic accessible and contentious, encouraging the audience to question assumptions rather than accept framework outputs as neutral truth [record_id:64].
-
-The BSidesLV abstract is more formal and policy-oriented, but it also frames the topic through open questions: “What are the challenges facing the CVE Program?” “How should these be communicated to policymakers?” and “What are new governance models that should be considered?” [record_id:2571]. Across both records, the talks are framed less as final answers and more as invitations to debate.
+The AMA record also uses informal language: “Alas,” “caught some shade,” and “Oops all questions!” [record_id:2732]. While less analytically dense, this style points to a community-conference register: candid, conversational, and responsive to audience feedback. The shared tone across records suggests that Beardsley-associated sessions may use humor and open discussion to address structural issues in vulnerability management.
 
 ## Methods, Tools, And Approaches Discussed
 
-The records do not describe hands-on tools, code, or implementation workflows. Instead, they discuss institutional methods and decision-support approaches for vulnerability management.
+The records do not provide implementation details, experimental protocols, source code, or step-by-step workflows. However, they identify several frameworks, tools, and institutional mechanisms relevant to vulnerability management.
 
-### Comparative evaluation of scoring systems
+The most concrete methods are vulnerability prioritization systems:
 
-Record 64 centers on comparing CVSS, EPSS, and SSVC against “the reality of how security teams actually handle vulnerabilities” [record_id:64]. The abstract says the talk will explore “where these models help, where they mislead,” and whether any are meaningfully better than chance-like or game-like decision-making, expressed humorously as “rolling a D20 saving throw vs exploitation” [record_id:64].
+- **CVSS**, presented as a scoring system used to bring order to vulnerability risk, though the Black Hat abstract critiques its mathematical framing and practical limitations [record_id:64].
+- **EPSS**, described as a statistical approach that attempts to predict exploitation, again with skepticism about how much predictive value it offers in operational settings [record_id:64].
+- **SSVC**, characterized as a structured decision approach that relies less on numeric scoring and more on guided judgment or “structured gut feelings” [record_id:64].
+- **KEV lists**, likely meaning known-exploited-vulnerability lists, described as one of the shortcuts defenders use to distinguish urgent vulnerabilities from less urgent ones [record_id:64].
+- **Vendor advisories** and **lived experience**, which the record identifies as real-world inputs defenders combine with formal systems [record_id:64].
 
-The approach implied is comparative and critical:
+The approach discussed in record 64 is comparative and evaluative rather than purely technical. The talk proposes to compare CVSS, EPSS, and SSVC against the “reality of how security teams actually handle vulnerabilities” [record_id:64]. This implies a practitioner-grounded evaluation method: models should be judged by their fit with operational triage, not merely by their internal consistency.
 
-- Examine each scoring or decision framework.
-- Identify its strengths and weaknesses.
-- Compare model outputs or assumptions to operational practice.
-- Evaluate whether the framework improves decisions or merely rationalizes them.
+The CVE records focus on institutional approaches:
 
-The talk appears to treat vulnerability prioritization as both a measurement problem and a sociotechnical decision problem [record_id:64].
+- The **CVE Program** is treated as a central naming and data authority for vulnerabilities [record_id:2571].
+- The **U.S. National Vulnerability Database** is presented as closely related to CVE and also affected by funding challenges [record_id:2571].
+- The **EU Vulnerability Database** is identified as a new development that changes the governance environment [record_id:2571].
+- **Formal audit**, **policymaker communication**, and **new governance models** are raised as mechanisms for reforming or preserving the CVE ecosystem [record_id:2571].
+- The **AMA format** is used as a community-engagement method to gather and answer audience questions about CVE after a prior panel lacked enough time for Q&A [record_id:2732].
 
-### Use of multiple risk signals
-
-The Black Hat abstract identifies several practical inputs defenders use:
-
-- CVSS.
-- EPSS.
-- SSVC.
-- KEV lists.
-- Vendor advisories.
-- Lived experience [record_id:64].
-
-This indicates an approach in which vulnerability management depends on signal fusion rather than one authoritative source. Security teams “mix and match shortcuts” to determine urgency [record_id:64]. The phrase “shortcuts” is notable: it implies that actual practice involves heuristics under time pressure, not purely formal analysis.
-
-### Governance-model analysis
-
-Record 2571 focuses on governance questions around the CVE Program. It asks what “new governance models” should be considered [record_id:2571]. Although the abstract does not enumerate those models, it clearly positions governance design as a method for preserving or improving vulnerability infrastructure.
-
-The session’s approach appears to include:
-
-- Assessing challenges facing the CVE Program.
-- Considering communication strategies for policymakers.
-- Evaluating how to maintain critical functions.
-- Avoiding fragmentation.
-- Considering alternative governance models [record_id:2571].
-
-### Policy communication
-
-The BSidesLV record explicitly raises the question of how challenges should be “communicated to policymakers” [record_id:2571]. This is an approach rather than a tool: vulnerability infrastructure sustainability depends not only on technical merit but also on effective explanation to funders, auditors, legislators, and public institutions.
-
-The record’s mention of congressional audit interest reinforces that vulnerability management infrastructure is now within the policy oversight domain [record_id:2571].
+Together, these records describe a vulnerability-management stack that is partly technical and partly institutional: identifiers, databases, scoring models, known-exploitation signals, advisories, policy decisions, and community processes all shape how defenders understand and act on vulnerabilities.
 
 ## Notable Talks, Records, And Evidence
 
-### “Vulnerability Haruspicy: Picking Out Risk Signals from Scoring System Entrails” — Black Hat USA 2025
+The most substantial and individually attributable record is the Black Hat 2025 briefing “Vulnerability Haruspicy: Picking Out Risk Signals from Scoring System Entrails” [record_id:64]. It matters because it presents a coherent thesis about vulnerability scoring: the field depends on frameworks such as CVSS, EPSS, and SSVC, but these frameworks may oversimplify, mislead, or merely rationalize preexisting judgments [record_id:64]. The abstract is also notable for connecting formal scoring systems to actual defender behavior, including KEV lists, vendor advisories, and lived experience [record_id:64]. For downstream researchers studying Beardsley’s views on risk quantification, vulnerability prioritization, or security metrics, this is the key record in the set.
 
-Record 64 is the most direct evidence of Beardsley-associated work on vulnerability scoring and risk prioritization. It is notable because it challenges the credibility and usefulness of major vulnerability scoring systems while acknowledging that defenders need some way to prioritize risk [record_id:64].
+The BSidesLV 2025 panel “What Should CVE Be When It Grows Up?” is representative of Beardsley’s participation in governance-oriented vulnerability-infrastructure discussions [record_id:2571]. Its importance lies in the breadth of issues it identifies: CVE’s long-standing role, its authority as a vulnerability data source, the relationship between vulnerability disclosure data and secure development, funding pressures on CVE and NVD, the emergence of the EU Vulnerability Database, congressional scrutiny, and possible governance-model reform [record_id:2571]. It is less individually attributable because Beardsley is one of several listed authors or panelists, but it is central for understanding the institutional context of the topic.
 
-The abstract’s key contribution is not a new scoring model, but a critical synthesis of existing models and real-world defender behavior. It frames CVSS, EPSS, and SSVC as imperfect attempts to impose order on vulnerability chaos [record_id:64]. It also recognizes that teams supplement formal frameworks with KEV lists, vendor advisories, and experience [record_id:64].
-
-This record matters because it captures a mature vulnerability-management concern: the field has many signals, but not necessarily clear evidence that those signals produce better decisions. The talk’s central question — whether teams are improving risk decisions or just justifying preexisting preferences — is highly relevant to governance, compliance, and operational security [record_id:64].
-
-### “What Should CVE Be When It Grows Up?” — BSidesLV 2025
-
-Record 2571 is notable as a co-speaker or panel record involving Tod Beardsley alongside Jerry Gamblin, Madison Oliver, Bob Lord, and Chris Butera. It concerns the future of the CVE Program and its role in the cybersecurity ecosystem [record_id:2571].
-
-The abstract emphasizes that CVE has served for more than a quarter century as an authoritative source of vulnerability data and supports secure design and development processes [record_id:2571]. It then places CVE in a period of stress: funding challenges for both CVE and NVD, creation of the EU Vulnerability Database, congressional attention, and a formal audit request [record_id:2571].
-
-This record matters because it broadens the topic from scoring individual vulnerabilities to sustaining the systems that make vulnerability identification and coordination possible. It points downstream researchers toward questions of institutional resilience, international coordination, and governance reform [record_id:2571].
-
-### Relationship between the two records
-
-Taken together, the records
+The BSidesLV “I am CVE, AMA!” session is important as a continuation of the CVE conversation rather than as a source of detailed claims [record_id:2732]. Its abstract says that a prior BSidesLV 2025 CVE panel ran out of time for audience questions, prompting a return with an “Oops all questions!” format [record_id:2732]. This record suggests sustained community interest in CVE and an effort by panelists, including Beardsley, to create a venue for open discussion.
