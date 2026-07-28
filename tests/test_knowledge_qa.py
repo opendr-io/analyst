@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from types import SimpleNamespace
 from uuid import uuid4
@@ -362,6 +363,36 @@ def test_tool_search_records_without_limit_returns_all_gathered_matches(monkeypa
     assert "Example Project 2" in result
     assert "Example Project 3" in result
 
+
+def test_tool_search_records_prefers_camlis_resource_url(monkeypatch):
+    class FakeRow(dict):
+        def __getitem__(self, key):
+            return dict.__getitem__(self, key)
+
+    rows = [
+        FakeRow({
+            "id": 113,
+            "source": "camlis",
+            "year": "2025",
+            "title": "LLM Salting",
+            "author": "Tamas Voros",
+            "agent_topics": "[]",
+            "url": "https://youtu.be/cqqUzsXIdPg",
+            "raw_json": json.dumps({"resources": [{"label": "video", "url": "https://youtu.be/cqqUzsXIdPg"}]}),
+            "text": "LLM salting abstract.",
+        })
+    ]
+
+    monkeypatch.setattr(the_analyst.ki, "list_classification_topics", lambda _db_path: [])
+    monkeypatch.setattr(
+        the_analyst.ki,
+        "search_records",
+        lambda _db_path, _query, limit: rows[:limit],
+    )
+
+    result = tool_search_records("LLM Salting", limit=1)
+
+    assert "URL: https://youtu.be/cqqUzsXIdPg" in result
 
 def test_tool_search_records_numeric_query_fetches_exact_record_id(monkeypatch):
     class FakeRow(dict):
@@ -894,6 +925,83 @@ def test_load_summary_files_enriches_record_citations_from_database(tmp_path):
     assert "[record_id:7]" not in result
     assert "Source: test" not in result
 
+def test_load_summary_files_prefers_camlis_video_resource_for_citations(tmp_path):
+    db_path = tmp_path / "knowledge.sqlite3"
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    sources_dir = summary_dir / "sources"
+    state_dir.mkdir()
+    sources_dir.mkdir(parents=True)
+    (sources_dir / "camlis.md").write_text(
+        "# Topic: Source: camlis\nImportant evidence [record_id:77].",
+        encoding="utf-8",
+    )
+    raw_json = json.dumps(
+        {
+            "resources": [
+                {"label": "pdf", "url": "https://www.camlis.org/s/talk.pdf"},
+                {"label": "video", "url": "https://youtu.be/example-video"},
+            ]
+        }
+    )
+    with the_analyst.ki.open_db(db_path) as conn:
+        conn.execute(
+            """
+            INSERT INTO records (
+                id, source, source_file, source_record_id, dedupe_key, title, author,
+                text, url, event, year, tags, raw_json, imported_at
+            )
+            VALUES (77, 'camlis', 'camlis.json', '77', 'camlis:77', 'CAMLIS Talk',
+                    'Casey Speaker', 'Full evidence.', 'https://youtu.be/example-video',
+                    'CAMLIS', '2025', '', ?, '2026-06-23T00:00:00+00:00')
+            """,
+            (raw_json,),
+        )
+        conn.commit()
+
+    result = load_summary_files(
+        state_dir,
+        topic="camlis",
+        summary_dir=summary_dir,
+        db_path=db_path,
+    )
+
+    assert "CAMLIS Talk, Casey Speaker, <https://youtu.be/example-video>" in result
+
+def test_load_summary_files_omits_camlis_url_when_no_resource_links(tmp_path):
+    db_path = tmp_path / "knowledge.sqlite3"
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    sources_dir = summary_dir / "sources"
+    state_dir.mkdir()
+    sources_dir.mkdir(parents=True)
+    (sources_dir / "camlis.md").write_text(
+        "# Topic: Source: camlis\nImportant evidence [record_id:78].",
+        encoding="utf-8",
+    )
+    with the_analyst.ki.open_db(db_path) as conn:
+        conn.execute(
+            """
+            INSERT INTO records (
+                id, source, source_file, source_record_id, dedupe_key, title, author,
+                text, url, event, year, tags, raw_json, imported_at
+            )
+            VALUES (78, 'camlis', 'camlis.json', '78', 'camlis:78', 'Legacy CAMLIS Talk',
+                    'Jordan Speaker', 'Full evidence.', '',
+                    'CAMLIS', '2017', '', '{"resources": []}', '2026-06-23T00:00:00+00:00')
+            """
+        )
+        conn.commit()
+
+    result = load_summary_files(
+        state_dir,
+        topic="camlis",
+        summary_dir=summary_dir,
+        db_path=db_path,
+    )
+
+    assert "Legacy CAMLIS Talk, Jordan Speaker" in result
+
 def test_load_summary_files_resolves_partial_topic_name(tmp_path):
     state_dir = tmp_path / "knowledge"
     summary_dir = tmp_path / "summaries"
@@ -915,6 +1023,85 @@ def test_load_summary_files_resolves_partial_topic_name(tmp_path):
     assert "Threat hunting report content." in result
     assert "Selected summary: detection engineering soc siem and threat hunting" in result
 
+
+def test_load_summary_files_returns_complete_records_for_three_record_topic_without_summary(tmp_path):
+    db_path = tmp_path / "knowledge.sqlite3"
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    state_dir.mkdir()
+    summary_dir.mkdir()
+    with the_analyst.ki.open_db(db_path) as conn:
+        for record_id in (1, 2, 3):
+            conn.execute(
+                """
+                INSERT INTO records (
+                    id, source, source_file, source_record_id, dedupe_key, title, author,
+                    text, url, event, year, tags, raw_json, imported_at, agent_topics
+                )
+                VALUES (?, 'test', 'test.json', ?, ?, ?, 'Example Author', ?,
+                        'https://example.test', 'Test Event', '2026', '', '{}',
+                        '2026-06-23T00:00:00+00:00', '|Tiny topic|')
+                """,
+                (
+                    record_id,
+                    str(record_id),
+                    f"test:{record_id}",
+                    f"Tiny Topic Record {record_id}",
+                    f"Full evidence for tiny topic record {record_id}.",
+                ),
+            )
+        conn.commit()
+
+    result = load_summary_files(
+        state_dir,
+        topic="Tiny topic",
+        summary_dir=summary_dir,
+        db_path=db_path,
+    )
+
+    assert "# Complete Record Evidence" in result
+    assert "No generated summary file was found for this small topic" in result
+    assert "Record count: 3" in result
+    assert "## [record_id:1] Tiny Topic Record 1" in result
+    assert "Full evidence for tiny topic record 3." in result
+
+
+def test_load_summary_files_does_not_fallback_to_records_for_larger_topic(tmp_path):
+    db_path = tmp_path / "knowledge.sqlite3"
+    state_dir = tmp_path / "knowledge"
+    summary_dir = tmp_path / "summaries"
+    state_dir.mkdir()
+    summary_dir.mkdir()
+    with the_analyst.ki.open_db(db_path) as conn:
+        for record_id in (1, 2, 3, 4):
+            conn.execute(
+                """
+                INSERT INTO records (
+                    id, source, source_file, source_record_id, dedupe_key, title, author,
+                    text, url, event, year, tags, raw_json, imported_at, agent_topics
+                )
+                VALUES (?, 'test', 'test.json', ?, ?, ?, 'Example Author', ?,
+                        '', 'Test Event', '2026', '', '{}',
+                        '2026-06-23T00:00:00+00:00', '|Large topic|')
+                """,
+                (
+                    record_id,
+                    str(record_id),
+                    f"test:{record_id}",
+                    f"Large Topic Record {record_id}",
+                    f"Full evidence for large topic record {record_id}.",
+                ),
+            )
+        conn.commit()
+
+    result = load_summary_files(
+        state_dir,
+        topic="Large topic",
+        summary_dir=summary_dir,
+        db_path=db_path,
+    )
+
+    assert result == ""
 
 def test_load_summary_files_returns_empty_for_unknown_topic():
     state_dir = _state_dir()
@@ -1169,6 +1356,11 @@ def test_tool_answer_from_summaries_loads_multiple_relevant_summaries(monkeypatc
     assert "Prompt injection details." in result
     assert "Retrieval pipeline details." in result
     assert "Voting details." not in result
+
+
+
+
+
 
 
 

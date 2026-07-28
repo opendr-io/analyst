@@ -50,6 +50,7 @@ class ToolUseBlock:
 class LLMResponse:
     content: list[TextBlock | ToolUseBlock]
     stop_reason: str
+    usage: Any = None
     raw: Any = None
 
 
@@ -163,9 +164,19 @@ def _normalize_openai_response(response: Any) -> LLMResponse:
             blocks.append(TextBlock(str(output_text)))
 
     has_tool = any(getattr(block, "type", "") == "tool_use" for block in blocks)
+    status = str(_get(response, "status", "") or "")
+    incomplete_details = _get(response, "incomplete_details")
+    incomplete_reason = _get(incomplete_details, "reason") if incomplete_details else None
+    if has_tool:
+        stop_reason = "tool_use"
+    elif status == "incomplete":
+        stop_reason = str(incomplete_reason or "incomplete")
+    else:
+        stop_reason = "end_turn"
     return LLMResponse(
         content=blocks,
-        stop_reason="tool_use" if has_tool else "end_turn",
+        stop_reason=stop_reason,
+        usage=_get(response, "usage"),
         raw=response,
     )
 

@@ -138,6 +138,25 @@ def normalize_blackhat_authors(value: Any) -> str:
     return re.sub(r"\s*;\s*", "; ", "".join(cleaned)).strip(" ;")
 
 
+def _camlis_resource_url(talk: dict[str, Any], label: str) -> str:
+    resources = talk.get("resources")
+    if not isinstance(resources, list):
+        return ""
+    for resource in resources:
+        if not isinstance(resource, dict):
+            continue
+        if clean_text(resource.get("label", "")).lower() != label:
+            continue
+        url = clean_text(resource.get("url", ""))
+        if url:
+            return url
+    return ""
+
+
+def _camlis_record_url(talk: dict[str, Any]) -> str:
+    return _camlis_resource_url(talk, "video")
+
+
 def records_from_camlis(data: dict[str, Any], source_file: Path) -> list[KnowledgeRecord]:
     records = []
     for talk in data.get("talks", []):
@@ -167,7 +186,7 @@ def records_from_camlis(data: dict[str, Any], source_file: Path) -> list[Knowled
                 title=talk.get("title", ""),
                 author=author,
                 text=talk.get("abstract", ""),
-                url=talk.get("url", ""),
+                url=_camlis_record_url(talk),
                 event="CAMLIS",
                 year=talk.get("year", ""),
                 tags=tags,
