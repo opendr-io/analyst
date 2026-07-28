@@ -1,0 +1,31 @@
+{
+  "topic": "Cloud, infrastructure, and CDR",
+  "topic_slug": "cloud-infrastructure-and-cdr",
+  "group_by": "topic",
+  "group_name": "Cloud, infrastructure, and CDR",
+  "group_label": "Cloud, infrastructure, and CDR",
+  "group_slug": "cloud-infrastructure-and-cdr",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T19:52:03+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "32947a987344bf7f020ec0effad6b83e676b7f06fe87e3d61980d1944f2bdddc",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\cloud-infrastructure-and-cdr.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\cloud-infrastructure-and-cdr.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\cloud-infrastructure-and-cdr.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\cloud-infrastructure-and-cdr.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "d4acd061cfa6d2adcb24f70c5af3af0971b0a50bbe4560904903e1a0603e59ad",
+  "prompt_hash": "ff85db005063095d049b682824e9ef3383ea4aa62a1bc170a8b2c55c43a122bf",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\cloud-infrastructure-and-cdr.validation.json"
+}

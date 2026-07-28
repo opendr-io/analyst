@@ -1,0 +1,31 @@
+{
+  "topic": "Cryptography key management and post-quantum security",
+  "topic_slug": "cryptography-key-management-and-post-quantum-security",
+  "group_by": "topic",
+  "group_name": "Cryptography key management and post-quantum security",
+  "group_label": "Cryptography key management and post-quantum security",
+  "group_slug": "cryptography-key-management-and-post-quantum-security",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T19:54:27+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "286ac50d9aa580505bba490dc6ca929351cd23067d7beabff00c412a33df93d8",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\cryptography-key-management-and-post-quantum-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\cryptography-key-management-and-post-quantum-security.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\cryptography-key-management-and-post-quantum-security.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\cryptography-key-management-and-post-quantum-security.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "6e0ec754a4d17091c590dc568f89014507d02884eeb4f2693a8c2642ed5754a2",
+  "prompt_hash": "1bbf2345442347ae01dcf6b0e5611569e670f5e29cc2789285c497b42881f18f",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\cryptography-key-management-and-post-quantum-security.validation.json"
+}

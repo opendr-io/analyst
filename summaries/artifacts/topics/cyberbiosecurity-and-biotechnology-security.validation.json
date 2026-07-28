@@ -1,0 +1,68 @@
+{
+  "group_by": "topic",
+  "group_name": "Cyberbiosecurity and biotechnology security",
+  "group_label": "Cyberbiosecurity and biotechnology security",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T19:58:23+00:00",
+  "summary_file_path": "summaries\\topics\\cyberbiosecurity-and-biotechnology-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 4,
+  "expected_record_ids": [
+    1875,
+    2389,
+    2482,
+    3047
+  ],
+  "record_ids_found_in_summary": [
+    1875,
+    2389,
+    2482,
+    3047
+  ],
+  "record_id_occurrences_in_summary": 37,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      1875,
+      2389,
+      2482,
+      3047
+    ],
+    "unique_observed": [
+      1875,
+      2389,
+      2482,
+      3047
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1875,
+      2389,
+      2482,
+      3047
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "fdac8a1cc38286d31867d4785132e55b078ca34a2a0c6508e600e406e529cecd",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "c34b3be262a14acf8778b974b44de4c04c691f690dd680443b436cc110389060",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5170,
+  "output_character_count": 20679
+}

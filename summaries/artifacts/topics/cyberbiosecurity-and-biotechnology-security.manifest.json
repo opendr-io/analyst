@@ -1,0 +1,31 @@
+{
+  "topic": "Cyberbiosecurity and biotechnology security",
+  "topic_slug": "cyberbiosecurity-and-biotechnology-security",
+  "group_by": "topic",
+  "group_name": "Cyberbiosecurity and biotechnology security",
+  "group_label": "Cyberbiosecurity and biotechnology security",
+  "group_slug": "cyberbiosecurity-and-biotechnology-security",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T19:56:05+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "5356870658553ccc43bcb4106a1bcc7dc1e146f98a6f230de05fe662727bfcf1",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\cyberbiosecurity-and-biotechnology-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "fdac8a1cc38286d31867d4785132e55b078ca34a2a0c6508e600e406e529cecd",
+  "prompt_hash": "c34b3be262a14acf8778b974b44de4c04c691f690dd680443b436cc110389060",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\cyberbiosecurity-and-biotechnology-security.validation.json"
+}

@@ -94,6 +94,10 @@ def output_token_target(record_count: int, input_tokens: int) -> int:
     return ((target + 999) // 1_000) * 1_000
 
 
+def expanded_output_token_target(current_max_tokens: int) -> int:
+    return min(current_max_tokens * 2, 60_000)
+
+
 def text_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -1139,9 +1143,19 @@ def summarize_group(
     retry_used = False
     response_metadata: list[dict[str, Any]] = []
     try:
-        initial_result = _call_summary_model_result(client, prompt, max_output_tokens, model=model)
+        current_max_tokens = max_output_tokens
+        initial_result = _call_summary_model_result(client, prompt, current_max_tokens, model=model)
         summary = initial_result.text
-        response_metadata.append(response_audit_metadata(initial_result, max_output_tokens, "initial"))
+        response_metadata.append(response_audit_metadata(initial_result, current_max_tokens, "initial"))
+
+        # A coverage addendum cannot repair a response that ended before its required sections.
+        while response_metadata[-1]["possibly_truncated"] and current_max_tokens < 60_000:
+            retry_used = True
+            current_max_tokens = expanded_output_token_target(current_max_tokens)
+            retry_result = _call_summary_model_result(client, prompt, current_max_tokens, model=model)
+            summary = retry_result.text
+            response_metadata.append(response_audit_metadata(retry_result, current_max_tokens, "full_summary_retry"))
+
         output_ids = extract_record_ids(summary)
         output_check = compare_ids(expected_ids, output_ids)
 
@@ -1153,11 +1167,11 @@ def summarize_group(
                 summary,
                 prompt,
                 output_check["missing"],
-                max_output_tokens,
+                current_max_tokens,
                 model=model,
                 return_response_metadata=True,
             )
-            response_metadata.append(response_audit_metadata(repair_result, max_output_tokens, "coverage_addendum"))
+            response_metadata.append(response_audit_metadata(repair_result, current_max_tokens, "coverage_addendum"))
             output_ids = extract_record_ids(summary)
             output_check = compare_ids(expected_ids, output_ids)
     except Exception as exc:
@@ -1199,7 +1213,8 @@ def summarize_group(
             "response_metadata": response_metadata,
             "requested_max_tokens": max_output_tokens,
             "estimated_output_tokens": estimate_tokens(summary),
-            "possibly_truncated": any(item["possibly_truncated"] for item in response_metadata),
+            "possibly_truncated": response_metadata[-1]["possibly_truncated"],
+            "truncation_retry_used": any(item["possibly_truncated"] for item in response_metadata[:-1]),
             "summary_hash": text_hash(summary),
         }
     )

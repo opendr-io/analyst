@@ -1,0 +1,31 @@
+{
+  "topic": "General technology productivity and non-security applications",
+  "topic_slug": "general-technology-productivity-and-non-security-applications",
+  "group_by": "topic",
+  "group_name": "General technology productivity and non-security applications",
+  "group_label": "General technology productivity and non-security applications",
+  "group_slug": "general-technology-productivity-and-non-security-applications",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:15:05+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "5bbd7935d0bdda385efa2c20a8d12cbb371c23589294e6874bb78fba81236915",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\general-technology-productivity-and-non-security-applications.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "e528bcc8105a3559ce104a91daf972fecc05f4e18fcef3ef17ade1a0c537075e",
+  "prompt_hash": "1953d5b2a01ae1e9a3644dfd38db54b4e6cf860098741d2fde897ba7b9997d95",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.validation.json"
+}

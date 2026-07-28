@@ -160,6 +160,12 @@ def test_output_token_target_targets_thirty_percent_of_input_tokens():
     assert ts.output_token_target(250, 180_000) == 54_000
     assert ts.output_token_target(500, 300_000) == 60_000
 
+def test_expanded_output_token_target_doubles_to_the_cap():
+    assert ts.expanded_output_token_target(3_000) == 6_000
+    assert ts.expanded_output_token_target(30_000) == 60_000
+    assert ts.expanded_output_token_target(60_000) == 60_000
+
+
 def test_print_dry_run_totals_sums_token_estimates(capsys):
     ts.print_dry_run_totals([
         {

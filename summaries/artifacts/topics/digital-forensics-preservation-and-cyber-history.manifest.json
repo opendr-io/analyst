@@ -1,0 +1,31 @@
+{
+  "topic": "Digital forensics preservation and cyber history",
+  "topic_slug": "digital-forensics-preservation-and-cyber-history",
+  "group_by": "topic",
+  "group_name": "Digital forensics preservation and cyber history",
+  "group_label": "Digital forensics preservation and cyber history",
+  "group_slug": "digital-forensics-preservation-and-cyber-history",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:08:00+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "8ce56aa44119dae0ddc0de409109a72495659077bc066a995756146c90f4efc7",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\digital-forensics-preservation-and-cyber-history.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "5f978d1069a9f7b33f14f45310f589ce6ecd48099d57d6afbc339b61cdeb8b6c",
+  "prompt_hash": "b6495c4e596c24022b2e8d127f71517aef2929950407a451037f3c1dfbdf1df1",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.validation.json"
+}

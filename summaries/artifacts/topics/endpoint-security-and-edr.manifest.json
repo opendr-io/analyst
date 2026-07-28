@@ -1,0 +1,31 @@
+{
+  "topic": "Endpoint security and EDR",
+  "topic_slug": "endpoint-security-and-edr",
+  "group_by": "topic",
+  "group_name": "Endpoint security and EDR",
+  "group_label": "Endpoint security and EDR",
+  "group_slug": "endpoint-security-and-edr",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:10:20+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "36804bf78c1b688f5325732cfad75d75163cc3ff496a9db8b9873e55626e73ac",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\endpoint-security-and-edr.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\endpoint-security-and-edr.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\endpoint-security-and-edr.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\endpoint-security-and-edr.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "a11b11293c5cbed933bf97de5eeca63d1d643c9d93153c4a95712a42fdc0749b",
+  "prompt_hash": "b6a5ee8f2681abf4ef8a085837ce267eb737961b4a0ee567a44273489d4118b4",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\endpoint-security-and-edr.validation.json"
+}

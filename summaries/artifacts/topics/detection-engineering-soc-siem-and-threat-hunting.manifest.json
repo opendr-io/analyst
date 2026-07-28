@@ -1,0 +1,31 @@
+{
+  "topic": "Detection engineering, SOC, SIEM, and threat hunting",
+  "topic_slug": "detection-engineering-soc-siem-and-threat-hunting",
+  "group_by": "topic",
+  "group_name": "Detection engineering, SOC, SIEM, and threat hunting",
+  "group_label": "Detection engineering, SOC, SIEM, and threat hunting",
+  "group_slug": "detection-engineering-soc-siem-and-threat-hunting",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:05:10+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "35db5c07618011e3b8e022cda524f9c953b4c3a2e7088e97eef989a3b96bc55c",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\detection-engineering-soc-siem-and-threat-hunting.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\detection-engineering-soc-siem-and-threat-hunting.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\detection-engineering-soc-siem-and-threat-hunting.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\detection-engineering-soc-siem-and-threat-hunting.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "a6cca84970cedcb08a453a07e131a2a27ddf9f06b7551931b9b8a079e0c801ae",
+  "prompt_hash": "fb2ac44fedefb1ed013e0e668f9e5853c14d17baf8cd1fa45be82351d36039a8",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\detection-engineering-soc-siem-and-threat-hunting.validation.json"
+}

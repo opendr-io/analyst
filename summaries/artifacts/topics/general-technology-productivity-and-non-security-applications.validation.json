@@ -1,0 +1,78 @@
+{
+  "group_by": "topic",
+  "group_name": "General technology productivity and non-security applications",
+  "group_label": "General technology productivity and non-security applications",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T20:17:23+00:00",
+  "summary_file_path": "summaries\\topics\\general-technology-productivity-and-non-security-applications.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\general-technology-productivity-and-non-security-applications.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 6,
+  "expected_record_ids": [
+    2077,
+    2225,
+    2781,
+    3015,
+    3076,
+    3080
+  ],
+  "record_ids_found_in_summary": [
+    2077,
+    2225,
+    2781,
+    3015,
+    3076,
+    3080
+  ],
+  "record_id_occurrences_in_summary": 53,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2077,
+      2225,
+      2781,
+      3015,
+      3076,
+      3080
+    ],
+    "unique_observed": [
+      2077,
+      2225,
+      2781,
+      3015,
+      3076,
+      3080
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2077,
+      2225,
+      2781,
+      3015,
+      3076,
+      3080
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "e528bcc8105a3559ce104a91daf972fecc05f4e18fcef3ef17ade1a0c537075e",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "1953d5b2a01ae1e9a3644dfd38db54b4e6cf860098741d2fde897ba7b9997d95",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5884,
+  "output_character_count": 23535
+}

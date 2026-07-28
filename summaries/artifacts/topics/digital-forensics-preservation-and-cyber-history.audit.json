@@ -1,0 +1,173 @@
+{
+  "topic": "Digital forensics preservation and cyber history",
+  "group_by": "topic",
+  "group_name": "Digital forensics preservation and cyber history",
+  "group_label": "Digital forensics preservation and cyber history",
+  "summary_status": "complete",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-28T20:08:00+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "source_fingerprint": "8ce56aa44119dae0ddc0de409109a72495659077bc066a995756146c90f4efc7",
+  "summary_input_artifact_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.prompt-input.md",
+  "summary_file_path": "summaries\\topics\\digital-forensics-preservation-and-cyber-history.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 10,
+  "loaded_record_count": 10,
+  "expected_record_ids": [
+    1937,
+    2006,
+    2340,
+    2386,
+    2477,
+    2705,
+    2752,
+    2913,
+    3016,
+    3086
+  ],
+  "prompt_record_ids": [
+    1937,
+    2006,
+    2340,
+    2386,
+    2477,
+    2705,
+    2752,
+    2913,
+    3016,
+    3086
+  ],
+  "prompt_record_id_occurrences": 10,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1937,
+      2006,
+      2340,
+      2386,
+      2477,
+      2705,
+      2752,
+      2913,
+      3016,
+      3086
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [
+    1937,
+    2006,
+    2477,
+    2913,
+    3086
+  ],
+  "secondary_record_ids": [
+    2340,
+    2386,
+    2705,
+    2752,
+    3016
+  ],
+  "estimated_input_tokens": 4322,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 6099,
+  "output_max_tokens": 3000,
+  "record_ids_found_in_output": [
+    1937,
+    2006,
+    2340,
+    2386,
+    2477,
+    2705,
+    2752,
+    2913,
+    3016,
+    3086
+  ],
+  "output_record_id_occurrences": 66,
+  "missing_output_record_ids": [],
+  "duplicate_output_record_ids": [
+    1937,
+    2006,
+    2340,
+    2386,
+    2477,
+    2705,
+    2752,
+    2913,
+    3016,
+    3086
+  ],
+  "unexpected_output_record_ids": [],
+  "output_token_estimate": 6099,
+  "output_character_count": 24393,
+  "retry_used": true,
+  "response_metadata": [
+    {
+      "phase": "initial",
+      "stop_reason": "max_output_tokens",
+      "actual_provider_usage": {
+        "input_tokens": 4050,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 4047
+        },
+        "output_tokens": 3000,
+        "output_tokens_details": {
+          "reasoning_tokens": 57
+        },
+        "total_tokens": 7050
+      },
+      "requested_max_tokens": 3000,
+      "estimated_output_tokens": 4069,
+      "actual_provider_output_tokens": 3000,
+      "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 4050,
+        "input_tokens_details": {
+          "cached_tokens": 4047,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 4463,
+        "output_tokens_details": {
+          "reasoning_tokens": 55
+        },
+        "total_tokens": 8513
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 6099,
+      "actual_provider_output_tokens": 4463,
+      "possibly_truncated": false
+    }
+  ],
+  "requested_max_tokens": 3000,
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "5f978d1069a9f7b33f14f45310f589ce6ecd48099d57d6afbc339b61cdeb8b6c",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\digital-forensics-preservation-and-cyber-history.validation.json"
+}
