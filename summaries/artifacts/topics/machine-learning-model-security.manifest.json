@@ -1,0 +1,31 @@
+{
+  "topic": "Machine learning model security",
+  "topic_slug": "machine-learning-model-security",
+  "group_by": "topic",
+  "group_name": "Machine learning model security",
+  "group_label": "Machine learning model security",
+  "group_slug": "machine-learning-model-security",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:24:54+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "533ac5dd7d470615a200281d1ed9abf9316c5c65dfd604d26840fa6549ced31c",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\machine-learning-model-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\machine-learning-model-security.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\machine-learning-model-security.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\machine-learning-model-security.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "c5609e2380a8ac4381919a03bc9a0ce0b62d6047bbec4559bd63b641bc7c8563",
+  "prompt_hash": "7de50f4f775519e7998de61c46ff60897c773cdd24045b25555280e96a72c501",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\machine-learning-model-security.validation.json"
+}
