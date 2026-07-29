@@ -1,0 +1,68 @@
+{
+  "group_by": "author",
+  "group_name": "Elad Meged",
+  "group_label": "Author: Elad Meged",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T20:42:54+00:00",
+  "summary_file_path": "summaries\\authors\\elad-meged.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\elad-meged.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\elad-meged.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\elad-meged.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\elad-meged.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 4,
+  "expected_record_ids": [
+    2589,
+    2644,
+    2887,
+    2939
+  ],
+  "record_ids_found_in_summary": [
+    2589,
+    2644,
+    2887,
+    2939
+  ],
+  "record_id_occurrences_in_summary": 63,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2589,
+      2644,
+      2887,
+      2939
+    ],
+    "unique_observed": [
+      2589,
+      2644,
+      2887,
+      2939
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2589,
+      2644,
+      2887,
+      2939
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "6725bd55a0bf69b36ae25126d3de6cc5d09dc537033e3c09ef61abb7a675005d",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "a6b4a4f8888fb3f597ae7d210fdc50a317050f8cc589a1ff75f279f7a291301c",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5075,
+  "output_character_count": 20299
+}

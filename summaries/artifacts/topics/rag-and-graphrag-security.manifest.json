@@ -1,0 +1,31 @@
+{
+  "topic": "RAG and GraphRAG security",
+  "topic_slug": "rag-and-graphrag-security",
+  "group_by": "topic",
+  "group_name": "RAG and GraphRAG security",
+  "group_label": "RAG and GraphRAG security",
+  "group_slug": "rag-and-graphrag-security",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:41:12+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "2620857d84580eb62953d490a3f9d5a8d29f847341fdc05fd88f6d9876a3b938",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\rag-and-graphrag-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "507482cd383bcd7f2cbf99a13405cd774943610e05d58adc724a8a5262f2c3e8",
+  "prompt_hash": "71c2a8326d8de19cf8a724f0556a4bfae06b9eeecf80e3000de67c71379691f2",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.validation.json"
+}

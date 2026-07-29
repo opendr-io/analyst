@@ -1,0 +1,68 @@
+{
+  "group_by": "author",
+  "group_name": "Ron Ben Yizhak",
+  "group_label": "Author: Ron Ben Yizhak",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T20:47:42+00:00",
+  "summary_file_path": "summaries\\authors\\ron-ben-yizhak.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 4,
+  "expected_record_ids": [
+    2016,
+    2585,
+    2855,
+    2902
+  ],
+  "record_ids_found_in_summary": [
+    2016,
+    2585,
+    2855,
+    2902
+  ],
+  "record_id_occurrences_in_summary": 69,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2016,
+      2585,
+      2855,
+      2902
+    ],
+    "unique_observed": [
+      2016,
+      2585,
+      2855,
+      2902
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2016,
+      2585,
+      2855,
+      2902
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "1a406a5f276a3860d7dfa2d274333cccf537c60e0caf471897306084e2795035",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "c23ca7fa11f782b0927c3636e349759a1d6fc383ed38818d48a8100d811235aa",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5410,
+  "output_character_count": 21639
+}

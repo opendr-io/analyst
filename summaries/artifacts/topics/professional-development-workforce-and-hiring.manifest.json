@@ -1,0 +1,31 @@
+{
+  "topic": "Professional development workforce and hiring",
+  "topic_slug": "professional-development-workforce-and-hiring",
+  "group_by": "topic",
+  "group_name": "Professional development workforce and hiring",
+  "group_label": "Professional development workforce and hiring",
+  "group_slug": "professional-development-workforce-and-hiring",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:37:46+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "85161038b005cba19385921870f2d1fafad30da4bc809c9629da0d483d78a606",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\professional-development-workforce-and-hiring.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\professional-development-workforce-and-hiring.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\professional-development-workforce-and-hiring.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\professional-development-workforce-and-hiring.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "4fd23e1582791ad7d6eb542de8d58899ce34577a82911c5e2a8e887fed436d7d",
+  "prompt_hash": "55e840aa7caf46b20a683d923082ad7be4f9d6fb2f8c7f8945fc6ed42508e61e",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\professional-development-workforce-and-hiring.validation.json"
+}
