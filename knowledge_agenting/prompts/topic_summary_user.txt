@@ -1,4 +1,4 @@
-﻿# Topic Summary Request
+# Topic Summary Request
 
 Topic: {topic}
 Topic query: {topic_query}

@@ -29,7 +29,7 @@ from knowledge_agenting.common import load_prompt
 from knowledge_indexing import knowledge_index as ki
 import llm_client
 from config import llm_settings
-from knowledge_agenting.topic_summarizer import summarize_topic as summarize_topic_to_files
+from knowledge_agenting.topic_summarizer import SMALL_TOPIC_MAX_RECORDS, summarize_topic as summarize_topic_to_files
 
 MODEL = llm_settings.get_model("qa")
 SUMMARY_DIR = APP_DIR / "summaries"
@@ -164,7 +164,7 @@ TOOLS = [
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Search term ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â author name, talk title, tool name, or keyword",
+                    "description": "Search term, author name, talk title, tool name, or keyword.",
                 },
                 "topic": {
                     "type": "string",
@@ -580,24 +580,6 @@ def _record_ids_in_text(text: str) -> list[int]:
     return record_ids
 
 
-def _resource_url(row: Any, label: str) -> str:
-    try:
-        raw = json.loads(str(row["raw_json"] or "{}"))
-    except (TypeError, ValueError, json.JSONDecodeError):
-        return ""
-    resources = raw.get("resources")
-    if not isinstance(resources, list):
-        return ""
-    for resource in resources:
-        if not isinstance(resource, dict):
-            continue
-        if str(resource.get("label") or "").strip().lower() != label:
-            continue
-        url = str(resource.get("url") or "").strip()
-        if url:
-            return url
-    return ""
-
 
 def _record_citation_url(row: Any) -> str:
     return str(row["url"] or "").strip()
@@ -623,7 +605,7 @@ def enrich_summary_citations(text: str, db_path: Path | None = None) -> str:
         for record_id in record_ids:
             row = conn.execute(
                 """
-                SELECT id, title, author, source, year, url, raw_json
+                SELECT id, title, author, source, year, url
                 FROM records
                 WHERE id = ?
                 """,
@@ -1001,7 +983,7 @@ def _format_complete_record_evidence(r: Any) -> str:
 def _small_topic_record_evidence(
     topic: str,
     db_path: Path | None = None,
-    max_records: int = 3,
+    max_records: int = SMALL_TOPIC_MAX_RECORDS,
 ) -> str:
     resolved_db_path = db_path or ki.DB_PATH
     rows = ki.list_records_for_topic(resolved_db_path, topic, limit=max_records + 1)

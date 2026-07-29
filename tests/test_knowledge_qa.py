@@ -364,35 +364,6 @@ def test_tool_search_records_without_limit_returns_all_gathered_matches(monkeypa
     assert "Example Project 3" in result
 
 
-def test_tool_search_records_prefers_camlis_resource_url(monkeypatch):
-    class FakeRow(dict):
-        def __getitem__(self, key):
-            return dict.__getitem__(self, key)
-
-    rows = [
-        FakeRow({
-            "id": 113,
-            "source": "camlis",
-            "year": "2025",
-            "title": "LLM Salting",
-            "author": "Tamas Voros",
-            "agent_topics": "[]",
-            "url": "https://youtu.be/cqqUzsXIdPg",
-            "raw_json": json.dumps({"resources": [{"label": "video", "url": "https://youtu.be/cqqUzsXIdPg"}]}),
-            "text": "LLM salting abstract.",
-        })
-    ]
-
-    monkeypatch.setattr(the_analyst.ki, "list_classification_topics", lambda _db_path: [])
-    monkeypatch.setattr(
-        the_analyst.ki,
-        "search_records",
-        lambda _db_path, _query, limit: rows[:limit],
-    )
-
-    result = tool_search_records("LLM Salting", limit=1)
-
-    assert "URL: https://youtu.be/cqqUzsXIdPg" in result
 
 def test_tool_search_records_numeric_query_fetches_exact_record_id(monkeypatch):
     class FakeRow(dict):

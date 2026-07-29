@@ -25,6 +25,7 @@ def _record(record_id: int = 42) -> dict:
 def test_topic_summary_prompt_is_loaded_from_prompt_files():
     assert ts.TOPIC_SUMMARY_USER_PROMPT.exists()
     assert ts.TOPIC_SUMMARY_SYSTEM_PROMPT.exists()
+    assert not ts.TOPIC_SUMMARY_USER_PROMPT.read_bytes().startswith(b"\xef\xbb\xbf")
 
     prompt = ts.build_prompt(
         "Threat modeling",
@@ -477,7 +478,7 @@ def test_repair_missing_ids_appends_addendum_and_includes_source_evidence():
             )
 
     client = SimpleNamespace(messages=FakeMessages())
-    repaired = ts.repair_missing_ids(
+    repair_result = ts.repair_missing_ids(
         client,
         "Threat modeling",
         "# Existing report\n\nPrior evidence [record_id:1].",
@@ -486,9 +487,8 @@ def test_repair_missing_ids_appends_addendum_and_includes_source_evidence():
         4000,
     )
 
-    assert repaired.startswith("# Existing report")
-    assert "[record_id:1]" in repaired
-    assert repaired.endswith("Evidence [record_id:2].")
+    assert isinstance(repair_result, ts.SummaryModelResult)
+    assert repair_result.text == "## Coverage Addendum\n\nEvidence [record_id:2]."
     repair_prompt = calls[0]["messages"][0]["content"]
     assert "Return only an addendum" in repair_prompt
     assert "## [record_id:2]\nMissing source evidence." in repair_prompt
@@ -509,3 +509,15 @@ def test_response_audit_metadata_marks_output_limit_as_possibly_truncated():
     assert metadata["requested_max_tokens"] == 4000
     assert metadata["estimated_output_tokens"] == ts.estimate_tokens("Generated summary.")
     assert metadata["possibly_truncated"] is True
+
+
+def test_response_audit_metadata_does_not_treat_exact_usage_as_truncation():
+    result = ts.SummaryModelResult(
+        text="Generated summary.",
+        stop_reason="end_turn",
+        provider_usage={"input_tokens": 10, "output_tokens": 4000, "total_tokens": 4010},
+    )
+
+    metadata = ts.response_audit_metadata(result, 4000, "initial")
+
+    assert metadata["possibly_truncated"] is False

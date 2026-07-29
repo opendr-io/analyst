@@ -41,6 +41,8 @@ SUMMARY_CHECK_DIR_NAMES = {
 DEFAULT_INPUT_TOKEN_THRESHOLD = 750_000
 DEFAULT_AUTHOR_MIN_RECORDS = 2
 RECORD_ID_RE = re.compile(r"\[record_id:(\d+)\]")
+MAX_FULL_SUMMARY_RETRIES = 1
+SMALL_TOPIC_MAX_RECORDS = 3
 
 
 @dataclass(frozen=True)
@@ -87,7 +89,7 @@ def slugify_topic(topic: str) -> str:
 
 
 def output_token_target(record_count: int, input_tokens: int) -> int:
-    if record_count <= 3:
+    if record_count <= SMALL_TOPIC_MAX_RECORDS:
         return 0
     target = (input_tokens * 30 + 99) // 100
     target = max(3_000, min(target, 60_000))
@@ -692,6 +694,7 @@ def preflight_group(
 
     primary_ids = [int(row["id"]) for row in records if (row["primary_topic"] or "") == group.name]
     secondary_ids = [int(row["id"]) for row in records if (row["primary_topic"] or "") != group.name]
+    output_tokens = output_token_target(len(records), input_tokens)
     preflight = {
         "group_by": group.group_by,
         "group_name": group.name,
@@ -706,8 +709,8 @@ def preflight_group(
         "secondary_record_ids": secondary_ids,
         "estimated_input_tokens": input_tokens,
         "max_input_tokens": max_input_tokens,
-        "estimated_output_tokens": output_token_target(len(records), input_tokens),
-        "output_max_tokens": output_token_target(len(records), input_tokens),
+        "estimated_output_tokens": output_tokens,
+        "output_max_tokens": output_tokens,
     }
     return records, topic_def, prompt, preflight
 
@@ -786,7 +789,7 @@ def response_audit_metadata(result: SummaryModelResult, requested_max_tokens: in
         "requested_max_tokens": requested_max_tokens,
         "estimated_output_tokens": estimate_tokens(result.text),
         "actual_provider_output_tokens": provider_output_tokens,
-        "possibly_truncated": "max_token" in stop_reason_text or "length" in stop_reason_text or (provider_output_tokens is not None and provider_output_tokens >= requested_max_tokens),
+        "possibly_truncated": any(marker in stop_reason_text for marker in ("max_output", "max_token", "length")),
     }
 
 
@@ -798,8 +801,7 @@ def repair_missing_ids(
     missing_ids: list[int],
     max_tokens: int,
     model: str = MODEL_SUMMARIZE,
-    return_response_metadata: bool = False,
-) -> str | tuple[str, SummaryModelResult]:
+) -> SummaryModelResult:
     missing = ", ".join(f"[record_id:{record_id}]" for record_id in missing_ids)
     prompt = f"""Write a Markdown coverage addendum for the topic summary below.
 
@@ -821,11 +823,7 @@ Source evidence:
 
 {source_prompt}
 """
-    result = _call_summary_model_result(client, prompt, max_tokens, model=model)
-    repaired = f"{summary.rstrip()}\n\n{result.text.lstrip()}"
-    if return_response_metadata:
-        return repaired, result
-    return repaired
+    return _call_summary_model_result(client, prompt, max_tokens, model=model)
 
 
 def write_json(path: Path, value: dict[str, Any]) -> None:
@@ -1141,6 +1139,7 @@ def summarize_group(
 
     client = client or llm_client.create_client()
     retry_used = False
+    coverage_repair_skipped_due_to_truncation = False
     response_metadata: list[dict[str, Any]] = []
     try:
         current_max_tokens = max_output_tokens
@@ -1149,7 +1148,10 @@ def summarize_group(
         response_metadata.append(response_audit_metadata(initial_result, current_max_tokens, "initial"))
 
         # A coverage addendum cannot repair a response that ended before its required sections.
-        while response_metadata[-1]["possibly_truncated"] and current_max_tokens < 60_000:
+        # One larger retry bounds duplicate full-prompt generation cost.
+        for _ in range(MAX_FULL_SUMMARY_RETRIES):
+            if not response_metadata[-1]["possibly_truncated"] or current_max_tokens >= 60_000:
+                break
             retry_used = True
             current_max_tokens = expanded_output_token_target(current_max_tokens)
             retry_result = _call_summary_model_result(client, prompt, current_max_tokens, model=model)
@@ -1160,20 +1162,23 @@ def summarize_group(
         output_check = compare_ids(expected_ids, output_ids)
 
         if output_check["missing"]:
-            retry_used = True
-            summary, repair_result = repair_missing_ids(
-                client,
-                group.label,
-                summary,
-                prompt,
-                output_check["missing"],
-                current_max_tokens,
-                model=model,
-                return_response_metadata=True,
-            )
-            response_metadata.append(response_audit_metadata(repair_result, current_max_tokens, "coverage_addendum"))
-            output_ids = extract_record_ids(summary)
-            output_check = compare_ids(expected_ids, output_ids)
+            if response_metadata[-1]["possibly_truncated"]:
+                coverage_repair_skipped_due_to_truncation = True
+            else:
+                retry_used = True
+                repair_result = repair_missing_ids(
+                    client,
+                    group.label,
+                    summary,
+                    prompt,
+                    output_check["missing"],
+                    current_max_tokens,
+                    model=model,
+                )
+                summary = f"{summary.rstrip()}\n\n{repair_result.text.lstrip()}"
+                response_metadata.append(response_audit_metadata(repair_result, current_max_tokens, "coverage_addendum"))
+                output_ids = extract_record_ids(summary)
+                output_check = compare_ids(expected_ids, output_ids)
     except Exception as exc:
         audit.update(
             {
@@ -1210,6 +1215,7 @@ def summarize_group(
             "output_token_estimate": estimate_tokens(summary),
             "output_character_count": len(summary),
             "retry_used": retry_used,
+            "coverage_repair_skipped_due_to_truncation": coverage_repair_skipped_due_to_truncation,
             "response_metadata": response_metadata,
             "requested_max_tokens": max_output_tokens,
             "estimated_output_tokens": estimate_tokens(summary),
