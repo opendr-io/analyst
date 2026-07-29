@@ -154,7 +154,11 @@ def _camlis_resource_url(talk: dict[str, Any], label: str) -> str:
 
 
 def _camlis_record_url(talk: dict[str, Any]) -> str:
-    return _camlis_resource_url(talk, "video")
+    for label in ("video", "pdf", "slides"):
+        url = _camlis_resource_url(talk, label)
+        if url:
+            return url
+    return clean_text(talk.get("url", ""))
 
 
 def records_from_camlis(data: dict[str, Any], source_file: Path) -> list[KnowledgeRecord]:
