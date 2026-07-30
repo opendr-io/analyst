@@ -1,0 +1,31 @@
+{
+  "topic": "OT and IoT security",
+  "topic_slug": "ot-and-iot-security",
+  "group_by": "topic",
+  "group_name": "OT and IoT security",
+  "group_label": "OT and IoT security",
+  "group_slug": "ot-and-iot-security",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:32:08+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "6a0c9272e036ddf09174e1f37afc764588565e8e198838946053c724c04e6968",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\ot-and-iot-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\ot-and-iot-security.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\ot-and-iot-security.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\ot-and-iot-security.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "fe25c0756acd2382de431c2fac0e29e5da0f868edc32c7392a77dfdc37c0a140",
+  "prompt_hash": "0c339352b11dfa49019cf2af287a0c95c3c847f1f134598da081a901560c2eae",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\ot-and-iot-security.validation.json"
+}

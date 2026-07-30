@@ -41,6 +41,8 @@ SUMMARY_CHECK_DIR_NAMES = {
 DEFAULT_INPUT_TOKEN_THRESHOLD = 750_000
 DEFAULT_AUTHOR_MIN_RECORDS = 2
 RECORD_ID_RE = re.compile(r"\[record_id:(\d+)\]")
+MAX_FULL_SUMMARY_RETRIES = 1
+SMALL_TOPIC_MAX_RECORDS = 3
 
 
 @dataclass(frozen=True)
@@ -72,6 +74,12 @@ class SummaryListing:
     manifest_path: Path
     audit_path: Path
 
+@dataclass(frozen=True)
+class SummaryModelResult:
+    text: str
+    stop_reason: str | None
+    provider_usage: dict[str, Any] | None
+
 
 def slugify_topic(topic: str) -> str:
     slug = topic.strip().lower()
@@ -80,14 +88,16 @@ def slugify_topic(topic: str) -> str:
     return slug or "topic"
 
 
-def output_token_target(record_count: int) -> int:
-    if record_count <= 10:
-        return 3_000
-    if record_count <= 50:
-        return 8_000
-    if record_count <= 100:
-        return 15_000
-    return 30_000
+def output_token_target(record_count: int, input_tokens: int) -> int:
+    if record_count <= SMALL_TOPIC_MAX_RECORDS:
+        return 0
+    target = (input_tokens * 30 + 99) // 100
+    target = max(3_000, min(target, 60_000))
+    return ((target + 999) // 1_000) * 1_000
+
+
+def expanded_output_token_target(current_max_tokens: int) -> int:
+    return min(current_max_tokens * 2, 60_000)
 
 
 def text_hash(text: str) -> str:
@@ -684,6 +694,7 @@ def preflight_group(
 
     primary_ids = [int(row["id"]) for row in records if (row["primary_topic"] or "") == group.name]
     secondary_ids = [int(row["id"]) for row in records if (row["primary_topic"] or "") != group.name]
+    output_tokens = output_token_target(len(records), input_tokens)
     preflight = {
         "group_by": group.group_by,
         "group_name": group.name,
@@ -698,7 +709,8 @@ def preflight_group(
         "secondary_record_ids": secondary_ids,
         "estimated_input_tokens": input_tokens,
         "max_input_tokens": max_input_tokens,
-        "output_max_tokens": output_token_target(len(records)),
+        "estimated_output_tokens": output_tokens,
+        "output_max_tokens": output_tokens,
     }
     return records, topic_def, prompt, preflight
 
@@ -713,14 +725,72 @@ def model_for_group(group_by: str) -> str:
     return MODEL_SUMMARIZE
 
 
-def call_summary_model(client: Any, prompt: str, max_tokens: int, model: str = MODEL_SUMMARIZE) -> str:
+def _json_safe_metadata(value: Any) -> Any:
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    if isinstance(value, dict):
+        return {str(key): _json_safe_metadata(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe_metadata(item) for item in value]
+    model_dump = getattr(value, "model_dump", None)
+    if callable(model_dump):
+        return _json_safe_metadata(model_dump())
+    as_dict = getattr(value, "__dict__", None)
+    if isinstance(as_dict, dict):
+        return {str(key): _json_safe_metadata(item) for key, item in as_dict.items() if not str(key).startswith("_")}
+    return str(value)
+
+
+def _provider_usage(response: Any) -> dict[str, Any] | None:
+    usage = getattr(response, "usage", None)
+    if usage is None:
+        raw = getattr(response, "raw", None)
+        usage = raw.get("usage") if isinstance(raw, dict) else getattr(raw, "usage", None)
+    serialized = _json_safe_metadata(usage)
+    return serialized if isinstance(serialized, dict) else None
+
+
+def _call_summary_model_result(client: Any, prompt: str, max_tokens: int, model: str = MODEL_SUMMARIZE) -> SummaryModelResult:
     response = client.messages.create(
         model=model,
         max_tokens=max_tokens,
         system=build_system_prompt(),
         messages=[{"role": "user", "content": prompt}],
     )
-    return response.content[0].text.strip()
+    return SummaryModelResult(
+        text=response.content[0].text.strip(),
+        stop_reason=getattr(response, "stop_reason", None),
+        provider_usage=_provider_usage(response),
+    )
+
+
+def call_summary_model(client: Any, prompt: str, max_tokens: int, model: str = MODEL_SUMMARIZE) -> str:
+    return _call_summary_model_result(client, prompt, max_tokens, model=model).text
+
+
+def _provider_output_tokens(usage: dict[str, Any] | None) -> int | None:
+    if not usage:
+        return None
+    for key in ("output_tokens", "completion_tokens"):
+        value = usage.get(key)
+        if isinstance(value, int):
+            return value
+    return None
+
+
+def response_audit_metadata(result: SummaryModelResult, requested_max_tokens: int, phase: str) -> dict[str, Any]:
+    provider_output_tokens = _provider_output_tokens(result.provider_usage)
+    stop_reason = result.stop_reason
+    stop_reason_text = stop_reason.lower() if isinstance(stop_reason, str) else ""
+    return {
+        "phase": phase,
+        "stop_reason": stop_reason,
+        "actual_provider_usage": result.provider_usage,
+        "requested_max_tokens": requested_max_tokens,
+        "estimated_output_tokens": estimate_tokens(result.text),
+        "actual_provider_output_tokens": provider_output_tokens,
+        "possibly_truncated": any(marker in stop_reason_text for marker in ("max_output", "max_token", "length")),
+    }
 
 
 def repair_missing_ids(
@@ -731,7 +801,7 @@ def repair_missing_ids(
     missing_ids: list[int],
     max_tokens: int,
     model: str = MODEL_SUMMARIZE,
-) -> str:
+) -> SummaryModelResult:
     missing = ", ".join(f"[record_id:{record_id}]" for record_id in missing_ids)
     prompt = f"""Write a Markdown coverage addendum for the topic summary below.
 
@@ -753,8 +823,7 @@ Source evidence:
 
 {source_prompt}
 """
-    addendum = call_summary_model(client, prompt, max_tokens, model=model)
-    return f"{summary.rstrip()}\n\n{addendum.lstrip()}"
+    return _call_summary_model_result(client, prompt, max_tokens, model=model)
 
 
 def write_json(path: Path, value: dict[str, Any]) -> None:
@@ -819,7 +888,7 @@ def print_topic_list(topics: list[str]) -> None:
 
 
 REQUIRED_SUMMARY_SECTIONS = [
-    "Executive Summary",
+    "Meta-Summary",
     "Research Landscape",
     "Major Themes And Trends",
     "Methods, Tools, And Approaches Discussed",
@@ -1046,33 +1115,70 @@ def summarize_group(
     if should_write_preflight:
         paths.prompt_input.write_text(prompt, encoding="utf-8")
 
+    max_output_tokens = preflight["output_max_tokens"]
     if dry_run:
         if write_preflight_artifacts:
             write_json(paths.audit, audit)
             write_json(paths.manifest, manifest)
         return audit
 
+    if max_output_tokens <= 0:
+        audit.update({
+            "summary_status": "skipped_small_topic_full_record_fallback",
+            "validation_status": "skipped",
+            "summary_storage": "full_record_fallback",
+        })
+        manifest.update({
+            "status": "skipped_small_topic_full_record_fallback",
+            "validation_status": "skipped",
+            "summary_storage": "full_record_fallback",
+        })
+        write_json(paths.audit, audit)
+        write_json(paths.manifest, manifest)
+        return audit
+
     client = client or llm_client.create_client()
-    max_output_tokens = preflight["output_max_tokens"]
     retry_used = False
+    coverage_repair_skipped_due_to_truncation = False
+    response_metadata: list[dict[str, Any]] = []
     try:
-        summary = call_summary_model(client, prompt, max_output_tokens, model=model)
+        current_max_tokens = max_output_tokens
+        initial_result = _call_summary_model_result(client, prompt, current_max_tokens, model=model)
+        summary = initial_result.text
+        response_metadata.append(response_audit_metadata(initial_result, current_max_tokens, "initial"))
+
+        # A coverage addendum cannot repair a response that ended before its required sections.
+        # One larger retry bounds duplicate full-prompt generation cost.
+        for _ in range(MAX_FULL_SUMMARY_RETRIES):
+            if not response_metadata[-1]["possibly_truncated"] or current_max_tokens >= 60_000:
+                break
+            retry_used = True
+            current_max_tokens = expanded_output_token_target(current_max_tokens)
+            retry_result = _call_summary_model_result(client, prompt, current_max_tokens, model=model)
+            summary = retry_result.text
+            response_metadata.append(response_audit_metadata(retry_result, current_max_tokens, "full_summary_retry"))
+
         output_ids = extract_record_ids(summary)
         output_check = compare_ids(expected_ids, output_ids)
 
         if output_check["missing"]:
-            retry_used = True
-            summary = repair_missing_ids(
-                client,
-                group.label,
-                summary,
-                prompt,
-                output_check["missing"],
-                max_output_tokens,
-                model=model,
-            )
-            output_ids = extract_record_ids(summary)
-            output_check = compare_ids(expected_ids, output_ids)
+            if response_metadata[-1]["possibly_truncated"]:
+                coverage_repair_skipped_due_to_truncation = True
+            else:
+                retry_used = True
+                repair_result = repair_missing_ids(
+                    client,
+                    group.label,
+                    summary,
+                    prompt,
+                    output_check["missing"],
+                    current_max_tokens,
+                    model=model,
+                )
+                summary = f"{summary.rstrip()}\n\n{repair_result.text.lstrip()}"
+                response_metadata.append(response_audit_metadata(repair_result, current_max_tokens, "coverage_addendum"))
+                output_ids = extract_record_ids(summary)
+                output_check = compare_ids(expected_ids, output_ids)
     except Exception as exc:
         audit.update(
             {
@@ -1080,6 +1186,7 @@ def summarize_group(
                 "error_type": type(exc).__name__,
                 "error_message": str(exc),
                 "retry_used": retry_used,
+                "response_metadata": response_metadata,
             }
         )
         manifest.update(
@@ -1108,6 +1215,12 @@ def summarize_group(
             "output_token_estimate": estimate_tokens(summary),
             "output_character_count": len(summary),
             "retry_used": retry_used,
+            "coverage_repair_skipped_due_to_truncation": coverage_repair_skipped_due_to_truncation,
+            "response_metadata": response_metadata,
+            "requested_max_tokens": max_output_tokens,
+            "estimated_output_tokens": estimate_tokens(summary),
+            "possibly_truncated": response_metadata[-1]["possibly_truncated"],
+            "truncation_retry_used": any(item["possibly_truncated"] for item in response_metadata[:-1]),
             "summary_hash": text_hash(summary),
         }
     )
@@ -1262,6 +1375,7 @@ def print_summary_result(audit: dict[str, Any], dry_run: bool) -> None:
         print(f"  validation_status: {audit['validation_status']}")
     print(f"  records: {audit['expected_record_count']}")
     print(f"  estimated_input_tokens: {audit['estimated_input_tokens']}")
+    print(f"  estimated_output_tokens: {audit.get('estimated_output_tokens', audit['output_max_tokens'])}")
     print(f"  output_max_tokens: {audit['output_max_tokens']}")
     print(f"  artifacts_written: {audit['artifacts_written']}")
     print(f"  prompt: {audit['summary_input_artifact_path']}")
@@ -1274,12 +1388,13 @@ def print_summary_result(audit: dict[str, Any], dry_run: bool) -> None:
 
 def print_dry_run_totals(audits: list[dict[str, Any]]) -> None:
     input_tokens = sum(int(audit["estimated_input_tokens"]) for audit in audits)
-    output_tokens = sum(int(audit["output_max_tokens"]) for audit in audits)
+    output_tokens = sum(int(audit.get("estimated_output_tokens", audit["output_max_tokens"])) for audit in audits)
     records = sum(int(audit["expected_record_count"]) for audit in audits)
     print("\ndry_run_totals:")
     print(f"  summaries: {len(audits)}")
     print(f"  records: {records}")
     print(f"  estimated_input_tokens: {input_tokens}")
+    print(f"  estimated_output_tokens: {output_tokens}")
     print(f"  output_max_tokens: {output_tokens}")
 
 
@@ -1397,3 +1512,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

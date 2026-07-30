@@ -25,6 +25,7 @@ def _record(record_id: int = 42) -> dict:
 def test_topic_summary_prompt_is_loaded_from_prompt_files():
     assert ts.TOPIC_SUMMARY_USER_PROMPT.exists()
     assert ts.TOPIC_SUMMARY_SYSTEM_PROMPT.exists()
+    assert not ts.TOPIC_SUMMARY_USER_PROMPT.read_bytes().startswith(b"\xef\xbb\xbf")
 
     prompt = ts.build_prompt(
         "Threat modeling",
@@ -37,7 +38,7 @@ def test_topic_summary_prompt_is_loaded_from_prompt_files():
 
     assert "Topic: Threat modeling" in prompt
     assert "Threat modeling query" in prompt
-    assert "## Executive Summary" in prompt
+    assert "## Meta-Summary" in prompt
     assert "## Coverage And Evidence Notes" in prompt
     assert "## [record_id:42]" in prompt
     assert "{topic}" not in prompt
@@ -150,6 +151,22 @@ def test_filter_existing_groups_skips_existing_summary_files(tmp_path):
     assert skipped == [existing]
 
 
+def test_output_token_target_targets_thirty_percent_of_input_tokens():
+    assert ts.output_token_target(1, 100_000) == 0
+    assert ts.output_token_target(3, 100_000) == 0
+    assert ts.output_token_target(4, 2_000) == 3_000
+    assert ts.output_token_target(10, 10_001) == 4_000
+    assert ts.output_token_target(50, 50_000) == 15_000
+    assert ts.output_token_target(100, 101_000) == 31_000
+    assert ts.output_token_target(250, 180_000) == 54_000
+    assert ts.output_token_target(500, 300_000) == 60_000
+
+def test_expanded_output_token_target_doubles_to_the_cap():
+    assert ts.expanded_output_token_target(3_000) == 6_000
+    assert ts.expanded_output_token_target(30_000) == 60_000
+    assert ts.expanded_output_token_target(60_000) == 60_000
+
+
 def test_print_dry_run_totals_sums_token_estimates(capsys):
     ts.print_dry_run_totals([
         {
@@ -169,6 +186,7 @@ def test_print_dry_run_totals_sums_token_estimates(capsys):
     assert "  summaries: 2" in output
     assert "  records: 5" in output
     assert "  estimated_input_tokens: 350" in output
+    assert "  estimated_output_tokens: 11000" in output
     assert "  output_max_tokens: 11000" in output
 
 
@@ -311,6 +329,7 @@ def test_archive_existing_rejects_source_outside_summary_dir(tmp_path):
         audit=tmp_path / "artifacts" / "topics" / "safe.audit.json",
         prompt_input=tmp_path / "artifacts" / "topics" / "safe.prompt-input.md",
         manifest=tmp_path / "artifacts" / "topics" / "safe.manifest.json",
+        validation=tmp_path / "artifacts" / "topics" / "safe.validation.json",
     )
 
     with pytest.raises(ValueError, match="archive source must stay within summary_dir"):
@@ -366,6 +385,48 @@ def test_summarize_group_dry_run_is_read_only_by_default(monkeypatch, tmp_path):
     assert not (paths.prompt_input.parent / "archive").exists()
 
 
+def test_summarize_group_skips_small_topic_full_record_fallback(monkeypatch, tmp_path):
+    group = ts.SummaryGroup("topic", "Tiny topic", "Tiny topic", "", "")
+    paths = ts.grouped_paths(tmp_path, group)
+    monkeypatch.setattr(ts, "run_global_preflight", lambda db_path: {"ok": True})
+    monkeypatch.setattr(
+        ts,
+        "preflight_group",
+        lambda db_path, group, max_input_tokens: (
+            [{"id": 1}, {"id": 2}, {"id": 3}],
+            {},
+            "new prompt",
+            {
+                "expected_record_count": 3,
+                "expected_record_ids": [1, 2, 3],
+                "estimated_input_tokens": 100,
+                "output_max_tokens": 0,
+            },
+        ),
+    )
+    monkeypatch.setattr(ts, "topic_table_hash", lambda db_path: "topic-hash")
+    monkeypatch.setattr(ts, "source_fingerprint", lambda label, records, topic_def: "source-hash")
+    monkeypatch.setattr(ts, "file_fingerprint", lambda db_path: {"path": str(db_path)})
+    monkeypatch.setattr(
+        ts,
+        "call_summary_model",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("LLM should not be called")),
+    )
+
+    audit = ts.summarize_group(
+        group=group,
+        db_path=tmp_path / "knowledge.sqlite3",
+        summary_dir=tmp_path,
+        dry_run=False,
+    )
+
+    assert audit["summary_status"] == "skipped_small_topic_full_record_fallback"
+    assert audit["summary_storage"] == "full_record_fallback"
+    assert paths.audit.exists()
+    assert paths.manifest.exists()
+    assert paths.prompt_input.exists()
+    assert not paths.summary.exists()
+
 def test_summarize_group_can_write_preflight_artifacts_without_archiving(monkeypatch, tmp_path):
     group = ts.SummaryGroup("author", "Existing Speaker", "Author: Existing Speaker", "", "")
     paths = ts.grouped_paths(tmp_path, group)
@@ -417,7 +478,7 @@ def test_repair_missing_ids_appends_addendum_and_includes_source_evidence():
             )
 
     client = SimpleNamespace(messages=FakeMessages())
-    repaired = ts.repair_missing_ids(
+    repair_result = ts.repair_missing_ids(
         client,
         "Threat modeling",
         "# Existing report\n\nPrior evidence [record_id:1].",
@@ -426,9 +487,37 @@ def test_repair_missing_ids_appends_addendum_and_includes_source_evidence():
         4000,
     )
 
-    assert repaired.startswith("# Existing report")
-    assert "[record_id:1]" in repaired
-    assert repaired.endswith("Evidence [record_id:2].")
+    assert isinstance(repair_result, ts.SummaryModelResult)
+    assert repair_result.text == "## Coverage Addendum\n\nEvidence [record_id:2]."
     repair_prompt = calls[0]["messages"][0]["content"]
     assert "Return only an addendum" in repair_prompt
     assert "## [record_id:2]\nMissing source evidence." in repair_prompt
+
+def test_response_audit_metadata_marks_output_limit_as_possibly_truncated():
+    result = ts.SummaryModelResult(
+        text="Generated summary.",
+        stop_reason="max_output_tokens",
+        provider_usage={"input_tokens": 10, "output_tokens": 4000, "total_tokens": 4010},
+    )
+
+    metadata = ts.response_audit_metadata(result, 4000, "initial")
+
+    assert metadata["phase"] == "initial"
+    assert metadata["stop_reason"] == "max_output_tokens"
+    assert metadata["actual_provider_usage"]["output_tokens"] == 4000
+    assert metadata["actual_provider_output_tokens"] == 4000
+    assert metadata["requested_max_tokens"] == 4000
+    assert metadata["estimated_output_tokens"] == ts.estimate_tokens("Generated summary.")
+    assert metadata["possibly_truncated"] is True
+
+
+def test_response_audit_metadata_does_not_treat_exact_usage_as_truncation():
+    result = ts.SummaryModelResult(
+        text="Generated summary.",
+        stop_reason="end_turn",
+        provider_usage={"input_tokens": 10, "output_tokens": 4000, "total_tokens": 4010},
+    )
+
+    metadata = ts.response_audit_metadata(result, 4000, "initial")
+
+    assert metadata["possibly_truncated"] is False

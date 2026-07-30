@@ -1,0 +1,68 @@
+{
+  "group_by": "author",
+  "group_name": "Joe Slowik",
+  "group_label": "Author: Joe Slowik",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T20:45:40+00:00",
+  "summary_file_path": "summaries\\authors\\joe-slowik.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\joe-slowik.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\joe-slowik.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\joe-slowik.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\joe-slowik.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 4,
+  "expected_record_ids": [
+    2517,
+    2703,
+    2842,
+    3009
+  ],
+  "record_ids_found_in_summary": [
+    2517,
+    2703,
+    2842,
+    3009
+  ],
+  "record_id_occurrences_in_summary": 54,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2517,
+      2703,
+      2842,
+      3009
+    ],
+    "unique_observed": [
+      2517,
+      2703,
+      2842,
+      3009
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2517,
+      2703,
+      2842,
+      3009
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "c6b9ed0b498373a37ae6ef6f40392551c2c25cccccd4f7d1903953a9dd47afd0",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "e75aec708cb7a4fc5e49b149339423a4e00105f56f824358b037593870ac6d31",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 4753,
+  "output_character_count": 19010
+}

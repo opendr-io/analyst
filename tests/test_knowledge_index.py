@@ -1,10 +1,11 @@
-from pathlib import Path
+﻿from pathlib import Path
 import sqlite3
 from uuid import uuid4
 
 import json
 import pytest
 
+from knowledge_indexing.knowledge_imports import _camlis_record_url
 from knowledge_indexing.knowledge_index import (
     _validate_ident,
     decode_topics,
@@ -439,6 +440,115 @@ def test_import_exports_preserves_blackhat_hash_urls_as_distinct_records():
     stats = import_exports([export], db_path=db_path)
 
     assert stats["inserted"] == 2
+
+
+def test_import_exports_uses_camlis_video_resource_as_record_url():
+    test_dir = local_tmp_dir()
+    export = test_dir / "camlis-talks.json"
+    export.write_text(
+        """
+        {
+          "talks": [
+            {
+              "year": 2025,
+              "speaker": "Speaker A",
+              "title": "Video Resource Talk",
+              "abstract": "Body",
+              "url": "https://camlis.example/dead-detail",
+              "resources": [
+                {"label": "code of conduct", "url": "https://camlis.example/code"},
+                {"label": "pdf", "url": "https://camlis.example/slides.pdf"},
+                {"label": "video", "url": "https://youtu.be/video-resource"}
+              ]
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
+
+    stats = import_exports([export], db_path=db_path)
+
+    assert stats["inserted"] == 1
+    with open_db(db_path) as conn:
+        row = conn.execute("SELECT url, source_record_id, raw_json FROM records WHERE source = 'camlis'").fetchone()
+    assert row["url"] == "https://youtu.be/video-resource"
+    assert "https://camlis.example/dead-detail" in row["source_record_id"]
+    assert "dead-detail" in row["raw_json"]
+
+
+def test_import_exports_uses_camlis_pdf_resource_when_video_is_unavailable():
+    test_dir = local_tmp_dir()
+    export = test_dir / "camlis-talks.json"
+    export.write_text(
+        """
+        {
+          "talks": [
+            {
+              "year": 2025,
+              "speaker": "Speaker A",
+              "title": "PDF Only Talk",
+              "abstract": "Body",
+              "url": "https://camlis.example/dead-detail",
+              "resources": [
+                {"label": "pdf", "url": "https://camlis.example/slides.pdf"}
+              ]
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
+
+    stats = import_exports([export], db_path=db_path)
+
+    assert stats["inserted"] == 1
+    with open_db(db_path) as conn:
+        row = conn.execute("SELECT url FROM records WHERE source = 'camlis'").fetchone()
+    assert row["url"] == "https://camlis.example/slides.pdf"
+
+
+def test_camlis_record_url_uses_slides_resource_when_video_and_pdf_are_unavailable():
+    assert _camlis_record_url(
+        {
+            "url": "https://camlis.example/talk-detail",
+            "resources": [{"label": "slides", "url": "https://camlis.example/slides"}],
+        }
+    ) == "https://camlis.example/slides"
+
+
+def test_import_exports_uses_camlis_legacy_url_when_no_resource_is_available():
+    test_dir = local_tmp_dir()
+    export = test_dir / "camlis-talks.json"
+    export.write_text(
+        """
+        {
+          "talks": [
+            {
+              "year": 2025,
+              "speaker": "Speaker A",
+              "title": "Legacy URL Talk",
+              "abstract": "Body",
+              "url": "https://camlis.example/talk-detail",
+              "resources": [
+                {"label": "code of conduct", "url": "https://camlis.example/code"}
+              ]
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+    db_path = test_dir / f"knowledge-{uuid4().hex}.sqlite3"
+
+    stats = import_exports([export], db_path=db_path)
+
+    assert stats["inserted"] == 1
+    with open_db(db_path) as conn:
+        row = conn.execute("SELECT url FROM records WHERE source = 'camlis'").fetchone()
+    assert row["url"] == "https://camlis.example/talk-detail"
 
 
 def test_import_exports_preserves_camlis_shared_detail_url_records():
@@ -1234,3 +1344,4 @@ def test_decode_topics_handles_empty_and_none():
 def test_decode_topics_splits_on_pipe():
     result = decode_topics("Topic A|Topic B|Topic C")
     assert result == ["Topic A", "Topic B", "Topic C"]
+

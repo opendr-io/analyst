@@ -1,0 +1,31 @@
+{
+  "topic": "Application security",
+  "topic_slug": "application-security",
+  "group_by": "topic",
+  "group_name": "Application security",
+  "group_label": "Application security",
+  "group_slug": "application-security",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T19:07:14+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "5579308b77630db353c74a10d8f82e2c2c9e89d6493fb18ed096aae1c64ba5b5",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\application-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\application-security.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\application-security.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\application-security.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "7e8c7500a930ef652c1912346eeb1d50f718bb41d2ec251e2b900e298a344c8c",
+  "prompt_hash": "8bdc881b64bb2e9fbf79dbce3b3c3e396cfaf9f7eec6d6ff2847dff6e0c94aff",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\application-security.validation.json"
+}

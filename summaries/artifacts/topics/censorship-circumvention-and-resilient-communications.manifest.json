@@ -1,0 +1,31 @@
+{
+  "topic": "Censorship circumvention and resilient communications",
+  "topic_slug": "censorship-circumvention-and-resilient-communications",
+  "group_by": "topic",
+  "group_name": "Censorship circumvention and resilient communications",
+  "group_label": "Censorship circumvention and resilient communications",
+  "group_slug": "censorship-circumvention-and-resilient-communications",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T19:49:28+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "ef2a04f17cf19d1ac20566b846aacf6c047efd608ff20d87be47f325c190a6ea",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\censorship-circumvention-and-resilient-communications.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "002983559ee1ee41c380cb69a6b24eda3a2e6d237f84f54df644f4c4450b77ea",
+  "prompt_hash": "b0fd75391ff291c5c3566bb7650d3f21d68344ca3c867892ba3a930d5c28efd7",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.validation.json"
+}

@@ -29,7 +29,7 @@ from knowledge_agenting.common import load_prompt
 from knowledge_indexing import knowledge_index as ki
 import llm_client
 from config import llm_settings
-from knowledge_agenting.topic_summarizer import summarize_topic as summarize_topic_to_files
+from knowledge_agenting.topic_summarizer import SMALL_TOPIC_MAX_RECORDS, summarize_topic as summarize_topic_to_files
 
 MODEL = llm_settings.get_model("qa")
 SUMMARY_DIR = APP_DIR / "summaries"
@@ -164,7 +164,7 @@ TOOLS = [
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Search term ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â author name, talk title, tool name, or keyword",
+                    "description": "Search term, author name, talk title, tool name, or keyword.",
                 },
                 "topic": {
                     "type": "string",
@@ -580,10 +580,15 @@ def _record_ids_in_text(text: str) -> list[int]:
     return record_ids
 
 
+
+def _record_citation_url(row: Any) -> str:
+    return str(row["url"] or "").strip()
+
+
 def _record_citation_text(row: Any) -> str:
     title = str(row["title"] or "").strip() or "(untitled)"
     author = str(row["author"] or "").strip() or "(unknown)"
-    url = str(row["url"] or "").strip()
+    url = _record_citation_url(row)
     if url:
         return f"{title}, {author}, <{url}>"
     return f"{title}, {author}"
@@ -672,7 +677,7 @@ def load_summary_files(
                 f"Selected summary: {item.topic}\n\n"
                 f"# {item.topic}\n\n{enrich_summary_citations(path.read_text(encoding='utf-8'), db_path=db_path)}"
             )
-        return ""
+        return _small_topic_record_evidence(topic, db_path=db_path)
     parts = []
 
     summary_topics = [item.topic for item in summary_files]
@@ -948,12 +953,51 @@ def _format_compact_record(r: Any) -> str:
     )
     if topics:
         part += f"Topics: {', '.join(topics)}\n"
-    if r["url"]:
-        part += f"URL: {r['url']}\n"
+    url = _record_citation_url(r)
+    if url:
+        part += f"URL: {url}\n"
     snippet = " ".join(r["text"].split())[:240]
     if snippet:
         part += f"Snippet: {snippet}"
     return part
+
+
+def _format_complete_record_evidence(r: Any) -> str:
+    topics = ki.decode_topics(r["agent_topics"])
+    lines = [
+        f"## [record_id:{r['id']}] {r['title']}",
+        f"Source: {r['source']}",
+        f"Year: {r['year']}",
+        f"Author: {r['author']}",
+    ]
+    url = _record_citation_url(r)
+    if url:
+        lines.append(f"URL: {url}")
+    if topics:
+        lines.append(f"Topics: {', '.join(topics)}")
+    lines.append("")
+    lines.append(str(r["text"] or ""))
+    return "\n".join(lines).strip()
+
+
+def _small_topic_record_evidence(
+    topic: str,
+    db_path: Path | None = None,
+    max_records: int = SMALL_TOPIC_MAX_RECORDS,
+) -> str:
+    resolved_db_path = db_path or ki.DB_PATH
+    rows = ki.list_records_for_topic(resolved_db_path, topic, limit=max_records + 1)
+    if not rows or len(rows) > max_records:
+        return ""
+    records_text = "\n\n---\n\n".join(_format_complete_record_evidence(row) for row in rows)
+    return (
+        "# Complete Record Evidence\n\n"
+        "No generated summary file was found for this small topic. "
+        "Use ONLY the complete records below to answer. Do not use outside knowledge.\n\n"
+        f"Selected topic: {topic}\n"
+        f"Record count: {len(rows)}\n\n"
+        f"{records_text}"
+    )
 
 
 def tool_search_records(query: str, topic: str = "", limit: int | None = None) -> str:
@@ -1319,14 +1363,15 @@ def tool_answer_about_author(
     canonical_author = author.strip()
     if len(rows) == 1:
         row = rows[0]
+        url = _record_citation_url(row)
         return (
             f"Author: {canonical_author}\n"
             "Evidence: single underlying record\n\n"
             f"[record_id:{row['id']}] {row['source']} {row['year']}\n"
             f"Title: {row['title']}\n"
             f"Author metadata: {row['author']}\n"
-            f"URL: {row['url']}\n\n"
-            f"{row['text']}"
+            + (f"URL: {url}\n\n" if url else "")
+            + f"{row['text']}"
         ).strip()
 
     summary_path = summary_dir / "authors" / f"{_topic_slug(canonical_author)}.md"
@@ -1600,6 +1645,9 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
 
 
 

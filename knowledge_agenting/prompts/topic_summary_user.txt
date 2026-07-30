@@ -22,7 +22,7 @@ Use this structure:
 
 # Topic: {topic}
 
-## Executive Summary
+## Meta-Summary
 Concise meta-summary of what the records collectively say about this topic.
 
 ## Research Landscape
@@ -46,3 +46,4 @@ Account for all records, including minor, ambiguous, logistical, or weakly tied 
 Records:
 
 {records_text}
+

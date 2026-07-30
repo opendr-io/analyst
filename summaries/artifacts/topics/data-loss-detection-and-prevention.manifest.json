@@ -1,0 +1,31 @@
+{
+  "topic": "Data loss detection and prevention",
+  "topic_slug": "data-loss-detection-and-prevention",
+  "group_by": "topic",
+  "group_name": "Data loss detection and prevention",
+  "group_label": "Data loss detection and prevention",
+  "group_slug": "data-loss-detection-and-prevention",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:02:40+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "02499386d353123b9c44f8620446cfa4367c5c70ff9afb8e5f87949909d6d5bf",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\data-loss-detection-and-prevention.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\data-loss-detection-and-prevention.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\data-loss-detection-and-prevention.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\data-loss-detection-and-prevention.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "cdbcf81e25c8ab9e8a35002a31e84be5e6d0a9e76493189221de83f54823e23d",
+  "prompt_hash": "0386fd869325f6f6479cdc01c7eef82c1c273712bdf89fed45907c969a713f53",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\data-loss-detection-and-prevention.validation.json"
+}

@@ -1,0 +1,83 @@
+{
+  "group_by": "topic",
+  "group_name": "Censorship circumvention and resilient communications",
+  "group_label": "Censorship circumvention and resilient communications",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T19:52:03+00:00",
+  "summary_file_path": "summaries\\topics\\censorship-circumvention-and-resilient-communications.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\censorship-circumvention-and-resilient-communications.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 7,
+  "expected_record_ids": [
+    2127,
+    2410,
+    2843,
+    2876,
+    2917,
+    2940,
+    2958
+  ],
+  "record_ids_found_in_summary": [
+    2127,
+    2410,
+    2843,
+    2876,
+    2917,
+    2940,
+    2958
+  ],
+  "record_id_occurrences_in_summary": 83,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2127,
+      2410,
+      2843,
+      2876,
+      2917,
+      2940,
+      2958
+    ],
+    "unique_observed": [
+      2127,
+      2410,
+      2843,
+      2876,
+      2917,
+      2940,
+      2958
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2127,
+      2410,
+      2843,
+      2876,
+      2917,
+      2940,
+      2958
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "002983559ee1ee41c380cb69a6b24eda3a2e6d237f84f54df644f4c4450b77ea",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "b0fd75391ff291c5c3566bb7650d3f21d68344ca3c867892ba3a930d5c28efd7",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 6250,
+  "output_character_count": 24997
+}

@@ -1,0 +1,93 @@
+{
+  "group_by": "topic",
+  "group_name": "RAG and GraphRAG security",
+  "group_label": "RAG and GraphRAG security",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T20:43:37+00:00",
+  "summary_file_path": "summaries\\topics\\rag-and-graphrag-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\rag-and-graphrag-security.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 9,
+  "expected_record_ids": [
+    118,
+    1930,
+    1943,
+    2110,
+    2515,
+    2740,
+    2827,
+    3110,
+    3128
+  ],
+  "record_ids_found_in_summary": [
+    118,
+    1930,
+    1943,
+    2110,
+    2515,
+    2740,
+    2827,
+    3110,
+    3128
+  ],
+  "record_id_occurrences_in_summary": 76,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      118,
+      1930,
+      1943,
+      2110,
+      2515,
+      2740,
+      2827,
+      3110,
+      3128
+    ],
+    "unique_observed": [
+      118,
+      1930,
+      1943,
+      2110,
+      2515,
+      2740,
+      2827,
+      3110,
+      3128
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      118,
+      1930,
+      1943,
+      2110,
+      2515,
+      2740,
+      2827,
+      3110,
+      3128
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "507482cd383bcd7f2cbf99a13405cd774943610e05d58adc724a8a5262f2c3e8",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "71c2a8326d8de19cf8a724f0556a4bfae06b9eeecf80e3000de67c71379691f2",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 6829,
+  "output_character_count": 27314
+}

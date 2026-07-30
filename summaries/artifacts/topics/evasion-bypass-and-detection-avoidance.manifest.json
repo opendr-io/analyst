@@ -1,0 +1,31 @@
+{
+  "topic": "Evasion, bypass, and detection avoidance",
+  "topic_slug": "evasion-bypass-and-detection-avoidance",
+  "group_by": "topic",
+  "group_name": "Evasion, bypass, and detection avoidance",
+  "group_label": "Evasion, bypass, and detection avoidance",
+  "group_slug": "evasion-bypass-and-detection-avoidance",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:13:17+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "fe869292216f080ec91548d34b9863c3e1d63971cabe821aea578c4e2d423938",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\evasion-bypass-and-detection-avoidance.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\evasion-bypass-and-detection-avoidance.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\evasion-bypass-and-detection-avoidance.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\evasion-bypass-and-detection-avoidance.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "5eea98a61e6a2e0c02f808d3f05ca1f9f0940cfd67ee7a7ea36f451615f6ab0a",
+  "prompt_hash": "48fdbb41fa77fda070bd04887b20e94c94b08fe3ea4eb3b90527f5b3cb63891a",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\evasion-bypass-and-detection-avoidance.validation.json"
+}

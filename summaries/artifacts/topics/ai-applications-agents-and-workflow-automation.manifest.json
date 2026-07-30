@@ -1,0 +1,31 @@
+{
+  "topic": "AI applications agents and workflow automation",
+  "topic_slug": "ai-applications-agents-and-workflow-automation",
+  "group_by": "topic",
+  "group_name": "AI applications agents and workflow automation",
+  "group_label": "AI applications agents and workflow automation",
+  "group_slug": "ai-applications-agents-and-workflow-automation",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T19:36:04+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "cb0b48dad581134a2b17037fdd4c804a945b4ffbe2a053b84b0c5d9bd938e727",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\ai-applications-agents-and-workflow-automation.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\ai-applications-agents-and-workflow-automation.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\ai-applications-agents-and-workflow-automation.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\ai-applications-agents-and-workflow-automation.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "caa4ca19029e569038217eaff4ccd019fe4438b289cfcabc0a4669687cd2a330",
+  "prompt_hash": "faf31860ee4533474adb5d454bbbfd844ce91aab8c7cb78d4ec915ab7ba90b2c",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\ai-applications-agents-and-workflow-automation.validation.json"
+}

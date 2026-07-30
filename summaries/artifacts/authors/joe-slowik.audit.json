@@ -1,0 +1,136 @@
+{
+  "topic": "",
+  "group_by": "author",
+  "group_name": "Joe Slowik",
+  "group_label": "Author: Joe Slowik",
+  "summary_status": "complete",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-28T20:43:15+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "source_fingerprint": "640070fd7317ec364efe916a636257002fda1935cda8319658a5518103d2b387",
+  "summary_input_artifact_path": "summaries\\artifacts\\authors\\joe-slowik.prompt-input.md",
+  "summary_file_path": "summaries\\authors\\joe-slowik.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\joe-slowik.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\joe-slowik.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 4,
+  "loaded_record_count": 4,
+  "expected_record_ids": [
+    2517,
+    2703,
+    2842,
+    3009
+  ],
+  "prompt_record_ids": [
+    2517,
+    2703,
+    2842,
+    3009
+  ],
+  "prompt_record_id_occurrences": 4,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2517,
+      2703,
+      2842,
+      3009
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    2517,
+    2703,
+    2842,
+    3009
+  ],
+  "estimated_input_tokens": 2258,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 4753,
+  "output_max_tokens": 3000,
+  "record_ids_found_in_output": [
+    2517,
+    2703,
+    2842,
+    3009
+  ],
+  "output_record_id_occurrences": 54,
+  "missing_output_record_ids": [],
+  "duplicate_output_record_ids": [
+    2517,
+    2703,
+    2842,
+    3009
+  ],
+  "unexpected_output_record_ids": [],
+  "output_token_estimate": 4753,
+  "output_character_count": 19010,
+  "retry_used": true,
+  "response_metadata": [
+    {
+      "phase": "initial",
+      "stop_reason": "max_output_tokens",
+      "actual_provider_usage": {
+        "input_tokens": 2081,
+        "input_tokens_details": {
+          "cached_tokens": 2078,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 3000,
+        "output_tokens_details": {
+          "reasoning_tokens": 194
+        },
+        "total_tokens": 5081
+      },
+      "requested_max_tokens": 3000,
+      "estimated_output_tokens": 4083,
+      "actual_provider_output_tokens": 3000,
+      "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 2081,
+        "input_tokens_details": {
+          "cached_tokens": 2078,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 3501,
+        "output_tokens_details": {
+          "reasoning_tokens": 174
+        },
+        "total_tokens": 5582
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 4753,
+      "actual_provider_output_tokens": 3501,
+      "possibly_truncated": false
+    }
+  ],
+  "requested_max_tokens": 3000,
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "c6b9ed0b498373a37ae6ef6f40392551c2c25cccccd4f7d1903953a9dd47afd0",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\joe-slowik.validation.json"
+}

@@ -1,0 +1,88 @@
+{
+  "group_by": "topic",
+  "group_name": "Blockchain and cryptocurrency security",
+  "group_label": "Blockchain and cryptocurrency security",
+  "validation_status": "pass",
+  "validated_at": "2026-07-28T19:49:28+00:00",
+  "summary_file_path": "summaries\\topics\\blockchain-and-cryptocurrency-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\blockchain-and-cryptocurrency-security.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\blockchain-and-cryptocurrency-security.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\blockchain-and-cryptocurrency-security.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\blockchain-and-cryptocurrency-security.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 8,
+  "expected_record_ids": [
+    2055,
+    2627,
+    2854,
+    3006,
+    3008,
+    3016,
+    3053,
+    3070
+  ],
+  "record_ids_found_in_summary": [
+    2055,
+    2627,
+    2854,
+    3006,
+    3008,
+    3016,
+    3053,
+    3070
+  ],
+  "record_id_occurrences_in_summary": 62,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2055,
+      2627,
+      2854,
+      3006,
+      3008,
+      3016,
+      3053,
+      3070
+    ],
+    "unique_observed": [
+      2055,
+      2627,
+      2854,
+      3006,
+      3008,
+      3016,
+      3053,
+      3070
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2055,
+      2627,
+      2854,
+      3006,
+      3008,
+      3016,
+      3053,
+      3070
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "0fcc8d2ab74152b6ff295a3e33e4aa1e2714252ac41ce02acb7a8bc8393cfeb5",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "7ef56bc7944c0e8b30bfeb12bb7b2ee43983e361cdd770eba8b3171e79f01716",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 6002,
+  "output_character_count": 24006
+}

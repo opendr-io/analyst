@@ -117,3 +117,24 @@ def test_load_project_env_reads_explicit_file_without_overriding_environment(tmp
 
     assert os.environ["OPENAI_API_KEY"] == "already-set"
     assert os.environ["ANTHROPIC_API_KEY"] == "anthropic-from-file"
+
+def test_openai_adapter_preserves_incomplete_stop_reason_and_usage():
+    client = _FakeOpenAI([
+        {"type": "message", "content": [{"type": "output_text", "text": "partial"}]},
+    ])
+    response = type("Response", (), {
+        "output": client.responses.output,
+        "status": "incomplete",
+        "incomplete_details": {"reason": "max_output_tokens"},
+        "usage": {"input_tokens": 10, "output_tokens": 100, "total_tokens": 110},
+    })()
+    client.responses.create = lambda **_kwargs: response
+
+    normalized = llm_client.OpenAIMessagesAdapter(client).create(
+        model="gpt-5.6",
+        max_tokens=100,
+        messages=[{"role": "user", "content": "question"}],
+    )
+
+    assert normalized.stop_reason == "max_output_tokens"
+    assert normalized.usage["output_tokens"] == 100

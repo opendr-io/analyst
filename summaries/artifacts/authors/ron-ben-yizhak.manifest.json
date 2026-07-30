@@ -1,0 +1,33 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Ron Ben Yizhak",
+  "group_label": "Author: Ron Ben Yizhak",
+  "group_slug": "ron-ben-yizhak",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:45:16+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "093035ff1fabda5bafbff6b967944c5ba53e7bf8286c0c030d6eba81c63807bd",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\authors\\ron-ben-yizhak.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260728T204516Z\\ron-ben-yizhak.prompt-input.md"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "1a406a5f276a3860d7dfa2d274333cccf537c60e0caf471897306084e2795035",
+  "prompt_hash": "c23ca7fa11f782b0927c3636e349759a1d6fc383ed38818d48a8100d811235aa",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\ron-ben-yizhak.validation.json"
+}

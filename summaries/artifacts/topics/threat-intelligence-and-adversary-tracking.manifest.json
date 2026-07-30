@@ -1,0 +1,31 @@
+{
+  "topic": "Threat intelligence and adversary tracking",
+  "topic_slug": "threat-intelligence-and-adversary-tracking",
+  "group_by": "topic",
+  "group_name": "Threat intelligence and adversary tracking",
+  "group_label": "Threat intelligence and adversary tracking",
+  "group_slug": "threat-intelligence-and-adversary-tracking",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:49:58+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "3326bb8a0fc20e580b1ace358979270d8ec731a83ecd83bc0c84ff24d5d71912",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\threat-intelligence-and-adversary-tracking.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\threat-intelligence-and-adversary-tracking.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\threat-intelligence-and-adversary-tracking.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\threat-intelligence-and-adversary-tracking.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "summary_hash": "85d7788f4f88cf53485a9c4be8791d407a6a553fdb116b769f23b35b77058ad0",
+  "prompt_hash": "9c0c013487b0a1cb85263f8d03eeb7d464f4e04592c368072c991d8a83549f44",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\threat-intelligence-and-adversary-tracking.validation.json"
+}

@@ -1,0 +1,28 @@
+{
+  "topic": "General AI education and prompt engineering",
+  "topic_slug": "general-ai-education-and-prompt-engineering",
+  "group_by": "topic",
+  "group_name": "General AI education and prompt engineering",
+  "group_label": "General AI education and prompt engineering",
+  "group_slug": "general-ai-education-and-prompt-engineering",
+  "status": "skipped_small_topic_full_record_fallback",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-28T20:15:04+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "8c66253b14fea8317e104c27e9aac7ee13ea8b476d424ca5e78d988b004d04f1",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "summary_file_path": "summaries\\topics\\general-ai-education-and-prompt-engineering.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\general-ai-education-and-prompt-engineering.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\general-ai-education-and-prompt-engineering.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\topics\\general-ai-education-and-prompt-engineering.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "validation_status": "skipped",
+  "summary_storage": "full_record_fallback"
+}
