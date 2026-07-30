@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Zhengyu Liu",
+  "group_label": "Author: Zhengyu Liu",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:36:00+00:00",
+  "summary_file_path": "summaries\\authors\\zhengyu-liu.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    1947,
+    2922,
+    2955
+  ],
+  "record_ids_found_in_summary": [
+    1947,
+    2922,
+    2955
+  ],
+  "record_id_occurrences_in_summary": 43,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      1947,
+      2922,
+      2955
+    ],
+    "unique_observed": [
+      1947,
+      2922,
+      2955
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1947,
+      2922,
+      2955
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "4867fc6efdd512275afe6491bc132b52ae13ebda4d96423e4ca382a6e000cae4",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "a8d20392492bbf8c70d93ee125f246fe4580a2ad5599bee115ca2b661f015f57",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5011,
+  "output_character_count": 20043
+}

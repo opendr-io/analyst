@@ -1,0 +1,78 @@
+{
+  "topic": "",
+  "group_by": "author",
+  "group_name": "David Batz",
+  "group_label": "Author: David Batz",
+  "summary_status": "failed",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-30T14:43:00+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "source_fingerprint": "cf3a5e64a0021ae7588d454075f8c4dea9a1415b9c7bf234aa534337bd0694e7",
+  "summary_input_artifact_path": "summaries\\artifacts\\authors\\david-batz.prompt-input.md",
+  "summary_file_path": "summaries\\authors\\david-batz.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\david-batz.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\david-batz.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 5,
+  "loaded_record_count": 5,
+  "expected_record_ids": [
+    2494,
+    2844,
+    2847,
+    2848,
+    2851
+  ],
+  "prompt_record_ids": [
+    2494,
+    2844,
+    2847,
+    2848,
+    2851
+  ],
+  "prompt_record_id_occurrences": 5,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2494,
+      2844,
+      2847,
+      2848,
+      2851
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    2494,
+    2844,
+    2847,
+    2848,
+    2851
+  ],
+  "estimated_input_tokens": 1599,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 3000,
+  "output_max_tokens": 3000,
+  "error_type": "APIConnectionError",
+  "error_message": "Connection error.",
+  "retry_used": false,
+  "response_metadata": []
+}

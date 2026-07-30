@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Mehmet Önder Key",
+  "group_label": "Author: Mehmet Önder Key",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:19:37+00:00",
+  "summary_file_path": "summaries\\authors\\mehmet-nder-key.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\mehmet-nder-key.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\mehmet-nder-key.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\mehmet-nder-key.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\mehmet-nder-key.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    1932,
+    3014,
+    3017
+  ],
+  "record_ids_found_in_summary": [
+    1932,
+    3014,
+    3017
+  ],
+  "record_id_occurrences_in_summary": 35,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      1932,
+      3014,
+      3017
+    ],
+    "unique_observed": [
+      1932,
+      3014,
+      3017
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1932,
+      3014,
+      3017
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "71e9ca6e391e0ba1646c1aab6f41e6ac9434a32b41790ef004f3feefa26a58d3",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "54524526fd8357284195cc39763b2bd074953e624a165eadb920ebda565113e2",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 4594,
+  "output_character_count": 18374
+}

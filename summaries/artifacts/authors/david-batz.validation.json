@@ -1,0 +1,73 @@
+{
+  "group_by": "author",
+  "group_name": "David Batz",
+  "group_label": "Author: David Batz",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T14:45:51+00:00",
+  "summary_file_path": "summaries\\authors\\david-batz.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\david-batz.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\david-batz.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\david-batz.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\david-batz.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 5,
+  "expected_record_ids": [
+    2494,
+    2844,
+    2847,
+    2848,
+    2851
+  ],
+  "record_ids_found_in_summary": [
+    2494,
+    2844,
+    2847,
+    2848,
+    2851
+  ],
+  "record_id_occurrences_in_summary": 62,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2494,
+      2844,
+      2847,
+      2848,
+      2851
+    ],
+    "unique_observed": [
+      2494,
+      2844,
+      2847,
+      2848,
+      2851
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2494,
+      2844,
+      2847,
+      2848,
+      2851
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "27b18cf9a76ba82374f056c681cf0c8ae22987e210aa07e91433bbdb2248e483",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "fa1c63d514bd41d9e859dbd7e5b533e8049e525376ff1369fce4a010aad117b7",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5208,
+  "output_character_count": 20831
+}

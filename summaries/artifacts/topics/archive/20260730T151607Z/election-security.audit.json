@@ -1,0 +1,64 @@
+{
+  "topic": "Election security",
+  "group_by": "topic",
+  "group_name": "Election security",
+  "group_label": "Election security",
+  "summary_status": "skipped_small_topic_full_record_fallback",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-28T20:10:20+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "source_fingerprint": "65509cf15464bf1214d6f8d958e3d4823eb4681976460fff12e04e87ddc35966",
+  "summary_input_artifact_path": "summaries\\artifacts\\topics\\election-security.prompt-input.md",
+  "summary_file_path": "summaries\\topics\\election-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\election-security.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\election-security.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 2,
+  "loaded_record_count": 2,
+  "expected_record_ids": [
+    1863,
+    2745
+  ],
+  "prompt_record_ids": [
+    1863,
+    2745
+  ],
+  "prompt_record_id_occurrences": 2,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1863,
+      2745
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [
+    1863,
+    2745
+  ],
+  "secondary_record_ids": [],
+  "estimated_input_tokens": 1490,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 0,
+  "output_max_tokens": 0,
+  "validation_status": "skipped",
+  "summary_storage": "full_record_fallback"
+}

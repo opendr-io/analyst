@@ -153,7 +153,8 @@ def test_filter_existing_groups_skips_existing_summary_files(tmp_path):
 
 def test_output_token_target_targets_thirty_percent_of_input_tokens():
     assert ts.output_token_target(1, 100_000) == 0
-    assert ts.output_token_target(3, 100_000) == 0
+    assert ts.output_token_target(2, 2_000) == 3_000
+    assert ts.output_token_target(3, 100_000) == 30_000
     assert ts.output_token_target(4, 2_000) == 3_000
     assert ts.output_token_target(10, 10_001) == 4_000
     assert ts.output_token_target(50, 50_000) == 15_000

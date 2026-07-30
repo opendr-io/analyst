@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Shahar Tal",
+  "group_label": "Author: Shahar Tal",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:26:36+00:00",
+  "summary_file_path": "summaries\\authors\\shahar-tal.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\shahar-tal.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\shahar-tal.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\shahar-tal.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\shahar-tal.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    88,
+    2630,
+    2648
+  ],
+  "record_ids_found_in_summary": [
+    88,
+    2630,
+    2648
+  ],
+  "record_id_occurrences_in_summary": 45,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      88,
+      2630,
+      2648
+    ],
+    "unique_observed": [
+      88,
+      2630,
+      2648
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      88,
+      2630,
+      2648
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "0e262ab88cc85ccc8ffa48ae3703362b4abd5e3d57edf0634f54d5203762bf14",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "c9f02854620ce5cf00a007c3a73fdfcc0e4a9d42b203336d45ea9d105330b5fe",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5182,
+  "output_character_count": 20728
+}

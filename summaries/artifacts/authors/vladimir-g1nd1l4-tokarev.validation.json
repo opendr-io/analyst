@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Vladimir \"G1ND1L4\" Tokarev",
+  "group_label": "Author: Vladimir \"G1ND1L4\" Tokarev",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:31:19+00:00",
+  "summary_file_path": "summaries\\authors\\vladimir-g1nd1l4-tokarev.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    2858,
+    2878,
+    2911
+  ],
+  "record_ids_found_in_summary": [
+    2858,
+    2878,
+    2911
+  ],
+  "record_id_occurrences_in_summary": 61,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2858,
+      2878,
+      2911
+    ],
+    "unique_observed": [
+      2858,
+      2878,
+      2911
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2858,
+      2878,
+      2911
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "694df410069aa242c98cdf3c76cb14e27f557de69142beb9a8fb14ba35bd10b0",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "5a625470b1d745cfe60411a7cc6c673d8a799b1c7d3a07c36809ce69fcb655b5",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5840,
+  "output_character_count": 23357
+}

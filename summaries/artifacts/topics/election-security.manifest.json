@@ -5,24 +5,31 @@
   "group_name": "Election security",
   "group_label": "Election security",
   "group_slug": "election-security",
-  "status": "skipped_small_topic_full_record_fallback",
+  "status": "complete",
   "model": "gpt-5.6",
-  "generated_at": "2026-07-28T20:10:20+00:00",
+  "generated_at": "2026-07-30T15:16:07+00:00",
   "prompt_version": "topic-summary-v1",
   "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
   "source_fingerprint": "65509cf15464bf1214d6f8d958e3d4823eb4681976460fff12e04e87ddc35966",
   "database_fingerprint": {
     "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
     "size_bytes": 19509248,
-    "mtime_utc": "2026-07-28T17:27:06+00:00",
-    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
   },
   "summary_file_path": "summaries\\topics\\election-security.md",
   "audit_file_path": "summaries\\artifacts\\topics\\election-security.audit.json",
   "prompt_input_file_path": "summaries\\artifacts\\topics\\election-security.prompt-input.md",
   "manifest_file_path": "summaries\\artifacts\\topics\\election-security.manifest.json",
-  "archived_paths": [],
+  "archived_paths": [
+    "summaries\\artifacts\\topics\\archive\\20260730T151607Z\\election-security.audit.json",
+    "summaries\\artifacts\\topics\\archive\\20260730T151607Z\\election-security.prompt-input.md",
+    "summaries\\artifacts\\topics\\archive\\20260730T151607Z\\election-security.manifest.json"
+  ],
   "artifacts_written": true,
-  "validation_status": "skipped",
-  "summary_storage": "full_record_fallback"
+  "summary_hash": "3de04ef5b754d335f69a0ecfbd09a856f306fcf86e528291c2a7f4f8e2650045",
+  "prompt_hash": "e599cd9dbead8e4d3b0487fe03a8401d8c88849bf430d2dc7ccdb54e729ac81c",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\election-security.validation.json"
 }

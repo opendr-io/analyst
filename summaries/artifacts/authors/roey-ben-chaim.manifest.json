@@ -1,0 +1,35 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Roey Ben Chaim",
+  "group_label": "Author: Roey Ben Chaim",
+  "group_slug": "roey-ben-chaim",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T15:21:44+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "3c6d9e28f9cb8876da4cd27432753fd49a34e5fdd5814f7198fa96c0675912c7",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\roey-ben-chaim.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260730T152144Z\\roey-ben-chaim.audit.json",
+    "summaries\\artifacts\\authors\\archive\\20260730T152144Z\\roey-ben-chaim.prompt-input.md",
+    "summaries\\artifacts\\authors\\archive\\20260730T152144Z\\roey-ben-chaim.manifest.json"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "cb04d75815580eb7a0d64c4e65ea3937946ee3d191065981779db089bad2bca2",
+  "prompt_hash": "3939578c53e5f484f014002a0d20161cb9a02ff33e8e13cd34f1b24e286229b5",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.validation.json"
+}

@@ -1,0 +1,35 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Mauro Eldritch",
+  "group_label": "Author: Mauro Eldritch",
+  "group_slug": "mauro-eldritch",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T15:15:34+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "f8df99eac6bf715b36ca2c730a442410af564b617c28bcee40aa476c0b03e911",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\mauro-eldritch.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260730T151534Z\\mauro-eldritch.audit.json",
+    "summaries\\artifacts\\authors\\archive\\20260730T151534Z\\mauro-eldritch.prompt-input.md",
+    "summaries\\artifacts\\authors\\archive\\20260730T151534Z\\mauro-eldritch.manifest.json"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "1dcd044e0f82df724940d47856245c514b1827065dcfdb859dbfaa2d67cec6a2",
+  "prompt_hash": "7d0e045329e98df31c8455663b67184e6a09be82e3909e17ddafaabe31813613",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.validation.json"
+}

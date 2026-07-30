@@ -1,4 +1,4 @@
-﻿# Topic Summary Request
+# Topic Summary Request
 
 Topic: AI infrastructure data engineering and model systems
 Topic query: Records primarily about AI infrastructure, model-serving systems, data pipelines, retrieval architecture, knowledge graphs, GPU or accelerator systems, model routing, memory/context systems, or other engineering foundations for AI applications.

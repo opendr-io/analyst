@@ -1,0 +1,131 @@
+{
+  "topic": "",
+  "group_by": "author",
+  "group_name": "Katie Paxton-Fear",
+  "group_label": "Author: Katie Paxton-Fear",
+  "summary_status": "complete",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-30T15:13:38+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "source_fingerprint": "0f7e4b2e2c8ac2dc7b5b1c85c710e88d75fea4d32bbc1833f27da10907127e83",
+  "summary_input_artifact_path": "summaries\\artifacts\\authors\\katie-paxton-fear.prompt-input.md",
+  "summary_file_path": "summaries\\authors\\katie-paxton-fear.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\katie-paxton-fear.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\katie-paxton-fear.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 3,
+  "loaded_record_count": 3,
+  "expected_record_ids": [
+    201,
+    3044,
+    3049
+  ],
+  "prompt_record_ids": [
+    201,
+    3044,
+    3049
+  ],
+  "prompt_record_id_occurrences": 3,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      201,
+      3044,
+      3049
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    201,
+    3044,
+    3049
+  ],
+  "estimated_input_tokens": 2823,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 4247,
+  "output_max_tokens": 3000,
+  "record_ids_found_in_output": [
+    201,
+    3044,
+    3049
+  ],
+  "output_record_id_occurrences": 34,
+  "missing_output_record_ids": [],
+  "duplicate_output_record_ids": [
+    201,
+    3044,
+    3049
+  ],
+  "unexpected_output_record_ids": [],
+  "output_token_estimate": 4247,
+  "output_character_count": 16987,
+  "retry_used": true,
+  "coverage_repair_skipped_due_to_truncation": false,
+  "response_metadata": [
+    {
+      "phase": "initial",
+      "stop_reason": "max_output_tokens",
+      "actual_provider_usage": {
+        "input_tokens": 2379,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 2376
+        },
+        "output_tokens": 3000,
+        "output_tokens_details": {
+          "reasoning_tokens": 58
+        },
+        "total_tokens": 5379
+      },
+      "requested_max_tokens": 3000,
+      "estimated_output_tokens": 4109,
+      "actual_provider_output_tokens": 3000,
+      "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 2379,
+        "input_tokens_details": {
+          "cached_tokens": 2376,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 3145,
+        "output_tokens_details": {
+          "reasoning_tokens": 86
+        },
+        "total_tokens": 5524
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 4247,
+      "actual_provider_output_tokens": 3145,
+      "possibly_truncated": false
+    }
+  ],
+  "requested_max_tokens": 3000,
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "b32a7e005d0874568ef9c7b6a4ea3014e86140538b6d7c8d0ca926c5e8cf5b3a",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\katie-paxton-fear.validation.json"
+}

@@ -1,0 +1,35 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Bobby Kuzma",
+  "group_label": "Author: Bobby Kuzma",
+  "group_slug": "bobby-kuzma",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T15:08:48+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "9bf9e010c28b33f02d77c966d347afd68c5ac49d12aea5b5fe4d761ec4feac5d",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\bobby-kuzma.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260730T150848Z\\bobby-kuzma.audit.json",
+    "summaries\\artifacts\\authors\\archive\\20260730T150848Z\\bobby-kuzma.prompt-input.md",
+    "summaries\\artifacts\\authors\\archive\\20260730T150848Z\\bobby-kuzma.manifest.json"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "a6ca8e96eca9a645b220e06ea388b9b0f9ff432944ba21f5d08c4f0614126e02",
+  "prompt_hash": "e4cdbc6df4ec9741d907aeb9b7912cb400c4dc1e7f0a89376a44590a094c31b3",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.validation.json"
+}

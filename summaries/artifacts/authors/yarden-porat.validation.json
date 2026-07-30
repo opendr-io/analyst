@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Yarden Porat",
+  "group_label": "Author: Yarden Porat",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:33:37+00:00",
+  "summary_file_path": "summaries\\authors\\yarden-porat.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\yarden-porat.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\yarden-porat.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\yarden-porat.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\yarden-porat.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    88,
+    2630,
+    2648
+  ],
+  "record_ids_found_in_summary": [
+    88,
+    2630,
+    2648
+  ],
+  "record_id_occurrences_in_summary": 41,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      88,
+      2630,
+      2648
+    ],
+    "unique_observed": [
+      88,
+      2630,
+      2648
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      88,
+      2630,
+      2648
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "121f3ffbafda309ac080446ec1400c12322a9cb667b766c7e6527f77e1bfbccd",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "4c914861feec00f8242a2e0cd6849c41dd3b6d70e2e819f62b8eab90cac36bcb",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5245,
+  "output_character_count": 20979
+}

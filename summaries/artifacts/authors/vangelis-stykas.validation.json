@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Vangelis Stykas",
+  "group_label": "Author: Vangelis Stykas",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:28:41+00:00",
+  "summary_file_path": "summaries\\authors\\vangelis-stykas.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    2646,
+    2660,
+    2903
+  ],
+  "record_ids_found_in_summary": [
+    2646,
+    2660,
+    2903
+  ],
+  "record_id_occurrences_in_summary": 49,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2646,
+      2660,
+      2903
+    ],
+    "unique_observed": [
+      2646,
+      2660,
+      2903
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2646,
+      2660,
+      2903
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "2a8fdc63541ebba1e01311ac0e7c5034b19de78b2797d2dd118309a725c09cb4",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "8777837beddcc9cf84dff42f7395be5cf61ada7c002fa6cd81d7a8115ab41ad9",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5437,
+  "output_character_count": 21748
+}

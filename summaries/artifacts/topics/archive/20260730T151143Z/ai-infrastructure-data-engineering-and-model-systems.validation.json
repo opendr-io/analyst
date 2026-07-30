@@ -1,0 +1,108 @@
+{
+  "group_by": "topic",
+  "group_name": "AI infrastructure data engineering and model systems",
+  "group_label": "AI infrastructure data engineering and model systems",
+  "validation_status": "fail",
+  "validated_at": "2026-07-28T19:39:02+00:00",
+  "summary_file_path": "summaries\\topics\\ai-infrastructure-data-engineering-and-model-systems.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.validation.json",
+  "errors": [
+    "missing required sections: ['Gaps, Limits, And Open Questions', 'Coverage And Evidence Notes']"
+  ],
+  "warnings": [],
+  "expected_record_count": 11,
+  "expected_record_ids": [
+    129,
+    1897,
+    2333,
+    2349,
+    2379,
+    2504,
+    2636,
+    2858,
+    2892,
+    3028,
+    3105
+  ],
+  "record_ids_found_in_summary": [
+    129,
+    1897,
+    2333,
+    2349,
+    2379,
+    2504,
+    2636,
+    2858,
+    2892,
+    3028,
+    3105
+  ],
+  "record_id_occurrences_in_summary": 36,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      129,
+      1897,
+      2333,
+      2349,
+      2379,
+      2504,
+      2636,
+      2858,
+      2892,
+      3028,
+      3105
+    ],
+    "unique_observed": [
+      129,
+      1897,
+      2333,
+      2349,
+      2379,
+      2504,
+      2636,
+      2858,
+      2892,
+      3028,
+      3105
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      129,
+      1897,
+      2333,
+      2349,
+      2379,
+      2504,
+      2636,
+      2858,
+      2892,
+      3028,
+      3105
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [
+    "Gaps, Limits, And Open Questions",
+    "Coverage And Evidence Notes"
+  ],
+  "forbidden_sections_present": [],
+  "summary_hash": "c403fdb980e64d9d59bba2eeb3c85f4c03adb71f9fe590deff12db5c6cd5a73d",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "38de692dc408807899d52b3b32724fc20f6b953e4532ab7d1077e5c8586d5f05",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 4026,
+  "output_character_count": 16101
+}

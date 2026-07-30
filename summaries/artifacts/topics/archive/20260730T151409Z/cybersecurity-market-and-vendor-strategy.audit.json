@@ -1,0 +1,64 @@
+{
+  "topic": "Cybersecurity market and vendor strategy",
+  "group_by": "topic",
+  "group_name": "Cybersecurity market and vendor strategy",
+  "group_label": "Cybersecurity market and vendor strategy",
+  "summary_status": "skipped_small_topic_full_record_fallback",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-28T20:02:40+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-28T17:27:06+00:00",
+    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+  },
+  "source_fingerprint": "3fc6754c64f7b34ae7de47b8c07c4c887cd5558dce7e07d4d951902f183b756a",
+  "summary_input_artifact_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.prompt-input.md",
+  "summary_file_path": "summaries\\topics\\cybersecurity-market-and-vendor-strategy.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 2,
+  "loaded_record_count": 2,
+  "expected_record_ids": [
+    2354,
+    2559
+  ],
+  "prompt_record_ids": [
+    2354,
+    2559
+  ],
+  "prompt_record_id_occurrences": 2,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2354,
+      2559
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    2354,
+    2559
+  ],
+  "estimated_input_tokens": 1609,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 0,
+  "output_max_tokens": 0,
+  "validation_status": "skipped",
+  "summary_storage": "full_record_fallback"
+}

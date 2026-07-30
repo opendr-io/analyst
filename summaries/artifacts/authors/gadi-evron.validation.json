@@ -1,0 +1,93 @@
+{
+  "group_by": "author",
+  "group_name": "Gadi Evron",
+  "group_label": "Author: Gadi Evron",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:44:12+00:00",
+  "summary_file_path": "summaries\\authors\\gadi-evron.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\gadi-evron.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\gadi-evron.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\gadi-evron.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\gadi-evron.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 9,
+  "expected_record_ids": [
+    2179,
+    2189,
+    2203,
+    2225,
+    2235,
+    2319,
+    2336,
+    2351,
+    2367
+  ],
+  "record_ids_found_in_summary": [
+    2179,
+    2189,
+    2203,
+    2225,
+    2235,
+    2319,
+    2336,
+    2351,
+    2367
+  ],
+  "record_id_occurrences_in_summary": 77,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2179,
+      2189,
+      2203,
+      2225,
+      2235,
+      2319,
+      2336,
+      2351,
+      2367
+    ],
+    "unique_observed": [
+      2179,
+      2189,
+      2203,
+      2225,
+      2235,
+      2319,
+      2336,
+      2351,
+      2367
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2179,
+      2189,
+      2203,
+      2225,
+      2235,
+      2319,
+      2336,
+      2351,
+      2367
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "d0a7c911c8bb384b57f9d35e57c1e860b15be36ced3db79da2d3bb35e4027e10",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "f4a5fff5b74b2b797ed1cfd28d415641926281b92dccc8b882fe5a650724a704",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5393,
+  "output_character_count": 21572
+}

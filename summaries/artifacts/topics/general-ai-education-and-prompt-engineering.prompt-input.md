@@ -1,4 +1,4 @@
-﻿# Topic Summary Request
+# Topic Summary Request
 
 Topic: General AI education and prompt engineering
 Topic query: Records primarily about general AI literacy, LLM education, prompt engineering, AI courses, model usage guidance, AI training resources, or non-security AI learning material.
