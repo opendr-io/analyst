@@ -2,16 +2,14 @@
   "group_by": "topic",
   "group_name": "AI infrastructure data engineering and model systems",
   "group_label": "AI infrastructure data engineering and model systems",
-  "validation_status": "fail",
-  "validated_at": "2026-07-28T19:39:02+00:00",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:14:09+00:00",
   "summary_file_path": "summaries\\topics\\ai-infrastructure-data-engineering-and-model-systems.md",
   "audit_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.audit.json",
   "manifest_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.manifest.json",
   "prompt_input_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.prompt-input.md",
   "validation_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.validation.json",
-  "errors": [
-    "missing required sections: ['Gaps, Limits, And Open Questions', 'Coverage And Evidence Notes']"
-  ],
+  "errors": [],
   "warnings": [],
   "expected_record_count": 11,
   "expected_record_ids": [
@@ -40,7 +38,7 @@
     3028,
     3105
   ],
-  "record_id_occurrences_in_summary": 36,
+  "record_id_occurrences_in_summary": 83,
   "output_id_check": {
     "missing": [],
     "unexpected": [],
@@ -93,16 +91,13 @@
     "exact": true,
     "all_expected_present": true
   },
-  "missing_required_sections": [
-    "Gaps, Limits, And Open Questions",
-    "Coverage And Evidence Notes"
-  ],
+  "missing_required_sections": [],
   "forbidden_sections_present": [],
-  "summary_hash": "c403fdb980e64d9d59bba2eeb3c85f4c03adb71f9fe590deff12db5c6cd5a73d",
+  "summary_hash": "de12cdda7843a6d68c1edb790619e3820209781396434ac0a216613d364a5ac0",
   "summary_hash_matches_audit": true,
   "summary_hash_matches_manifest": true,
-  "prompt_hash": "38de692dc408807899d52b3b32724fc20f6b953e4532ab7d1077e5c8586d5f05",
+  "prompt_hash": "7e539787e8ba75fdcedec09f319cf1292a3aec2dbd01b4b3330041089048995c",
   "prompt_hash_matches_manifest": true,
-  "output_token_estimate": 4026,
-  "output_character_count": 16101
+  "output_token_estimate": 5311,
+  "output_character_count": 21244
 }

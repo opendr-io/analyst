@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Bobby Kuzma",
+  "group_label": "Author: Bobby Kuzma",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:11:10+00:00",
+  "summary_file_path": "summaries\\authors\\bobby-kuzma.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\bobby-kuzma.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    2056,
+    2722,
+    2723
+  ],
+  "record_ids_found_in_summary": [
+    2056,
+    2722,
+    2723
+  ],
+  "record_id_occurrences_in_summary": 58,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2056,
+      2722,
+      2723
+    ],
+    "unique_observed": [
+      2056,
+      2722,
+      2723
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2056,
+      2722,
+      2723
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "a6ca8e96eca9a645b220e06ea388b9b0f9ff432944ba21f5d08c4f0614126e02",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "e4cdbc6df4ec9741d907aeb9b7912cb400c4dc1e7f0a89376a44590a094c31b3",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5549,
+  "output_character_count": 22193
+}

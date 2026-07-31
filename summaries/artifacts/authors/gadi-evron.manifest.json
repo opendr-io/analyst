@@ -1,0 +1,33 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Gadi Evron",
+  "group_label": "Author: Gadi Evron",
+  "group_slug": "gadi-evron",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T15:41:58+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "c21aa68dfa88b5e817384a9c87d2c30225d8fb699f7a13d0e6b5bdbe77a99d0f",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\gadi-evron.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\gadi-evron.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\gadi-evron.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\gadi-evron.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260730T154158Z\\gadi-evron.md"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "d0a7c911c8bb384b57f9d35e57c1e860b15be36ced3db79da2d3bb35e4027e10",
+  "prompt_hash": "f4a5fff5b74b2b797ed1cfd28d415641926281b92dccc8b882fe5a650724a704",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\gadi-evron.validation.json"
+}

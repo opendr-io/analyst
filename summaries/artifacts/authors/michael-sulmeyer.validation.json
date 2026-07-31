@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Michael Sulmeyer",
+  "group_label": "Author: Michael Sulmeyer",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:21:44+00:00",
+  "summary_file_path": "summaries\\authors\\michael-sulmeyer.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\michael-sulmeyer.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\michael-sulmeyer.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\michael-sulmeyer.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\michael-sulmeyer.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    1946,
+    2686,
+    2966
+  ],
+  "record_ids_found_in_summary": [
+    1946,
+    2686,
+    2966
+  ],
+  "record_id_occurrences_in_summary": 36,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      1946,
+      2686,
+      2966
+    ],
+    "unique_observed": [
+      1946,
+      2686,
+      2966
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1946,
+      2686,
+      2966
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "b8087e8fa4fb0f4177db85dd2a4dca6409f07e03164e9e7b1f17070d7532538a",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "e8999c6ee471652a9d885ec5983c252e020d0a1593cda7cc462439a9392454e9",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 4953,
+  "output_character_count": 19810
+}

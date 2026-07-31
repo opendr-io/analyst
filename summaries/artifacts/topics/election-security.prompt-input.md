@@ -1,4 +1,4 @@
-﻿# Topic Summary Request
+# Topic Summary Request
 
 Topic: Election security
 Topic query: Records primarily about election technology, voting systems, ballot-marking devices, election infrastructure, internet voting, verifiability, election integrity, voting-system regulation, or related security and trust issues.

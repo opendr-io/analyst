@@ -1,0 +1,35 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Shahar Tal",
+  "group_label": "Author: Shahar Tal",
+  "group_slug": "shahar-tal",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T15:23:48+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "1bfd1f82072728578707149bdd69de5ecbe23a9cb045c0578da55c4b9386f5c3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\shahar-tal.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\shahar-tal.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\shahar-tal.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\shahar-tal.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260730T152348Z\\shahar-tal.audit.json",
+    "summaries\\artifacts\\authors\\archive\\20260730T152348Z\\shahar-tal.prompt-input.md",
+    "summaries\\artifacts\\authors\\archive\\20260730T152348Z\\shahar-tal.manifest.json"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "0e262ab88cc85ccc8ffa48ae3703362b4abd5e3d57edf0634f54d5203762bf14",
+  "prompt_hash": "c9f02854620ce5cf00a007c3a73fdfcc0e4a9d42b203336d45ea9d105330b5fe",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\shahar-tal.validation.json"
+}

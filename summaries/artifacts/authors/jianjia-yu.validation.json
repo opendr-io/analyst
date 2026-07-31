@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Jianjia Yu",
+  "group_label": "Author: Jianjia Yu",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:13:38+00:00",
+  "summary_file_path": "summaries\\authors\\jianjia-yu.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\jianjia-yu.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\jianjia-yu.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\jianjia-yu.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\jianjia-yu.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    1947,
+    2922,
+    2955
+  ],
+  "record_ids_found_in_summary": [
+    1947,
+    2922,
+    2955
+  ],
+  "record_id_occurrences_in_summary": 51,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      1947,
+      2922,
+      2955
+    ],
+    "unique_observed": [
+      1947,
+      2922,
+      2955
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1947,
+      2922,
+      2955
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "32721df98b830a9ffcb831ac13572d71cd880adf7f20ac9b81e45577f49a8799",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "ac14dc710c38bf066cf33e087e9c9155c424edee75dbd025200e45c4a8f62b80",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 5252,
+  "output_character_count": 21007
+}

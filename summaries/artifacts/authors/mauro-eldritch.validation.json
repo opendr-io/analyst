@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Mauro Eldritch",
+  "group_label": "Author: Mauro Eldritch",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:17:39+00:00",
+  "summary_file_path": "summaries\\authors\\mauro-eldritch.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\mauro-eldritch.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    2482,
+    2923,
+    2975
+  ],
+  "record_ids_found_in_summary": [
+    2482,
+    2923,
+    2975
+  ],
+  "record_id_occurrences_in_summary": 38,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2482,
+      2923,
+      2975
+    ],
+    "unique_observed": [
+      2482,
+      2923,
+      2975
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2482,
+      2923,
+      2975
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "1dcd044e0f82df724940d47856245c514b1827065dcfdb859dbfaa2d67cec6a2",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "7d0e045329e98df31c8455663b67184e6a09be82e3909e17ddafaabe31813613",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 4385,
+  "output_character_count": 17540
+}

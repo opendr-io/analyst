@@ -3,17 +3,17 @@
   "group_by": "topic",
   "group_name": "Cybersecurity market and vendor strategy",
   "group_label": "Cybersecurity market and vendor strategy",
-  "summary_status": "skipped_small_topic_full_record_fallback",
+  "summary_status": "complete",
   "model": "gpt-5.6",
-  "generated_timestamp": "2026-07-28T20:02:40+00:00",
+  "generated_timestamp": "2026-07-30T15:14:09+00:00",
   "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
   "prompt_version": "topic-summary-v1",
   "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
   "database_fingerprint": {
     "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
     "size_bytes": 19509248,
-    "mtime_utc": "2026-07-28T17:27:06+00:00",
-    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
   },
   "source_fingerprint": "3fc6754c64f7b34ae7de47b8c07c4c887cd5558dce7e07d4d951902f183b756a",
   "summary_input_artifact_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.prompt-input.md",
@@ -57,8 +57,69 @@
   ],
   "estimated_input_tokens": 1609,
   "max_input_tokens": 750000,
-  "estimated_output_tokens": 0,
-  "output_max_tokens": 0,
-  "validation_status": "skipped",
-  "summary_storage": "full_record_fallback"
+  "estimated_output_tokens": 3825,
+  "output_max_tokens": 3000,
+  "record_ids_found_in_output": [
+    2354,
+    2559
+  ],
+  "output_record_id_occurrences": 23,
+  "missing_output_record_ids": [],
+  "duplicate_output_record_ids": [
+    2354,
+    2559
+  ],
+  "unexpected_output_record_ids": [],
+  "output_token_estimate": 3825,
+  "output_character_count": 15300,
+  "retry_used": true,
+  "coverage_repair_skipped_due_to_truncation": false,
+  "response_metadata": [
+    {
+      "phase": "initial",
+      "stop_reason": "max_output_tokens",
+      "actual_provider_usage": {
+        "input_tokens": 1431,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 1428
+        },
+        "output_tokens": 3000,
+        "output_tokens_details": {
+          "reasoning_tokens": 146
+        },
+        "total_tokens": 4431
+      },
+      "requested_max_tokens": 3000,
+      "estimated_output_tokens": 4142,
+      "actual_provider_output_tokens": 3000,
+      "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 1431,
+        "input_tokens_details": {
+          "cached_tokens": 1428,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 2694,
+        "output_tokens_details": {
+          "reasoning_tokens": 52
+        },
+        "total_tokens": 4125
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 3825,
+      "actual_provider_output_tokens": 2694,
+      "possibly_truncated": false
+    }
+  ],
+  "requested_max_tokens": 3000,
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "047eba3b5c69c3c1c57ce8e44e5c4f639f8519efb2917df08625e58d0d303d28",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.validation.json"
 }

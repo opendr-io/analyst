@@ -1,0 +1,35 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Vangelis Stykas",
+  "group_label": "Author: Vangelis Stykas",
+  "group_slug": "vangelis-stykas",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T15:26:30+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "fe6e556202c418b2df037a151a8832a274aac2327d0170ffea1ca9acb5aef74b",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\vangelis-stykas.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260730T152630Z\\vangelis-stykas.audit.json",
+    "summaries\\artifacts\\authors\\archive\\20260730T152630Z\\vangelis-stykas.prompt-input.md",
+    "summaries\\artifacts\\authors\\archive\\20260730T152630Z\\vangelis-stykas.manifest.json"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "2a8fdc63541ebba1e01311ac0e7c5034b19de78b2797d2dd118309a725c09cb4",
+  "prompt_hash": "8777837beddcc9cf84dff42f7395be5cf61ada7c002fa6cd81d7a8115ab41ad9",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\vangelis-stykas.validation.json"
+}

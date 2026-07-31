@@ -1,0 +1,131 @@
+{
+  "topic": "",
+  "group_by": "author",
+  "group_name": "Vladimir \"G1ND1L4\" Tokarev",
+  "group_label": "Author: Vladimir \"G1ND1L4\" Tokarev",
+  "summary_status": "complete",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-30T15:28:41+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "source_fingerprint": "f53ec69c1a0c5bd64a4887f839ff06d5505ab34813a092f68b090a983692309e",
+  "summary_input_artifact_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.prompt-input.md",
+  "summary_file_path": "summaries\\authors\\vladimir-g1nd1l4-tokarev.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 3,
+  "loaded_record_count": 3,
+  "expected_record_ids": [
+    2858,
+    2878,
+    2911
+  ],
+  "prompt_record_ids": [
+    2858,
+    2878,
+    2911
+  ],
+  "prompt_record_id_occurrences": 3,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2858,
+      2878,
+      2911
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    2858,
+    2878,
+    2911
+  ],
+  "estimated_input_tokens": 2596,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 5840,
+  "output_max_tokens": 3000,
+  "record_ids_found_in_output": [
+    2858,
+    2878,
+    2911
+  ],
+  "output_record_id_occurrences": 61,
+  "missing_output_record_ids": [],
+  "duplicate_output_record_ids": [
+    2858,
+    2878,
+    2911
+  ],
+  "unexpected_output_record_ids": [],
+  "output_token_estimate": 5840,
+  "output_character_count": 23357,
+  "retry_used": true,
+  "coverage_repair_skipped_due_to_truncation": false,
+  "response_metadata": [
+    {
+      "phase": "initial",
+      "stop_reason": "max_output_tokens",
+      "actual_provider_usage": {
+        "input_tokens": 2639,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 2636
+        },
+        "output_tokens": 3000,
+        "output_tokens_details": {
+          "reasoning_tokens": 92
+        },
+        "total_tokens": 5639
+      },
+      "requested_max_tokens": 3000,
+      "estimated_output_tokens": 3790,
+      "actual_provider_output_tokens": 3000,
+      "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 2639,
+        "input_tokens_details": {
+          "cached_tokens": 2636,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 4607,
+        "output_tokens_details": {
+          "reasoning_tokens": 102
+        },
+        "total_tokens": 7246
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 5840,
+      "actual_provider_output_tokens": 4607,
+      "possibly_truncated": false
+    }
+  ],
+  "requested_max_tokens": 3000,
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "694df410069aa242c98cdf3c76cb14e27f557de69142beb9a8fb14ba35bd10b0",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\vladimir-g1nd1l4-tokarev.validation.json"
+}

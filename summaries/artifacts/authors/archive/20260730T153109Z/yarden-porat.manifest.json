@@ -1,0 +1,28 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Yarden Porat",
+  "group_label": "Author: Yarden Porat",
+  "group_slug": "yarden-porat",
+  "status": "skipped_small_topic_full_record_fallback",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T14:46:18+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "7e8e0ddd46f22899a78d55becc0ac8b757e4f7001e801ab764838c3250062e08",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\yarden-porat.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\yarden-porat.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\yarden-porat.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\yarden-porat.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "validation_status": "skipped",
+  "summary_storage": "full_record_fallback"
+}

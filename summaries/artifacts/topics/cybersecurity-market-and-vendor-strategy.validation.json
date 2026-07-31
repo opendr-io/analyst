@@ -1,0 +1,58 @@
+{
+  "group_by": "topic",
+  "group_name": "Cybersecurity market and vendor strategy",
+  "group_label": "Cybersecurity market and vendor strategy",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:16:07+00:00",
+  "summary_file_path": "summaries\\topics\\cybersecurity-market-and-vendor-strategy.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\cybersecurity-market-and-vendor-strategy.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 2,
+  "expected_record_ids": [
+    2354,
+    2559
+  ],
+  "record_ids_found_in_summary": [
+    2354,
+    2559
+  ],
+  "record_id_occurrences_in_summary": 23,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2354,
+      2559
+    ],
+    "unique_observed": [
+      2354,
+      2559
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2354,
+      2559
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "047eba3b5c69c3c1c57ce8e44e5c4f639f8519efb2917df08625e58d0d303d28",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "daabceb260d1f93f373636a929876c1e5c4c8c7d9100f7e2c5b532cb59961ca9",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 3825,
+  "output_character_count": 15300
+}

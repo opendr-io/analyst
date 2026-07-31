@@ -1,0 +1,63 @@
+{
+  "group_by": "author",
+  "group_name": "Roey Ben Chaim",
+  "group_label": "Author: Roey Ben Chaim",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:23:48+00:00",
+  "summary_file_path": "summaries\\authors\\roey-ben-chaim.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\authors\\roey-ben-chaim.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 3,
+  "expected_record_ids": [
+    2368,
+    2669,
+    3113
+  ],
+  "record_ids_found_in_summary": [
+    2368,
+    2669,
+    3113
+  ],
+  "record_id_occurrences_in_summary": 49,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      2368,
+      2669,
+      3113
+    ],
+    "unique_observed": [
+      2368,
+      2669,
+      3113
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2368,
+      2669,
+      3113
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "cb04d75815580eb7a0d64c4e65ea3937946ee3d191065981779db089bad2bca2",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "3939578c53e5f484f014002a0d20161cb9a02ff33e8e13cd34f1b24e286229b5",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 4704,
+  "output_character_count": 18813
+}

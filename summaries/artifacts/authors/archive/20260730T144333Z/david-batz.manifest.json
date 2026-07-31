@@ -1,0 +1,28 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "David Batz",
+  "group_label": "Author: David Batz",
+  "group_slug": "david-batz",
+  "status": "failed",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T14:43:00+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "cf3a5e64a0021ae7588d454075f8c4dea9a1415b9c7bf234aa534337bd0694e7",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\david-batz.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\david-batz.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\david-batz.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\david-batz.manifest.json",
+  "archived_paths": [],
+  "artifacts_written": true,
+  "prompt_hash": "fa1c63d514bd41d9e859dbd7e5b533e8049e525376ff1369fce4a010aad117b7",
+  "summary_storage": "file"
+}

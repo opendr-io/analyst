@@ -1,0 +1,167 @@
+{
+  "topic": "",
+  "group_by": "author",
+  "group_name": "Gadi Evron",
+  "group_label": "Author: Gadi Evron",
+  "summary_status": "complete",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-30T15:41:58+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "source_fingerprint": "c21aa68dfa88b5e817384a9c87d2c30225d8fb699f7a13d0e6b5bdbe77a99d0f",
+  "summary_input_artifact_path": "summaries\\artifacts\\authors\\gadi-evron.prompt-input.md",
+  "summary_file_path": "summaries\\authors\\gadi-evron.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\gadi-evron.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\gadi-evron.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 9,
+  "loaded_record_count": 9,
+  "expected_record_ids": [
+    2179,
+    2189,
+    2203,
+    2225,
+    2235,
+    2319,
+    2336,
+    2351,
+    2367
+  ],
+  "prompt_record_ids": [
+    2179,
+    2189,
+    2203,
+    2225,
+    2235,
+    2319,
+    2336,
+    2351,
+    2367
+  ],
+  "prompt_record_id_occurrences": 9,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      2179,
+      2189,
+      2203,
+      2225,
+      2235,
+      2319,
+      2336,
+      2351,
+      2367
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    2179,
+    2189,
+    2203,
+    2225,
+    2235,
+    2319,
+    2336,
+    2351,
+    2367
+  ],
+  "estimated_input_tokens": 2394,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 5393,
+  "output_max_tokens": 3000,
+  "record_ids_found_in_output": [
+    2179,
+    2189,
+    2203,
+    2225,
+    2235,
+    2319,
+    2336,
+    2351,
+    2367
+  ],
+  "output_record_id_occurrences": 77,
+  "missing_output_record_ids": [],
+  "duplicate_output_record_ids": [
+    2179,
+    2189,
+    2203,
+    2225,
+    2235,
+    2319,
+    2336,
+    2351,
+    2367
+  ],
+  "unexpected_output_record_ids": [],
+  "output_token_estimate": 5393,
+  "output_character_count": 21572,
+  "retry_used": true,
+  "coverage_repair_skipped_due_to_truncation": false,
+  "response_metadata": [
+    {
+      "phase": "initial",
+      "stop_reason": "max_output_tokens",
+      "actual_provider_usage": {
+        "input_tokens": 2424,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 2421
+        },
+        "output_tokens": 3000,
+        "output_tokens_details": {
+          "reasoning_tokens": 71
+        },
+        "total_tokens": 5424
+      },
+      "requested_max_tokens": 3000,
+      "estimated_output_tokens": 3914,
+      "actual_provider_output_tokens": 3000,
+      "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 2424,
+        "input_tokens_details": {
+          "cached_tokens": 2421,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 4087,
+        "output_tokens_details": {
+          "reasoning_tokens": 96
+        },
+        "total_tokens": 6511
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 5393,
+      "actual_provider_output_tokens": 4087,
+      "possibly_truncated": false
+    }
+  ],
+  "requested_max_tokens": 3000,
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "d0a7c911c8bb384b57f9d35e57c1e860b15be36ced3db79da2d3bb35e4027e10",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\gadi-evron.validation.json"
+}

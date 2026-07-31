@@ -1,4 +1,4 @@
-﻿# Topic Summary Request
+# Topic Summary Request
 
 Topic: Cybersecurity market and vendor strategy
 Topic query: Records primarily about cybersecurity market analysis, vendor strategy, security product positioning, investment commentary, buyer behavior, product communications, or business strategy in the security industry.

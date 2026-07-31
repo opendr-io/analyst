@@ -1,0 +1,58 @@
+{
+  "group_by": "topic",
+  "group_name": "Election security",
+  "group_label": "Election security",
+  "validation_status": "pass",
+  "validated_at": "2026-07-30T15:17:05+00:00",
+  "summary_file_path": "summaries\\topics\\election-security.md",
+  "audit_file_path": "summaries\\artifacts\\topics\\election-security.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\topics\\election-security.manifest.json",
+  "prompt_input_file_path": "summaries\\artifacts\\topics\\election-security.prompt-input.md",
+  "validation_file_path": "summaries\\artifacts\\topics\\election-security.validation.json",
+  "errors": [],
+  "warnings": [],
+  "expected_record_count": 2,
+  "expected_record_ids": [
+    1863,
+    2745
+  ],
+  "record_ids_found_in_summary": [
+    1863,
+    2745
+  ],
+  "record_id_occurrences_in_summary": 30,
+  "output_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [
+      1863,
+      2745
+    ],
+    "unique_observed": [
+      1863,
+      2745
+    ],
+    "exact": false,
+    "all_expected_present": true
+  },
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1863,
+      2745
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "missing_required_sections": [],
+  "forbidden_sections_present": [],
+  "summary_hash": "3de04ef5b754d335f69a0ecfbd09a856f306fcf86e528291c2a7f4f8e2650045",
+  "summary_hash_matches_audit": true,
+  "summary_hash_matches_manifest": true,
+  "prompt_hash": "e599cd9dbead8e4d3b0487fe03a8401d8c88849bf430d2dc7ccdb54e729ac81c",
+  "prompt_hash_matches_manifest": true,
+  "output_token_estimate": 3930,
+  "output_character_count": 15718
+}

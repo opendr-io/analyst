@@ -1,0 +1,68 @@
+{
+  "topic": "",
+  "group_by": "author",
+  "group_name": "Katie Paxton-Fear",
+  "group_label": "Author: Katie Paxton-Fear",
+  "summary_status": "skipped_small_topic_full_record_fallback",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-30T14:45:52+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "source_fingerprint": "0f7e4b2e2c8ac2dc7b5b1c85c710e88d75fea4d32bbc1833f27da10907127e83",
+  "summary_input_artifact_path": "summaries\\artifacts\\authors\\katie-paxton-fear.prompt-input.md",
+  "summary_file_path": "summaries\\authors\\katie-paxton-fear.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\katie-paxton-fear.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\katie-paxton-fear.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 3,
+  "loaded_record_count": 3,
+  "expected_record_ids": [
+    201,
+    3044,
+    3049
+  ],
+  "prompt_record_ids": [
+    201,
+    3044,
+    3049
+  ],
+  "prompt_record_id_occurrences": 3,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      201,
+      3044,
+      3049
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    201,
+    3044,
+    3049
+  ],
+  "estimated_input_tokens": 2823,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 0,
+  "output_max_tokens": 0,
+  "validation_status": "skipped",
+  "summary_storage": "full_record_fallback"
+}

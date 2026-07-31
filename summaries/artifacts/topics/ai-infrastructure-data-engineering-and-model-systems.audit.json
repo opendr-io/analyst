@@ -5,15 +5,15 @@
   "group_label": "AI infrastructure data engineering and model systems",
   "summary_status": "complete",
   "model": "gpt-5.6",
-  "generated_timestamp": "2026-07-28T19:38:01+00:00",
+  "generated_timestamp": "2026-07-30T15:11:43+00:00",
   "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
   "prompt_version": "topic-summary-v1",
   "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
   "database_fingerprint": {
     "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
     "size_bytes": 19509248,
-    "mtime_utc": "2026-07-28T17:27:06+00:00",
-    "sha256": "d285c2f6ce3b054eb300d65c4759d3e0616c1ce636a7b4aa05fc9e06a1f76407"
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
   },
   "source_fingerprint": "3d08ece2f602bb792568feb55dbd50f5b89d7778d970c91a218f7593515224aa",
   "summary_input_artifact_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.prompt-input.md",
@@ -94,7 +94,7 @@
   ],
   "estimated_input_tokens": 4845,
   "max_input_tokens": 750000,
-  "estimated_output_tokens": 4026,
+  "estimated_output_tokens": 5311,
   "output_max_tokens": 3000,
   "record_ids_found_in_output": [
     129,
@@ -109,7 +109,7 @@
     3028,
     3105
   ],
-  "output_record_id_occurrences": 36,
+  "output_record_id_occurrences": 83,
   "missing_output_record_ids": [],
   "duplicate_output_record_ids": [
     129,
@@ -125,9 +125,10 @@
     3105
   ],
   "unexpected_output_record_ids": [],
-  "output_token_estimate": 4026,
-  "output_character_count": 16101,
-  "retry_used": false,
+  "output_token_estimate": 5311,
+  "output_character_count": 21244,
+  "retry_used": true,
+  "coverage_repair_skipped_due_to_truncation": false,
   "response_metadata": [
     {
       "phase": "initial",
@@ -140,19 +141,40 @@
         },
         "output_tokens": 3000,
         "output_tokens_details": {
-          "reasoning_tokens": 137
+          "reasoning_tokens": 216
         },
         "total_tokens": 7422
       },
       "requested_max_tokens": 3000,
-      "estimated_output_tokens": 4026,
+      "estimated_output_tokens": 3864,
       "actual_provider_output_tokens": 3000,
       "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 4422,
+        "input_tokens_details": {
+          "cached_tokens": 4419,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 4047,
+        "output_tokens_details": {
+          "reasoning_tokens": 175
+        },
+        "total_tokens": 8469
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 5311,
+      "actual_provider_output_tokens": 4047,
+      "possibly_truncated": false
     }
   ],
   "requested_max_tokens": 3000,
-  "possibly_truncated": true,
-  "summary_hash": "c403fdb980e64d9d59bba2eeb3c85f4c03adb71f9fe590deff12db5c6cd5a73d",
-  "validation_status": "fail",
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "de12cdda7843a6d68c1edb790619e3820209781396434ac0a216613d364a5ac0",
+  "validation_status": "pass",
   "validation_file_path": "summaries\\artifacts\\topics\\ai-infrastructure-data-engineering-and-model-systems.validation.json"
 }

@@ -1,0 +1,33 @@
+{
+  "topic": "",
+  "topic_slug": "",
+  "group_by": "author",
+  "group_name": "Zhengyu Liu",
+  "group_label": "Author: Zhengyu Liu",
+  "group_slug": "zhengyu-liu",
+  "status": "complete",
+  "model": "gpt-5.6",
+  "generated_at": "2026-07-30T15:33:37+00:00",
+  "prompt_version": "topic-summary-v1",
+  "topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "source_fingerprint": "1a05197024ca965c0a65f6976eab9f4f40ce0173551ecc4acb8fcf79be69cf80",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "summary_file_path": "summaries\\authors\\zhengyu-liu.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.audit.json",
+  "prompt_input_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.prompt-input.md",
+  "manifest_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.manifest.json",
+  "archived_paths": [
+    "summaries\\artifacts\\authors\\archive\\20260730T153337Z\\zhengyu-liu.prompt-input.md"
+  ],
+  "artifacts_written": true,
+  "summary_hash": "4867fc6efdd512275afe6491bc132b52ae13ebda4d96423e4ca382a6e000cae4",
+  "prompt_hash": "a8d20392492bbf8c70d93ee125f246fe4580a2ad5599bee115ca2b661f015f57",
+  "summary_storage": "file",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.validation.json"
+}

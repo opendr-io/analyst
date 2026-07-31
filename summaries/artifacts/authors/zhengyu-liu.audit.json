@@ -1,0 +1,131 @@
+{
+  "topic": "",
+  "group_by": "author",
+  "group_name": "Zhengyu Liu",
+  "group_label": "Author: Zhengyu Liu",
+  "summary_status": "complete",
+  "model": "gpt-5.6",
+  "generated_timestamp": "2026-07-30T15:33:37+00:00",
+  "taxonomy_version_or_topic_table_snapshot_hash": "c8c0f418ec730aa43d92f1fa6ac163bdee42e66f678d84070c534908b2d5e558",
+  "prompt_version": "topic-summary-v1",
+  "source_database_path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+  "database_fingerprint": {
+    "path": "\\\\vmware-host\\Shared Folders\\SHARED\\GitHub\\analyst\\knowledge\\knowledge.sqlite3",
+    "size_bytes": 19509248,
+    "mtime_utc": "2026-07-29T16:30:54+00:00",
+    "sha256": "a4b6409a228f06030cbcb6383ed233caa5f0d268e56b18741720f54ace6d515b"
+  },
+  "source_fingerprint": "1a05197024ca965c0a65f6976eab9f4f40ce0173551ecc4acb8fcf79be69cf80",
+  "summary_input_artifact_path": "summaries\\artifacts\\authors\\zhengyu-liu.prompt-input.md",
+  "summary_file_path": "summaries\\authors\\zhengyu-liu.md",
+  "audit_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.audit.json",
+  "manifest_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.manifest.json",
+  "artifacts_written": true,
+  "global_preflight": {
+    "classified_records": 1437,
+    "records_with_empty_agent_topics": [],
+    "records_with_empty_primary_topic": [],
+    "primary_topics_not_in_topics": [],
+    "ok": true
+  },
+  "expected_record_count": 3,
+  "loaded_record_count": 3,
+  "expected_record_ids": [
+    1947,
+    2922,
+    2955
+  ],
+  "prompt_record_ids": [
+    1947,
+    2922,
+    2955
+  ],
+  "prompt_record_id_occurrences": 3,
+  "prompt_id_check": {
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "unique_observed": [
+      1947,
+      2922,
+      2955
+    ],
+    "exact": true,
+    "all_expected_present": true
+  },
+  "primary_record_ids": [],
+  "secondary_record_ids": [
+    1947,
+    2922,
+    2955
+  ],
+  "estimated_input_tokens": 2113,
+  "max_input_tokens": 750000,
+  "estimated_output_tokens": 5011,
+  "output_max_tokens": 3000,
+  "record_ids_found_in_output": [
+    1947,
+    2922,
+    2955
+  ],
+  "output_record_id_occurrences": 43,
+  "missing_output_record_ids": [],
+  "duplicate_output_record_ids": [
+    1947,
+    2922,
+    2955
+  ],
+  "unexpected_output_record_ids": [],
+  "output_token_estimate": 5011,
+  "output_character_count": 20043,
+  "retry_used": true,
+  "coverage_repair_skipped_due_to_truncation": false,
+  "response_metadata": [
+    {
+      "phase": "initial",
+      "stop_reason": "max_output_tokens",
+      "actual_provider_usage": {
+        "input_tokens": 2004,
+        "input_tokens_details": {
+          "cached_tokens": 2001,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 3000,
+        "output_tokens_details": {
+          "reasoning_tokens": 264
+        },
+        "total_tokens": 5004
+      },
+      "requested_max_tokens": 3000,
+      "estimated_output_tokens": 3626,
+      "actual_provider_output_tokens": 3000,
+      "possibly_truncated": true
+    },
+    {
+      "phase": "full_summary_retry",
+      "stop_reason": "end_turn",
+      "actual_provider_usage": {
+        "input_tokens": 2004,
+        "input_tokens_details": {
+          "cached_tokens": 2001,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 3923,
+        "output_tokens_details": {
+          "reasoning_tokens": 171
+        },
+        "total_tokens": 5927
+      },
+      "requested_max_tokens": 6000,
+      "estimated_output_tokens": 5011,
+      "actual_provider_output_tokens": 3923,
+      "possibly_truncated": false
+    }
+  ],
+  "requested_max_tokens": 3000,
+  "possibly_truncated": false,
+  "truncation_retry_used": true,
+  "summary_hash": "4867fc6efdd512275afe6491bc132b52ae13ebda4d96423e4ca382a6e000cae4",
+  "validation_status": "pass",
+  "validation_file_path": "summaries\\artifacts\\authors\\zhengyu-liu.validation.json"
+}
