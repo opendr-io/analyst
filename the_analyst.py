@@ -3,10 +3,10 @@
 Knowledge base Q&A agent with tool use.
 
 One-shot:
-    python the_oracle.py "What tools exist for MCP sandboxing?"
+    python the_or.py "What tools exist for MCP sandboxing?"
 
 Interactive:
-    python the_oracle.py
+    python the_analyst.py
 """
 
 import argparse
@@ -1533,13 +1533,13 @@ def run_prefixed_turn(question: str) -> bool:
 
 def format_help() -> str:
     tool_lines = [
-        "Oracle commands:",
+        "Analyst commands:",
         "  help                 Show this help text.",
         "  query: <text>        Search structured record annotations without using the LLM.",
         "  question: <text>     Answer from summary files using the summary-answer flow.",
         "  quit                 Exit interactive mode.",
         "",
-        "Oracle tools:",
+        "Analyst tools:",
     ]
     for tool in TOOLS:
         description = re.sub(r"\s+", " ", str(tool.get("description", ""))).strip()
