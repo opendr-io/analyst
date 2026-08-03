@@ -3,7 +3,7 @@
 Knowledge base Q&A agent with tool use.
 
 One-shot:
-    python the_or.py "What tools exist for MCP sandboxing?"
+    python the_analyst.py "What tools exist for MCP sandboxing?"
 
 Interactive:
     python the_analyst.py
