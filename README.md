@@ -5,6 +5,9 @@
 An agent that answers questions about cybersecurity conference research using an agent curated knowledge base. UI is via Jupyter notebook or command prompt.SQL queries can also be used to search for researchers, talks, or tools. 
 
 Answers to free-form questions are given from three dozen pre-processed topic summaries compiled by a knowledge agent. There are also summaries for each conference and for authors with more than one presentation in the data.
+
+Colab instance here: https://colab.research.google.com/github/opendr-io/analyst/blob/main/the-analyst.ipynb#scrollTo=d2863aa6
+
 ## User Interface: ##
 
 **Question** - answers questions using the pre-processed topic summaries from the conference list above. This requires an OpenAI key. Question types:
